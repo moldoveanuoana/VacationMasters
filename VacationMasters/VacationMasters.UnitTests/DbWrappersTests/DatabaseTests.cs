@@ -27,5 +27,11 @@ namespace VacationMasters.UnitTests.DbWrappersTests
         {
             int x = 0;
         }
+
+        [Test]
+        public bool GivenXShouldNotThrowY()
+        {
+            return true;
+        }
     }
 }
