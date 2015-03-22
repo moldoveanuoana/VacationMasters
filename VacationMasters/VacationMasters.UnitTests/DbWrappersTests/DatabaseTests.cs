@@ -33,5 +33,12 @@ namespace VacationMasters.UnitTests.DbWrappersTests
         {
             return true;
         }
+
+        [Test]
+        public void Test2()
+        {
+            int y = 1;
+        }
+
     }
 }
