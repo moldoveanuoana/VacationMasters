@@ -8,6 +8,6 @@
 How to work on a change(ticket): <br>
 1. Se face un branch <br>
 2. Se fac modificarile dorite -> commit <br>
-3. Se face push <br>
+3. Se face push(publish) <br>
 4. Se deschide un pull request <br>
 5. Daca pare in regula -> merge -> buildserver -> OK. Se rezolva potentialele erori aparute in urma buildului <br>
