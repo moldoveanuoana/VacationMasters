@@ -38,6 +38,7 @@ namespace VacationMasters.UnitTests.DbWrappersTests
         public void Test2()
         {
             int y = 1;
+            //testcomment
         }
 
     }
