@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using MySql.Data.MySqlClient;
 using NUnit.Framework;
 using VacationMasters.Wrappers;
@@ -40,6 +35,17 @@ namespace VacationMasters.UnitTests.DbWrapperTests
             var connection = _dbWrapper.GetConnection();
             var connected = connection.State == ConnectionState.Open;
             Assert.IsTrue(connected);
+        }
+
+        [Test]
+        public void ConnectionDisconnectionShouldNotFail()
+        {
+            var connection = _dbWrapper.GetConnection();
+            var connected = connection.State == ConnectionState.Open;
+            Assert.IsTrue(connected);
+            connection.Close();
+            var disconnected = connection.State == ConnectionState.Closed;
+            Assert.IsTrue(disconnected);
         }
     }
 }

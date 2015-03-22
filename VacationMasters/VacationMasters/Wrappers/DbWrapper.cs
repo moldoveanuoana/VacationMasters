@@ -3,17 +3,17 @@ using MySql.Data.MySqlClient;
 
 namespace VacationMasters.Wrappers
 {
-    public class DbWrapper:IDbWrapper
+    public class DbWrapper : IDbWrapper
     {
         private MySqlConnection CreateConnection()
         {
-            var connection = new MySqlConnection("server=galactica.emanuelscirlet.com;database=vacationmasters;uid=sa;password=predator12;");
+            var connection = new MySqlConnection("server=galactica.emanuelscirlet.com;database=vacationmasters;uid=sa;password=vacationmasters12;");
             return connection;
         }
 
         private MySqlCommand CreateCommand(MySqlConnection connection)
         {
-            var command = new MySqlCommand {Connection = connection};
+            var command = new MySqlCommand { Connection = connection };
             return command;
         }
 
@@ -65,7 +65,7 @@ namespace VacationMasters.Wrappers
                 return default(T);
             }
         }
-      
+
         public T QueryValue<T>(string sqlQuery)
         {
             return RunCommand(command =>
@@ -76,8 +76,8 @@ namespace VacationMasters.Wrappers
                 {
                     return default(T);
                 }
-                Type t = Nullable.GetUnderlyingType(typeof (T)) ?? typeof (T);
-                return (T) Convert.ChangeType(result, t);
+                Type t = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
+                return (T)Convert.ChangeType(result, t);
             });
         }
     }

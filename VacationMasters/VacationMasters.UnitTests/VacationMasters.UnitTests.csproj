@@ -112,7 +112,8 @@
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbWrapperTests\WrapperTests.cs" />
+    <Compile Include="DatabaseTests\DatabaseCommandsTests.cs" />
+    <Compile Include="DatabaseTests\WrapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
