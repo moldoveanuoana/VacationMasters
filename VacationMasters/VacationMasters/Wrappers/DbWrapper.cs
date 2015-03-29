@@ -1,5 +1,7 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
+using VacationMasters.Essentials;
+using System.Collections.Generic;
 
 namespace VacationMasters.Wrappers
 {
@@ -78,6 +80,24 @@ namespace VacationMasters.Wrappers
                 }
                 Type t = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
                 return (T)Convert.ChangeType(result, t);
+            });
+        }
+        public List<Preference> GetAllPreferences()
+        {
+            return RunCommand(command =>
+            {
+                command.CommandText = "Select * from Preferences";
+                var reader = command.ExecuteReader();
+                var list = new List<Preference>();
+                while (reader.Read())
+                {
+                    var preference = new Preference();
+                    preference.ID = reader.GetInt32(0);
+                    preference.Name = reader.GetString(1);
+                    preference.Category = reader.GetString(2);
+                    list.Add(preference);
+                }
+                return list;
             });
         }
     }
