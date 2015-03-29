@@ -25,10 +25,19 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var password = CreateRandom.String();
             var user = new User(CreateRandom.String(), CreateRandom.String(), CreateRandom.String(),
                 CreateRandom.String(), CreateRandom.String(), false, CreateRandom.String(), CreateRandom.String());
+            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password));
+            Assert.DoesNotThrow(() => _userManagement.RemoveUser(user.UserName));
+        }
+
+        [Test]
+        public void AddUserWithPreferencesShouldNotThrow()
+        {
+            var password = CreateRandom.String();
+            var user = new User(CreateRandom.String(), CreateRandom.String(), CreateRandom.String(),
+                CreateRandom.String(), CreateRandom.String(), false, CreateRandom.String(), CreateRandom.String());
             var preferences = new List<int>();
             preferences.Add(CreateRandom.Int()); preferences.Add(CreateRandom.Int()); preferences.Add(CreateRandom.Int());
-            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password));
-            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password,preferences));
+            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password, preferences));
             Assert.DoesNotThrow(() => _userManagement.RemoveUser(user.UserName));
         }
 
