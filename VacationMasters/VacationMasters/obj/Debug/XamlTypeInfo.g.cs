@@ -124,25 +124,27 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[8];
+            _typeNameTable = new string[9];
             _typeNameTable[0] = "VacationMasters.MainPage";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[3] = "Windows.UI.Color";
-            _typeNameTable[4] = "System.ValueType";
-            _typeNameTable[5] = "Object";
-            _typeNameTable[6] = "Byte";
-            _typeNameTable[7] = "VacationMasters.Resources.CircularProgressBar";
+            _typeNameTable[3] = "VacationMasters.Register";
+            _typeNameTable[4] = "Windows.UI.Color";
+            _typeNameTable[5] = "System.ValueType";
+            _typeNameTable[6] = "Object";
+            _typeNameTable[7] = "Byte";
+            _typeNameTable[8] = "VacationMasters.Resources.CircularProgressBar";
 
-            _typeTable = new global::System.Type[8];
+            _typeTable = new global::System.Type[9];
             _typeTable[0] = typeof(global::VacationMasters.MainPage);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[3] = typeof(global::Windows.UI.Color);
-            _typeTable[4] = typeof(global::System.ValueType);
-            _typeTable[5] = typeof(global::System.Object);
-            _typeTable[6] = typeof(global::System.Byte);
-            _typeTable[7] = typeof(global::VacationMasters.Resources.CircularProgressBar);
+            _typeTable[3] = typeof(global::VacationMasters.Register);
+            _typeTable[4] = typeof(global::Windows.UI.Color);
+            _typeTable[5] = typeof(global::System.ValueType);
+            _typeTable[6] = typeof(global::System.Object);
+            _typeTable[7] = typeof(global::System.Byte);
+            _typeTable[8] = typeof(global::VacationMasters.Resources.CircularProgressBar);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -178,7 +180,8 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
         }
 
         private object Activate_0_MainPage() { return new global::VacationMasters.MainPage(); }
-        private object Activate_7_CircularProgressBar() { return new global::VacationMasters.Resources.CircularProgressBar(); }
+        private object Activate_3_Register() { return new global::VacationMasters.Register(); }
+        private object Activate_8_CircularProgressBar() { return new global::VacationMasters.Resources.CircularProgressBar(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -205,7 +208,14 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 xamlType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 3:   //  Windows.UI.Color
+            case 3:   //  VacationMasters.Register
+                userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
+                userType.Activator = Activate_3_Register;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 4:   //  Windows.UI.Color
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
                 userType.AddMemberName("A");
                 userType.AddMemberName("B");
@@ -214,24 +224,24 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 4:   //  System.ValueType
+            case 5:   //  System.ValueType
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 xamlType = userType;
                 break;
 
-            case 5:   //  Object
+            case 6:   //  Object
                 xamlType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 6:   //  Byte
+            case 7:   //  Byte
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 7:   //  VacationMasters.Resources.CircularProgressBar
+            case 8:   //  VacationMasters.Resources.CircularProgressBar
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_7_CircularProgressBar;
+                userType.Activator = Activate_8_CircularProgressBar;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;

@@ -25,7 +25,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var user = new User(CreateRandom.String(), CreateRandom.String(), CreateRandom.String(),
                 CreateRandom.String(), CreateRandom.String(), false, CreateRandom.String(), CreateRandom.String());
 
-            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password));
+            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password,null));
             Assert.DoesNotThrow(() => _userManagement.RemoveUser(user.UserName));
         }
 
