@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 using VacationMasters.Essentials;
 using VacationMasters.UnitTests.Infrastructure;
 using VacationMasters.UserManagement;
@@ -24,8 +25,10 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var password = CreateRandom.String();
             var user = new User(CreateRandom.String(), CreateRandom.String(), CreateRandom.String(),
                 CreateRandom.String(), CreateRandom.String(), false, CreateRandom.String(), CreateRandom.String());
-
-            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password,null));
+            var preferences = new List<int>();
+            preferences.Add(CreateRandom.Int()); preferences.Add(CreateRandom.Int()); preferences.Add(CreateRandom.Int());
+            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password));
+            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password,preferences));
             Assert.DoesNotThrow(() => _userManagement.RemoveUser(user.UserName));
         }
 

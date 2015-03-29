@@ -37,6 +37,21 @@ namespace VacationMasters.UserManagement
             throw new NotImplementedException();
         }
 
+        public void AddUser(User user, string password, string type = "User")
+        {
+            var input = CryptographicBuffer.ConvertStringToBinary(password,
+            BinaryStringEncoding.Utf8);
+            var hasher = HashAlgorithmProvider.OpenAlgorithm("SHA256");
+            var hashed = hasher.HashData(input);
+            var pwd = CryptographicBuffer.EncodeToBase64String(hashed);
+            var sql = string.Format("INSERT INTO Users(UserName, FirstName, LastName, Email, PhoneNumber," +
+            "Password, Banned, Type, KeyWordsSearches) " +
+            "values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}');",
+            user.UserName, user.FirstName, user.LastName, user.Email, user.PhoneNumber, pwd,
+            false, type, user.KeyWordSearches);
+            _dbWrapper.QueryValue<object>(sql);
+        }
+
         public void AddUser(User user, string password, List<int> preferencesIds, string type = "User")
         {
             var input = CryptographicBuffer.ConvertStringToBinary(password,
