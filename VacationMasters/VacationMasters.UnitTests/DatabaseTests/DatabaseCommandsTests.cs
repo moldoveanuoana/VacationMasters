@@ -36,7 +36,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var user = new User(CreateRandom.String(), CreateRandom.String(), CreateRandom.String(),
                 CreateRandom.String(), CreateRandom.String(), false, CreateRandom.String(), CreateRandom.String());
             var preferences = new List<int>();
-            preferences.Add(CreateRandom.Int()); preferences.Add(CreateRandom.Int()); preferences.Add(CreateRandom.Int());
+            preferences.Add(1);preferences.Add(2);
             Assert.DoesNotThrow(() => _userManagement.AddUser(user, password, preferences));
             Assert.DoesNotThrow(() => _userManagement.RemoveUser(user.UserName));
         }

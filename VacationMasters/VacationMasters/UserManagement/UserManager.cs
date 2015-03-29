@@ -82,6 +82,9 @@ namespace VacationMasters.UserManagement
         public void RemoveUser(string userName)
         {
             var sql = string.Format("Delete from Users where UserName = {0}", userName);
+            sql += "SELECT LAST_INSERT_ID();";
+            var idUser = _dbWrapper.QueryValue<int>(sql);
+            sql = string.Format("DELETE FROM ChoosePreferences WHERE IDUser = {0}", idUser);
             _dbWrapper.QueryValue<object>(sql);
         }
     }
