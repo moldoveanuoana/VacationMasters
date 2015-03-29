@@ -61,7 +61,7 @@ namespace VacationMasters.Wrappers
             }
             catch (Exception e)
             {
-                MessageBox("An error occured! Please check your connection!");
+                MessageBox("An error occured!!\n" + e.Message);
                 return default(T);
             }
         }
