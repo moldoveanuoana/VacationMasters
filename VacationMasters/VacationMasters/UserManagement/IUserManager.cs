@@ -1,4 +1,5 @@
-﻿using VacationMasters.Essentials;
+﻿using System.Collections.Generic;
+using VacationMasters.Essentials;
 
 namespace VacationMasters.UserManagement
 {
@@ -41,6 +42,7 @@ namespace VacationMasters.UserManagement
         /// <param name="password"></param>
         /// <param name="type"></param>
         void AddUser(User user, string password, string type = "User");
+        void AddUser(User user, string password, List<int> preferencesId, string type = "User");
 
         /// <summary>
         /// Remove user from database
