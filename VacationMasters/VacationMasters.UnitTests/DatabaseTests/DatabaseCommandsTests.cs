@@ -25,8 +25,8 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var user = new User(CreateRandom.String(), CreateRandom.String(), CreateRandom.String(),
                 CreateRandom.String(), CreateRandom.String(), false, CreateRandom.String(), CreateRandom.String());
 
-            _userManagement.AddUser(user, password);
-            _userManagement.RemoveUser(user.UserName);
+            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password));
+            Assert.DoesNotThrow(() => _userManagement.RemoveUser(user.UserName));
         }
 
         public void MultipleUsersCanLoginAtTheSameTime()
