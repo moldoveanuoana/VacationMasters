@@ -105,6 +105,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Essentials\User.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -112,6 +113,8 @@
     <Compile Include="Resources\CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserManagement\IUserManager.cs" />
+    <Compile Include="UserManagement\UserManager.cs" />
     <Compile Include="Wrappers\DbWrapper.cs" />
     <Compile Include="Wrappers\IDbWrapper.cs" />
   </ItemGroup>
