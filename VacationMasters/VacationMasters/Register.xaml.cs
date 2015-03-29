@@ -27,10 +27,13 @@ namespace VacationMasters
 {
     public sealed partial class Register : UserControl
     {
+        public UserManager UserManager { get; set; }
+        public DbWrapper DbWrapper { get; set; }
         public Register()
         {
-            var dbWrapper = new DbWrapper();
-            var preferences = dbWrapper.GetAllPreferences();
+            this.DbWrapper = new DbWrapper();
+            this.UserManager = new UserManager(this.DbWrapper);
+            var preferences = this.DbWrapper.GetAllPreferences();
             this.InitializeComponent();
             this.comboBoxCountry.ItemsSource = preferences.Where(c => c.Category == "Country").Select(d => d.Name).ToArray();
             this.comboBoxType.ItemsSource = preferences.Where(c => c.Category == "Type").Select(d => d.Name).ToArray();
@@ -39,8 +42,7 @@ namespace VacationMasters
         {
             if (VerifyRegisterFields() == false) return;
             var preferencesIds = new List<int>();
-            var dbWrapper = new DbWrapper();
-            var preferences = dbWrapper.GetAllPreferences();
+            var preferences = this.DbWrapper.GetAllPreferences();
             if (this.comboBoxCountry.SelectedValue != null)
             {
                 var countryPref = preferences.Where(c => c.Name == this.comboBoxCountry.SelectedValue.ToString()).First();
@@ -51,9 +53,8 @@ namespace VacationMasters
                 var typePref = preferences.Where(c => c.Name == this.comboBoxType.SelectedValue.ToString()).First();
                 preferencesIds.Add(typePref.ID);
             }
-            var userManager = new UserManager(new DbWrapper());
             var user = new User(this.txtBoxUsrName.Text, this.txtBoxFrsName.Text, this.txtBoxLstName.Text, this.txtBoxEmail.Text, this.txtBoxPhone.Text, false, "User", null);
-            userManager.AddUser(user, this.pwdBox.Password, preferencesIds);
+            this.UserManager.AddUser(user, this.pwdBox.Password, preferencesIds);
         }
 
         private bool VerifyRegisterFields()
@@ -66,11 +67,25 @@ namespace VacationMasters
             if (ChangeRequiredTextBlock(this.phoneRequired, this.txtBoxPhone) == false) completedFields = false;
             if (ChangeRequiredTextBlock(this.pwdRequired, this.pwdBox) == false) completedFields = false;
             if (ChangeRequiredTextBlock(this.confRequired, this.confirmPwdBox) == false) completedFields = false;
+            if (this.txtBoxUsrName.Text != null && this.UserManager.CheckIfUserExists(this.txtBoxUsrName.Text) == true)
+            {
+                this.usrRequired.FontSize = 11;
+                this.usrRequired.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+                this.usrRequired.Text = "The username is already taken";
+                completedFields = false;
+            }
             if (this.txtBoxEmail.Text != null && IsValidEmail(this.txtBoxEmail.Text) == false)
             {
                 this.emailRequired.FontSize = 11;
                 this.emailRequired.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
                 this.emailRequired.Text = "The e-mail is not valid";
+                completedFields = false;
+            }
+            if (this.txtBoxEmail.Text != null && IsValidEmail(this.txtBoxEmail.Text) == true && this.UserManager.CheckIfEmailExists(this.txtBoxEmail.Text) == true)
+            {
+                this.emailRequired.FontSize = 11;
+                this.emailRequired.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+                this.emailRequired.Text = "The e-mail is already used";
                 completedFields = false;
             }
             if (this.txtBoxPhone.Text != null && IsValidPhoneNumber(this.txtBoxPhone.Text) == false)

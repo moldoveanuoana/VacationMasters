@@ -52,6 +52,19 @@ namespace VacationMasters.UserManagement
             _dbWrapper.QueryValue<object>(sql);
         }
 
+        public bool CheckIfUserExists(string userName)
+        {
+            var sql = string.Format("Select ID From Users UserName = {0}", userName);
+            if (_dbWrapper.QueryValue<int>(sql) == 0) return false;
+            return true;
+
+        }
+        public bool CheckIfEmailExists(string email)
+        {
+            var sql = string.Format("Select ID From Users Where Email = {0}", email);
+            if (_dbWrapper.QueryValue<int>(sql) == 0) return false;
+            return true;
+        }
         public void AddUser(User user, string password, List<int> preferencesIds, string type = "User")
         {
             var input = CryptographicBuffer.ConvertStringToBinary(password,
@@ -81,10 +94,8 @@ namespace VacationMasters.UserManagement
 
         public void RemoveUser(string userName)
         {
-            var sql = string.Format("Delete from Users where UserName = {0}", userName);
-            sql += "SELECT LAST_INSERT_ID();";
-            var idUser = _dbWrapper.QueryValue<int>(sql);
-            sql = string.Format("DELETE FROM ChoosePreferences WHERE IDUser = {0}", idUser);
+            var sql = string.Format("DELETE FROM ChoosePreferences  WHERE IDUser = (SELECT ID FROM Users Where UserName = {0});", userName);
+            sql += string.Format("Delete from Users where UserName = {0};", userName);
             _dbWrapper.QueryValue<object>(sql);
         }
     }
