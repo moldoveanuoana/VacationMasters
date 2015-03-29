@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 using NUnit.Framework;
 using VacationMasters.Wrappers;
 
-namespace VacationMasters.UnitTests.DbWrapperTests
+namespace VacationMasters.UnitTests.DatabaseTests
 {
     [TestFixture]
     public class WrapperTests
