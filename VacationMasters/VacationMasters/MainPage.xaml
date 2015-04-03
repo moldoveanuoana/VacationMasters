@@ -41,7 +41,9 @@
 
             </StackPanel>
             <StackPanel Height="290">
-                <ScrollViewer Height="287"/>
+                <ScrollViewer Height="287" RenderTransformOrigin="0.475,0.484">
+                    
+                </ScrollViewer>
             </StackPanel>
             <StackPanel Height="104" Orientation="Vertical" RenderTransformOrigin="0.502,0.708">
                 <TextBlock TextWrapping="Wrap" Text="You can contact us at" Height="25" Margin="0,0,694,0" HorizontalAlignment="Center" FontSize="16"/>
