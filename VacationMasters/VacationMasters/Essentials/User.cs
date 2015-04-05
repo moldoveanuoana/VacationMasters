@@ -24,5 +24,10 @@
             KeyWordSearches = keyWordSearches;
         }
 
+        public User()
+        {
+            
+        }
+
     }
 }

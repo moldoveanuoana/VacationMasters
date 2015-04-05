@@ -1,29 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Popups;
+using System.Text.RegularExpressions;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using System.Security.Cryptography;
-using Windows.Security.Cryptography.Core;
-using Windows.Storage.Streams;
-using Windows.Security.Cryptography;
-using VacationMasters.Wrappers;
-using System.Text.RegularExpressions;
 using VacationMasters.Essentials;
 using VacationMasters.UserManagement;
+using VacationMasters.Wrappers;
 
-namespace VacationMasters
+namespace VacationMasters.Screens
 {
     public sealed partial class Register : UserControl
     {
@@ -31,12 +15,12 @@ namespace VacationMasters
         public DbWrapper DbWrapper { get; set; }
         public Register()
         {
-            this.DbWrapper = new DbWrapper();
-            this.UserManager = new UserManager(this.DbWrapper);
-            var preferences = this.DbWrapper.GetAllPreferences();
-            this.InitializeComponent();
-            this.comboBoxCountry.ItemsSource = preferences.Where(c => c.Category == "Country").Select(d => d.Name).ToArray();
-            this.comboBoxType.ItemsSource = preferences.Where(c => c.Category == "Type").Select(d => d.Name).ToArray();
+            DbWrapper = new DbWrapper();
+            UserManager = new UserManager(this.DbWrapper);
+            var preferences = DbWrapper.GetAllPreferences();
+            InitializeComponent();
+            comboBoxCountry.ItemsSource = preferences.Where(c => c.Category == "Country").Select(d => d.Name).ToArray();
+            comboBoxType.ItemsSource = preferences.Where(c => c.Category == "Type").Select(d => d.Name).ToArray();
         }
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -45,12 +29,12 @@ namespace VacationMasters
             var preferences = this.DbWrapper.GetAllPreferences();
             if (this.comboBoxCountry.SelectedValue != null)
             {
-                var countryPref = preferences.Where(c => c.Name == this.comboBoxCountry.SelectedValue.ToString()).First();
+                var countryPref = preferences.First(c => c.Name == this.comboBoxCountry.SelectedValue.ToString());
                 preferencesIds.Add(countryPref.ID);
             }
             if (this.comboBoxType.SelectedValue != null)
             {
-                var typePref = preferences.Where(c => c.Name == this.comboBoxType.SelectedValue.ToString()).First();
+                var typePref = preferences.First(c => c.Name == this.comboBoxType.SelectedValue.ToString());
                 preferencesIds.Add(typePref.ID);
             }
             var user = new User(this.txtBoxUsrName.Text, this.txtBoxFrsName.Text, this.txtBoxLstName.Text, this.txtBoxEmail.Text, this.txtBoxPhone.Text, false, "User", null);
@@ -67,7 +51,7 @@ namespace VacationMasters
             if (ChangeRequiredTextBlock(this.phoneRequired, this.txtBoxPhone) == false) completedFields = false;
             if (ChangeRequiredTextBlock(this.pwdRequired, this.pwdBox) == false) completedFields = false;
             if (ChangeRequiredTextBlock(this.confRequired, this.confirmPwdBox) == false) completedFields = false;
-            if (this.txtBoxUsrName.Text != null && this.UserManager.CheckIfUserExists(this.txtBoxUsrName.Text) == true)
+            if (UserManager.CheckIfUserExists(this.txtBoxUsrName.Text) == true)
             {
                 this.usrRequired.FontSize = 11;
                 this.usrRequired.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
