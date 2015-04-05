@@ -16,15 +16,23 @@ namespace VacationMasters.UnitTests.DatabaseTests
         public void SetUp()
         {
             _dbWrapper = new DbWrapper();
-            _userManagement = new UserManagement.UserManager(_dbWrapper);
+            _userManagement = new UserManager(_dbWrapper);
+        }
+
+        private User CreateRandomUser()
+        {
+            var user = new User(CreateRandom.String(), CreateRandom.String(), CreateRandom.String(),
+                CreateRandom.String(), CreateRandom.String(), false, CreateRandom.String(), CreateRandom.String());
+
+            return user;
         }
 
         [Test]
         public void LMDShouldNotThrow()
         {
             var password = CreateRandom.String();
-            var user = new User(CreateRandom.String(), CreateRandom.String(), CreateRandom.String(),
-                CreateRandom.String(), CreateRandom.String(), false, CreateRandom.String(), CreateRandom.String());
+            var user = CreateRandomUser();
+
             Assert.DoesNotThrow(() => _userManagement.AddUser(user, password));
             Assert.DoesNotThrow(() => _userManagement.RemoveUser(user.UserName));
         }
@@ -33,12 +41,61 @@ namespace VacationMasters.UnitTests.DatabaseTests
         public void AddUserWithPreferencesShouldNotThrow()
         {
             var password = CreateRandom.String();
-            var user = new User(CreateRandom.String(), CreateRandom.String(), CreateRandom.String(),
-                CreateRandom.String(), CreateRandom.String(), false, CreateRandom.String(), CreateRandom.String());
+            var user = CreateRandomUser();
             var preferences = new List<int>();
-            preferences.Add(1);preferences.Add(2);
+
+            preferences.Add(1);
+            preferences.Add(2);
+
             Assert.DoesNotThrow(() => _userManagement.AddUser(user, password, preferences));
             Assert.DoesNotThrow(() => _userManagement.RemoveUser(user.UserName));
+        }
+
+        [Test]
+        public void GetUserShouldNotThrow()
+        {
+            var password = CreateRandom.String();
+            var user = CreateRandomUser();
+
+            _userManagement.AddUser(user, password);
+
+            var localUser = _userManagement.GetUser(user.UserName);
+
+            Assert.That(user.UserName == localUser.UserName);
+
+            _userManagement.RemoveUser(user.UserName);
+        }
+
+        [Test]
+        public void BanUserShouldNotThrow()
+        {
+            var password = CreateRandom.String();
+            var user = CreateRandomUser();
+            user.Banned = true;
+
+            _userManagement.AddUser(user, password);
+
+            _userManagement.BanUser(user.UserName);
+            var localUser = _userManagement.GetUser(user.UserName);
+            Assert.That(localUser.Banned == user.Banned);
+
+            _userManagement.RemoveUser(user.UserName);
+        }
+
+        [Test]
+        public void UnbanUserShouldNotThrow()
+        {
+            var password = CreateRandom.String();
+            var user = CreateRandomUser();
+            user.Banned = false;
+
+            _userManagement.AddUser(user, password);
+
+            _userManagement.UnbanUser(user.UserName);
+            var localUser = _userManagement.GetUser(user.UserName);
+            Assert.That(localUser.Banned == user.Banned);
+
+            _userManagement.RemoveUser(user.UserName);
         }
 
         public void MultipleUsersCanLoginAtTheSameTime()
@@ -65,5 +122,6 @@ namespace VacationMasters.UnitTests.DatabaseTests
         {
             //TODO:this
         }
+
     }
 }

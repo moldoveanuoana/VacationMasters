@@ -6,9 +6,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:screens="using:VacationMasters.Screens"
+    d:DataContext="{d:DesignInstance Type=local:MainPage, 
+                                     IsDesignTimeCreatable=True}"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition GeneratedDuration="0" />
+                </VisualStateGroup.Transitions>
+
+                <VisualState x:Name="AdminControl">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AdminControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <StackPanel HorizontalAlignment="Left" Height="67" Margin="10,10,0,0" VerticalAlignment="Top" Width="409">
             <TextBlock TextWrapping="Wrap" Text="? LOGO ??" FontSize="16"/>
         </StackPanel>
@@ -44,8 +63,11 @@
             <StackPanel Height="290">
                 <ScrollViewer Height="287" RenderTransformOrigin="0.475,0.484">
                     
+                    <screens:AdminControl x:Name="AdminControlView" Visibility="Collapsed"/>
                 </ScrollViewer>
+                
             </StackPanel>
+            
             <StackPanel Height="104" Orientation="Vertical" RenderTransformOrigin="0.502,0.708">
                 <TextBlock TextWrapping="Wrap" Text="You can contact us at" Height="25" Margin="0,0,694,0" HorizontalAlignment="Center" FontSize="16"/>
                 <TextBlock TextWrapping="Wrap" Text="Address:" Height="25" Margin="0,0,694,0" HorizontalAlignment="Left" FontSize="16"/>
@@ -54,8 +76,7 @@
             </StackPanel>
         </StackPanel>
 
-
-
+        
 
     </Grid>
 </Page>

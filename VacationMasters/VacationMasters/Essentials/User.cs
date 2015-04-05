@@ -33,5 +33,10 @@ namespace VacationMasters.Essentials
             KeyWordSearches = keyWordSearches;
         }
 
+        public User()
+        {
+            
+        }
+
     }
 }

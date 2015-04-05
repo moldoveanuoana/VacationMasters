@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using VacationMasters.Essentials;
-using VacationMasters.Wrappers;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using VacationMasters.Wrappers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,12 +15,20 @@ namespace VacationMasters
 
         public MainPage()
         {
+            this.DataContext = this;
            /* this.DbWrapper = new DbWrapper();
             var packageList = this.DbWrapper.GetAllPackages();*/
             this.InitializeComponent();
-                
-            
+        }
 
+        public Visibility CollapsedVisibility
+        {
+            get { return Visibility.Collapsed; }
+        }
+
+        public Visibility VisibleVisibility
+        {
+            get { return Visibility.Visible; }
         }
 
         private void home_Click(object sender, RoutedEventArgs e)
@@ -56,6 +51,7 @@ namespace VacationMasters
         private void admin_control_Click(object sender, RoutedEventArgs e)
         {
             // this.Frame.Navigate(typeof(AdminControl), null);
+            VisualStateManager.GoToState(this, "AdminControl", true);
         }
 
         private void contact_Click(object sender, RoutedEventArgs e)

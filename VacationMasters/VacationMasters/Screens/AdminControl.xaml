@@ -2,19 +2,109 @@
     x:Class="VacationMasters.Screens.AdminControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:VacationMasters.Screens"
+    xmlns:resources="using:VacationMasters.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:VacationMasters.Resources.Converters"
+    xmlns:screens="using:VacationMasters.Screens"
+    xmlns:interop="using:Windows.UI.Xaml.Interop"
     mc:Ignorable="d"
     d:DesignHeight="780"
-    d:DesignWidth="1024">
+    d:DesignWidth="1024"
+    d:DataContext="{d:DesignInstance Type=screens:AdminControl, 
+                                     IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary  Source="/Resources/BrushResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:BooleanToImageConverter x:Key="BooleanToImageConverter"
+                                    FalseIcon="/Resources/Images/iconClear.png"
+                                    TrueIcon="/Resources/Images/iconBanned.png"/>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="aaaa" />
+        <Border Grid.Row="0" 
+                Grid.Column="0"
+                Grid.RowSpan="1"
+                Grid.ColumnSpan="3"
+                BorderBrush="{StaticResource Brush.White}"
+                BorderThickness="1"
+                CornerRadius="19">
+            <StackPanel Margin="0,0,150,0">
+                <TextBlock Text="User Control"
+                           Margin="20,1,0,0"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        x:Name="UserSearchBox"
+                        FontSize="18"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        PlaceholderText="User"
+                        TextWrapping="Wrap"
+                        Margin="5,10,0,0"/>
+                    <StackPanel Grid.Row="0"
+                                Grid.Column="1"
+                                Height="20"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Margin="3,17,0,0">
+                    <Viewbox 
+                             Width="20"
+                             Height="20"
+                             Visibility="{Binding IsOperationInProgress, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <resources:CircularProgressBar/>
+                    </Viewbox>
+                    <Image Width="20" 
+                           Height="20"
+                           Margin="2,0,0,0"
+                           Visibility="{Binding IsUserSearched, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           Source="{Binding Banned, Converter={StaticResource BooleanToImageConverter}}"/>
+                    </StackPanel>
+                    <Button Grid.Row="1"
+                            Grid.Column="0"
+                            Content="Ban"
+                            HorizontalAlignment="Right"
+                            Click="BanUser"/>
+                    <Button Grid.Row="1"
+                            Grid.Column="1"
+                            Content="Search"
+                            HorizontalAlignment="Right"
+                            Click="SearchUser"/>
+                    <Button Grid.Row="1"
+                            Grid.Column="2"
+                            Content="Unban"
+                            HorizontalAlignment="Right"
+                            Click="UnbanUser"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
     </Grid>
 </UserControl>

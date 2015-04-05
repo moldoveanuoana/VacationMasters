@@ -49,7 +49,7 @@ namespace VacationMasters.Wrappers
             });
         }
 
-        private T RunCommand<T>(Func<MySqlCommand, T> func)
+        public T RunCommand<T>(Func<MySqlCommand, T> func)
         {
             try
             {
