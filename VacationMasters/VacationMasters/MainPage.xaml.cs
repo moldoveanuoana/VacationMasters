@@ -26,51 +26,49 @@ namespace VacationMasters
     {
         public DbWrapper DbWrapper { get; set; }
 
-        public MainPage()
+         public MainPage()
         {
-           /* this.DbWrapper = new DbWrapper();
-            var packageList = this.DbWrapper.GetAllPackages();*/
+            this.DbWrapper = new DbWrapper();
+            var types = DbWrapper.GetTypes();
             this.InitializeComponent();
-                
+            foreach (String t in types)
+                type_combo.Items.Add(t);
+           /*     type_combo.Items.Add("elem1");
+                type_combo.Items.Add("elem2");*/
             
-
         }
 
-        private void home_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MainPage), null);
-        }
-
-        private void packages_Click(object sender, RoutedEventArgs e)
-        {
-            // this.Frame.Navigate(typeof(Packages), null);
-
-        }
-
-        private void user_panel_Click(object sender, RoutedEventArgs e)
-        {
-            // this.Frame.Navigate(typeof(UserPanel), null);
-
-        }
-
-        private void admin_control_Click(object sender, RoutedEventArgs e)
-        {
-            // this.Frame.Navigate(typeof(AdminControl), null);
-        }
-
-        private void contact_Click(object sender, RoutedEventArgs e)
-        {
-            // this.Frame.Navigate(typeof(Contact), null);
-        }
-
-
-        private void search_Click(object sender, RoutedEventArgs e)
+        private void Search(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Home(object sender, RoutedEventArgs e)
+        {
 
         }
 
+        private void Packages(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void UserPanel(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Contact(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AdminControl(object sender, RoutedEventArgs e)
+        {
+
+        }
 
     }
+
+
 }
