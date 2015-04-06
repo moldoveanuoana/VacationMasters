@@ -16,8 +16,10 @@ namespace VacationMasters.Resources
         {
             InitializeComponent();
 
-            _animationTimer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(100)};
+            _animationTimer = new DispatcherTimer();
+            _animationTimer.Interval = TimeSpan.FromMilliseconds(100);
             _animationTimer.Tick += HandleAnimationTick;
+            _animationTimer.Start();
         }
 
         private void HandleAnimationTick(object sender, object e)
@@ -66,6 +68,17 @@ namespace VacationMasters.Resources
         private void HandleUnloaded(object sender, RoutedEventArgs e)
         {
             Stop();
+        }
+
+        private void HandleVisibleChanged(object sender,
+            DependencyPropertyChangedEventArgs e)
+        {
+            bool isVisible = (bool)e.NewValue;
+
+            if (isVisible)
+                Start();
+            else
+                Stop();
         }
 
         public void Dispose()

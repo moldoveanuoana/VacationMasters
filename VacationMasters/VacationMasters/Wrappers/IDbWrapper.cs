@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System;
+using MySql.Data.MySqlClient;
 
 namespace VacationMasters.Wrappers
 {
@@ -24,5 +25,11 @@ namespace VacationMasters.Wrappers
         /// <param name="sqlQuery"></param>
         /// <returns></returns>
         T QueryValue<T>(string sqlQuery);
+
+        /// <summary>
+        /// Run a sql command
+        /// </summary>
+        /// <param name="func"></param>
+        T RunCommand<T>(Func<MySqlCommand, T> func);
     }
 }
