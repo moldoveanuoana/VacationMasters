@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <ResourceDictionary Source="BrushResources.xaml" />
     </UserControl.Resources>
-    
+
     <Grid Background="Transparent"
           HorizontalAlignment="Center"
           VerticalAlignment="Center">

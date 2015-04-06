@@ -49,7 +49,7 @@ namespace VacationMasters.Wrappers
             });
         }
 
-        private T RunCommand<T>(Func<MySqlCommand, T> func)
+        public T RunCommand<T>(Func<MySqlCommand, T> func)
         {
             try
             {
@@ -127,5 +127,23 @@ namespace VacationMasters.Wrappers
                     return list;
                 });
         }*/
+
+
+        public List<String> GetTypes()
+        {
+            return RunCommand(command =>
+            {
+                command.CommandText = " SELECT DISTINCT type FROM Package";
+                var reader = command.ExecuteReader();
+                var list = new List<String>();
+                while (reader.Read())
+                {
+                    String t = reader.GetString(0);
+                    list.Add(t);
+                }
+                return list;
+            });
+        }
+
     }
 }
