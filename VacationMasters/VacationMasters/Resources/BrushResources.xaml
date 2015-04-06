@@ -5,4 +5,5 @@
     <Color x:Key="Color.DarkBlue">#FF0A3655</Color>
 
     <SolidColorBrush x:Key="Brush.DarkBlue" Color="{StaticResource Color.DarkBlue}"/>
+    <SolidColorBrush x:Key="Brush.White" Color="White"/>
 </ResourceDictionary>

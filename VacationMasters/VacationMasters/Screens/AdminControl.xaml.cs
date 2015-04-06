@@ -69,6 +69,8 @@ namespace VacationMasters.Screens
         private async void SearchUser(object sender, RoutedEventArgs e)
         {
             var userName = UserSearchBox.Text;
+            if (String.IsNullOrEmpty(userName))
+                return;
             try
             {
                 IsOperationInProgress = true;
@@ -86,8 +88,10 @@ namespace VacationMasters.Screens
 
         private async void BanUser(object sender, RoutedEventArgs e)
         {
-            IsOperationInProgress = true;
             var userName = UserSearchBox.Text;
+            if (String.IsNullOrEmpty(userName))
+                return;
+            IsOperationInProgress = true;
             await Task.Run(() => _userManager.BanUser(userName));
             Banned = true;
             IsOperationInProgress = false;
@@ -95,8 +99,10 @@ namespace VacationMasters.Screens
 
         private async void UnbanUser(object sender, RoutedEventArgs e)
         {
-            IsOperationInProgress = true;
             var userName = UserSearchBox.Text;
+            if (String.IsNullOrEmpty(userName))
+                return;
+            IsOperationInProgress = true;
             await Task.Run(() => _userManager.UnbanUser(userName));
             Banned = false;
             IsOperationInProgress = false;

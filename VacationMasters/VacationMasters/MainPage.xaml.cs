@@ -70,6 +70,10 @@ namespace VacationMasters
             VisualStateManager.GoToState(this, "AdminControl", true);
         }
 
+        private void GoToRegisterControl(object sender, RoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "RegisterControl", true);
+        }
     }
 
 
