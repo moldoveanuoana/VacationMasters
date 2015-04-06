@@ -52,7 +52,7 @@ namespace VacationMasters
 
         private void Packages(object sender, RoutedEventArgs e)
         {
-
+            // this.Frame.Navigate(typeof(AdminControl), null);
         }
 
         private void UserPanel(object sender, RoutedEventArgs e)

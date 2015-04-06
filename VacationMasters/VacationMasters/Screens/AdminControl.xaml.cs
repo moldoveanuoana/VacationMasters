@@ -4,8 +4,6 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 using VacationMasters.Essentials;
 using VacationMasters.UserManagement;
 using VacationMasters.Wrappers;
@@ -14,6 +12,7 @@ namespace VacationMasters.Screens
 {
     public sealed partial class AdminControl : UserControl, INotifyPropertyChanged
     {
+
         private readonly IUserManager _userManager;
         private bool _banned;
         private bool _isUserSearched;
@@ -71,6 +70,7 @@ namespace VacationMasters.Screens
             var userName = UserSearchBox.Text;
             if (String.IsNullOrEmpty(userName))
                 return;
+
             try
             {
                 IsOperationInProgress = true;
@@ -91,7 +91,9 @@ namespace VacationMasters.Screens
             var userName = UserSearchBox.Text;
             if (String.IsNullOrEmpty(userName))
                 return;
-            IsOperationInProgress = true;
+
+           IsOperationInProgress = true;
+
             await Task.Run(() => _userManager.BanUser(userName));
             Banned = true;
             IsOperationInProgress = false;
@@ -102,7 +104,9 @@ namespace VacationMasters.Screens
             var userName = UserSearchBox.Text;
             if (String.IsNullOrEmpty(userName))
                 return;
+
             IsOperationInProgress = true;
+
             await Task.Run(() => _userManager.UnbanUser(userName));
             Banned = false;
             IsOperationInProgress = false;
