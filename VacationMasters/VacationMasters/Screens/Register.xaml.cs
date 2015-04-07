@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Controls;
 using VacationMasters.Essentials;
 using VacationMasters.UserManagement;
 using VacationMasters.Wrappers;
+using System.Threading.Tasks;
 
 namespace VacationMasters.Screens
 {
@@ -15,10 +16,14 @@ namespace VacationMasters.Screens
         public DbWrapper DbWrapper { get; set; }
         public Register()
         {
-            DbWrapper = new DbWrapper();
-            UserManager = new UserManager(this.DbWrapper);
-            var preferences = DbWrapper.GetAllPreferences();
             InitializeComponent();
+            FillPreferencesComboBoxes();
+        }
+        private async void FillPreferencesComboBoxes()
+        {
+            DbWrapper = new DbWrapper();
+            UserManager = new UserManager(DbWrapper);
+            var preferences = await Task.Run(() => DbWrapper.GetAllPreferences());
             comboBoxCountry.ItemsSource = preferences.Where(c => c.Category == "Country").Select(d => d.Name).ToArray();
             comboBoxType.ItemsSource = preferences.Where(c => c.Category == "Type").Select(d => d.Name).ToArray();
         }
@@ -26,62 +31,62 @@ namespace VacationMasters.Screens
         {
             if (VerifyRegisterFields() == false) return;
             var preferencesIds = new List<int>();
-            var preferences = this.DbWrapper.GetAllPreferences();
-            if (this.comboBoxCountry.SelectedValue != null)
+            var preferences = DbWrapper.GetAllPreferences();
+            if (comboBoxCountry.SelectedValue != null)
             {
-                var countryPref = preferences.First(c => c.Name == this.comboBoxCountry.SelectedValue.ToString());
+                var countryPref = preferences.Where(c => c.Name == comboBoxCountry.SelectedValue.ToString()).First();
                 preferencesIds.Add(countryPref.ID);
             }
-            if (this.comboBoxType.SelectedValue != null)
+            if (comboBoxType.SelectedValue != null)
             {
-                var typePref = preferences.First(c => c.Name == this.comboBoxType.SelectedValue.ToString());
+                var typePref = preferences.Where(c => c.Name == comboBoxType.SelectedValue.ToString()).First();
                 preferencesIds.Add(typePref.ID);
             }
-            var user = new User(this.txtBoxUsrName.Text, this.txtBoxFrsName.Text, this.txtBoxLstName.Text, this.txtBoxEmail.Text, this.txtBoxPhone.Text, false, "User", null);
-            this.UserManager.AddUser(user, this.pwdBox.Password, preferencesIds);
+            var user = new User(txtBoxUsrName.Text, txtBoxFrsName.Text, txtBoxLstName.Text, txtBoxEmail.Text, txtBoxPhone.Text, false, "User", null);
+            UserManager.AddUser(user, pwdBox.Password, preferencesIds);
         }
 
         private bool VerifyRegisterFields()
         {
             var completedFields = true;
-            if (ChangeRequiredTextBlock(this.usrRequired, this.txtBoxUsrName) == false) completedFields = false;
-            if (ChangeRequiredTextBlock(this.frsRequired, this.txtBoxFrsName) == false) completedFields = false;
-            if (ChangeRequiredTextBlock(this.lstRequired, this.txtBoxLstName) == false) completedFields = false;
-            if (ChangeRequiredTextBlock(this.emailRequired, this.txtBoxEmail) == false) completedFields = false;
-            if (ChangeRequiredTextBlock(this.phoneRequired, this.txtBoxPhone) == false) completedFields = false;
-            if (ChangeRequiredTextBlock(this.pwdRequired, this.pwdBox) == false) completedFields = false;
-            if (ChangeRequiredTextBlock(this.confRequired, this.confirmPwdBox) == false) completedFields = false;
-            if (UserManager.CheckIfUserExists(this.txtBoxUsrName.Text) == true)
+            if (ChangeRequiredTextBlock(usrRequired, txtBoxUsrName) == false) completedFields = false;
+            if (ChangeRequiredTextBlock(frsRequired, txtBoxFrsName) == false) completedFields = false;
+            if (ChangeRequiredTextBlock(lstRequired, txtBoxLstName) == false) completedFields = false;
+            if (ChangeRequiredTextBlock(emailRequired, txtBoxEmail) == false) completedFields = false;
+            if (ChangeRequiredTextBlock(phoneRequired, txtBoxPhone) == false) completedFields = false;
+            if (ChangeRequiredTextBlock(pwdRequired, pwdBox) == false) completedFields = false;
+            if (ChangeRequiredTextBlock(confRequired, confirmPwdBox) == false) completedFields = false;
+            if (string.IsNullOrEmpty(txtBoxUsrName.Text) == false && UserManager.CheckIfUserExists(txtBoxUsrName.Text))
             {
-                this.usrRequired.FontSize = 11;
-                this.usrRequired.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-                this.usrRequired.Text = "The username is already taken";
+                usrRequired.FontSize = 11;
+                usrRequired.VerticalAlignment = VerticalAlignment.Center;
+                usrRequired.Text = "The username is already taken";
                 completedFields = false;
             }
-            if (this.txtBoxEmail.Text != null && IsValidEmail(this.txtBoxEmail.Text) == false)
+            if (string.IsNullOrEmpty(txtBoxEmail.Text) == false && IsValidEmail(txtBoxEmail.Text) == false)
             {
-                this.emailRequired.FontSize = 11;
-                this.emailRequired.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-                this.emailRequired.Text = "The e-mail is not valid";
+                emailRequired.FontSize = 11;
+                emailRequired.VerticalAlignment = VerticalAlignment.Center;
+                emailRequired.Text = "The e-mail is not valid";
                 completedFields = false;
             }
-            if (this.txtBoxEmail.Text != null && IsValidEmail(this.txtBoxEmail.Text) == true && this.UserManager.CheckIfEmailExists(this.txtBoxEmail.Text) == true)
+            if (string.IsNullOrEmpty(txtBoxEmail.Text) == false && IsValidEmail(txtBoxEmail.Text) && UserManager.CheckIfEmailExists(txtBoxEmail.Text))
             {
-                this.emailRequired.FontSize = 11;
-                this.emailRequired.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-                this.emailRequired.Text = "The e-mail is already used";
+                emailRequired.FontSize = 11;
+                emailRequired.VerticalAlignment = VerticalAlignment.Center;
+                emailRequired.Text = "The e-mail is already used";
                 completedFields = false;
             }
-            if (this.txtBoxPhone.Text != null && IsValidPhoneNumber(this.txtBoxPhone.Text) == false)
+            if (string.IsNullOrEmpty(txtBoxPhone.Text) == false && IsValidPhoneNumber(txtBoxPhone.Text) == false)
             {
-                this.phoneRequired.FontSize = 11;
-                this.phoneRequired.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-                this.phoneRequired.Text = "The phone is not valid";
+                phoneRequired.FontSize = 11;
+                phoneRequired.VerticalAlignment = VerticalAlignment.Center;
+                phoneRequired.Text = "The phone is not valid";
                 completedFields = false;
             }
             if (pwdBox.Password != confirmPwdBox.Password)
             {
-                this.errorTxt.Text = "Password and Confirm Password do not match";
+                errorTxt.Text = "Password and Confirm Password do not match";
                 completedFields = false;
             }
             return completedFields;
@@ -92,7 +97,7 @@ namespace VacationMasters.Screens
             if (string.IsNullOrEmpty(textbox.Text))
             {
                 textblock.FontSize = 11;
-                textblock.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+                textblock.VerticalAlignment = VerticalAlignment.Center;
                 textblock.Text = "This field is required!";
                 return false;
             }
@@ -103,7 +108,7 @@ namespace VacationMasters.Screens
             if (string.IsNullOrEmpty(passwordbox.Password))
             {
                 textblock.FontSize = 11;
-                textblock.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+                textblock.VerticalAlignment = VerticalAlignment.Center;
                 textblock.Text = "This field is required!";
                 return false;
             }

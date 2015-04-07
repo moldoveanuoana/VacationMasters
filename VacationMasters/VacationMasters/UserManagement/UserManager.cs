@@ -77,10 +77,9 @@ namespace VacationMasters.UserManagement
 
         public bool CheckIfUserExists(string userName)
         {
-            var sql = string.Format("Select ID From Users UserName = {0};", userName);
+            var sql = string.Format("Select ID From Users Where UserName = {0};", userName);
             if (_dbWrapper.QueryValue<int>(sql) == 0) return false;
             return true;
-
         }
         public bool CheckIfEmailExists(string email)
         {
