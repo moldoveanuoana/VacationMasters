@@ -14,6 +14,15 @@ namespace VacationMasters.UserManagement
         bool CanLogin(User user);
 
         /// <summary>
+        /// checks whether a given user exists
+        /// Conditions: existing and password equivalence
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        bool CheckIfUserExists(string userName);
+
+        /// <summary>
         /// Checks whether the combination UserName/Password worked or not
         /// </summary>
         /// <param name="userName"></param>

@@ -74,6 +74,11 @@ namespace VacationMasters
         {
             VisualStateManager.GoToState(this, "RegisterControl", true);
         }
+
+        private void GoToLoginControl(object sender, RoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "LoginControl", true);
+        }
     }
 
 

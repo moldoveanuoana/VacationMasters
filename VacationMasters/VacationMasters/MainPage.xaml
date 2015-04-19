@@ -27,6 +27,10 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="RegisterControl">
@@ -36,6 +40,26 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RegisterControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="LoginControl">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AdminControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RegisterControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -97,7 +121,8 @@
                 <HyperlinkButton x:Name="login"
                                  Content="Login" 
                                  HorizontalAlignment="Right"
-                                 Grid.Column="0"/>
+                                 Grid.Column="0"
+                                 Click="GoToLoginControl"/>
                 <HyperlinkButton x:Name="register"
                                  Content="Register" 
                                  HorizontalAlignment="Right"
@@ -123,6 +148,7 @@
             <StackPanel>
             <screens:AdminControl x:Name="AdminControlView" Visibility="Collapsed"/>
             <screens:Register x:Name="RegisterControlView" Visibility="Collapsed"/>
+            <screens:Login x:Name="LoginControlView" Visibility="Collapsed"/>
             </StackPanel>
         </ScrollViewer>
         <Grid Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom">
