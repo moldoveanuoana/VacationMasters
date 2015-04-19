@@ -19,18 +19,32 @@ namespace VacationMasters.UserManagement
 
         public bool CanLogin(User user)
         {
-            //TODO: check for existing user
+            if (!CheckIfUserExists(user.UserName))
+                return false;
+
             return !user.Banned;
         }
 
         public bool CheckCredentials(string userName, string password)
         {
-            throw new NotImplementedException();
+            if (!CheckIfUserExists(userName))
+                return false;
+
+            var sql = string.Format("SELECT password FROM Users UserName = {0}", userName);
+            var usrPwd = _dbWrapper.QueryValue<object>(sql);
+            string pwd = EncryptPassword(userName, password);
+
+            if (String.Compare(usrPwd.ToString(), pwd) != 0)
+                return false;
+
+            return true;
         }
 
         public void ChangePassword(string userName, string newPassword)
         {
-            throw new NotImplementedException();
+            string newPwd = EncryptPassword(userName, newPassword);
+            var sql = string.Format("Update Users Set password ='{0}'", newPwd);
+            _dbWrapper.QueryValue<object>(sql);
         }
 
         public User GetUser(string userName)
@@ -180,5 +194,26 @@ namespace VacationMasters.UserManagement
             _dbWrapper.QueryValue<object>(sql);
         }
 
+        private static Dictionary<string, User> ActiveUserList = new Dictionary<string, User>();
+        public static void UserSignIn(User user)
+        {
+            ActiveUserList.Add(user.UserName, user);
+        }
+
+        public static void UserSignOut(User user)
+        {
+            ActiveUserList.Remove(user.UserName);
+        }
+
+        private string EncryptPassword(string userName, string password)
+        {
+            var input = CryptographicBuffer.ConvertStringToBinary(password,
+            BinaryStringEncoding.Utf8);
+            var hasher = HashAlgorithmProvider.OpenAlgorithm("SHA256");
+            var hashed = hasher.HashData(input);
+            var pwd = CryptographicBuffer.EncodeToBase64String(hashed);
+
+            return pwd.ToString();
+        }
     }
 }

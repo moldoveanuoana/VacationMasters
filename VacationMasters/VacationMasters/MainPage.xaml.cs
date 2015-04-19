@@ -260,8 +260,10 @@ namespace VacationMasters
             VisualStateManager.GoToState(this, "ContactControl", true);
         }
 
-     
-       
+        private void GoToLoginControl(object sender, RoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "LoginControl", true);
+        }
     }
 
 

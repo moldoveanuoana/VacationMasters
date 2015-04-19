@@ -34,6 +34,10 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="RegisterControl">
@@ -46,14 +50,23 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
+
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="ContactControl">
-                    <Storyboard>
+                    
+                </VisualState>
+                    <VisualState x:Name="LoginControl">
+                        <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AdminControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
@@ -62,7 +75,12 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
+                            
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -124,7 +142,8 @@
                 <HyperlinkButton x:Name="login"
                                  Content="Login" 
                                  HorizontalAlignment="Right"
-                                 Grid.Column="0"/>
+                                 Grid.Column="0"
+                                 Click="GoToLoginControl"/>
                 <HyperlinkButton x:Name="register"
                                  Content="Register" 
                                  HorizontalAlignment="Right"
@@ -149,8 +168,9 @@
         <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="0,0,0,63"  >
             <StackPanel>
             <screens:AdminControl x:Name="AdminControlView" Visibility="Collapsed"/>
-            <screens:Register x:Name="RegisterControlView" Visibility="Collapsed"/>
+                <screens:Register x:Name="RegisterControlView" Visibility="Collapsed"/>
                 <screens:Contact x:Name="ContactControlView" Visibility="Collapsed" />
+                <screens:Login x:Name="LoginControlView" Visibility="Collapsed"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>
