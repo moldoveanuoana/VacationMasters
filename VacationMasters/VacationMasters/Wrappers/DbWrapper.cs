@@ -34,7 +34,7 @@ namespace VacationMasters.Wrappers
             return command;
         }
 
-        private async void MessageBox(string msg)
+       private async void MessageBox(string msg)
         {
             var msgDlg = new Windows.UI.Popups.MessageDialog(msg) { DefaultCommandIndex = 1 };
             await msgDlg.ShowAsync();
