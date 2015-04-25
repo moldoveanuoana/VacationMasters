@@ -19,8 +19,8 @@ namespace VacationMasters
             this.DbWrapper = new DbWrapper();
             var types = DbWrapper.GetTypes();
             this.InitializeComponent();
-            foreach (String t in types)
-                type_combo.Items.Add(t);
+           // foreach (String t in types)
+             //   type_combo.Items.Add(t);
            /*     type_combo.Items.Add("elem1");
                 type_combo.Items.Add("elem2");*/
             
@@ -52,7 +52,7 @@ namespace VacationMasters
 
         private void Packages(object sender, RoutedEventArgs e)
         {
-            // this.Frame.Navigate(typeof(AdminControl), null);
+            //this.Frame.Navigate(typeof(AdminControl), null);
         }
 
         private void UserPanel(object sender, RoutedEventArgs e)

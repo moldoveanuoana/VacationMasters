@@ -78,5 +78,11 @@ namespace VacationMasters.UserManagement
         /// </summary>
         /// <param name="userName"></param>
         void UnbanUser(string userName);
+
+        /// <summary>
+        /// Lifts ban for a user, give access back
+        /// </summary>
+        /// <param name="userName"></param>
+        bool Login(string username, string password);
     }
 }
