@@ -15,11 +15,11 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
         <TextBlock Margin="3" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" TextAlignment="Right">User Name</TextBlock>
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
-            <TextBox x:Name="txtBoxUsrName" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Stretch"></TextBox>
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" MinWidth="200" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+            <TextBox x:Name="txtBoxUsrName" Margin="3" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Stretch"></TextBox>
             <TextBlock  x:Name="usrRequired" Margin="3" HorizontalAlignment="Stretch" TextAlignment="Left" VerticalAlignment="Top" Foreground="Red" FontSize="14">*</TextBlock>
         </StackPanel>
         <TextBlock Margin="3" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" TextAlignment="Right">Password</TextBlock>

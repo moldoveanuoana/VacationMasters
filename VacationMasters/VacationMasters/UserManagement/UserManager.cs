@@ -4,6 +4,8 @@ using Windows.Security.Cryptography.Core;
 using VacationMasters.Essentials;
 using VacationMasters.Wrappers;
 using System.Collections.Generic;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace VacationMasters.UserManagement
 {
@@ -194,15 +196,45 @@ namespace VacationMasters.UserManagement
             _dbWrapper.QueryValue<object>(sql);
         }
 
-        private static Dictionary<string, User> ActiveUserList = new Dictionary<string, User>();
-        public static void UserSignIn(User user)
+        public bool Login(string userName, string password)
         {
-            ActiveUserList.Add(user.UserName, user);
+            if (CurrentUser != null && userName != String.Empty && CheckIfUserExists(userName) == true)
+            {
+                var currUser = GetUser(userName);
+                if (currUser.Banned)
+                {
+                    String message = "You have been baned!";
+                    DisplayPopup(message);
+                    return false;
+                }
+
+                if (CheckCredentials(userName, password) == false)
+                {
+                    String message = "Incorrect username or password!";
+                    DisplayPopup(message);
+                    return false;
+                }
+
+                CurrentUser = GetUser(userName);
+                return true;
+            }
+            else 
+            {
+              String message = "All fields are mandatory!";
+              DisplayPopup(message);
+              return false;
+            }
         }
 
-        public static void UserSignOut(User user)
+        private void DisplayPopup(string message)
         {
-            ActiveUserList.Remove(user.UserName);
+            Popup validationPopup = new Popup();
+            validationPopup.VerticalOffset = 200;
+            validationPopup.HorizontalOffset = 300;
+            
+             TextBlock popupText = new TextBlock();
+             popupText.Text = message;
+             validationPopup.Child = popupText;
         }
 
         private string EncryptPassword(string userName, string password)
@@ -215,5 +247,6 @@ namespace VacationMasters.UserManagement
 
             return pwd.ToString();
         }
+
     }
 }

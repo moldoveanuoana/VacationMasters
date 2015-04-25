@@ -104,24 +104,61 @@ namespace VacationMasters.UnitTests.DatabaseTests
             _userManagement.RemoveUser(user.UserName);
         }
 
+        [Test]
         public void MultipleUsersCanLoginAtTheSameTime()
         {
-            //TODO:this
+            var password1 = CreateRandom.String();
+            var user1 = CreateRandomUser();
+
+            var password2 = CreateRandom.String();
+            var user2 = CreateRandomUser();
+
+            _userManagement.AddUser(user1, password1);
+            _userManagement.AddUser(user2, password2);
+
+            Assert.DoesNotThrow(() => _userManagement.Login(user1.UserName, password1));
+            Assert.DoesNotThrow(() => _userManagement.Login(user2.UserName, password2));
+            Assert.IsTrue(UserManager.CurrentUser.UserName == user1.UserName);
+            Assert.IsFalse(UserManager.CurrentUser.UserName == user2.UserName);
+
+            _userManagement.RemoveUser(user1.UserName);
+            _userManagement.RemoveUser(user2.UserName);
         }
 
+        [Test]
         public void ValidUserWithPasswordPassCredentialChecking()
         {
-            //TODO:this
+            var password = CreateRandom.String();
+            var user = CreateRandomUser();
+
+            _userManagement.AddUser(user, password);
+
+            Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password));
+            Assert.NotNull(UserManager.CurrentUser);
+
+            _userManagement.RemoveUser(user.UserName);
         }
 
+        [Test]
         public void ValidUserWithWrongPasswordFailsCredentialChecking()
         {
-            //TODO:this
-        }
+            var password = CreateRandom.String();
+            var password1 = CreateRandom.String();
+            var user = CreateRandomUser();
 
+            Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password1));
+            Assert.IsFalse(_userManagement.Login(user.UserName, password1));
+            Assert.IsNull(UserManager.CurrentUser);
+        }
+        
+        [Test]
         public void NonExistingUserTriesToLogin()
         {
-            //TODO:this
+           var password = CreateRandom.String();
+           var user = CreateRandomUser();
+
+           Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password));
+           Assert.IsTrue(_userManagement.Login(user.UserName, password));
         }
 
         public void UserCanChangeHisPassword()

@@ -88,5 +88,9 @@ namespace VacationMasters.UserManagement
         List<String> GetAllEmails();
 
         List<String> GetStrings(string sql);
+        
+
+        bool Login(string username, string password);
+
     }
 }
