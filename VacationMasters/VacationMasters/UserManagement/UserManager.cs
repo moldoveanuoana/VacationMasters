@@ -34,7 +34,30 @@ namespace VacationMasters.UserManagement
 
         public User GetUser(string userName)
         {
-            throw new NotImplementedException();
+            var sql = string.Format("SELECT UserName, FirstName, LastName, Email, PhoneNumber, " +
+                                    "Banned, Type, KeyWordsSearches from users " +
+                                    "where UserName = '{0}';", userName);
+            User user = null;
+
+            return _dbWrapper.RunCommand(command =>
+            {
+                command.CommandText = sql;
+                var reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    userName = reader.GetString(0);
+                    var firstName = reader.GetString(1);
+                    var lastName = reader.GetString(2);
+                    var email = reader.GetString(3);
+                    var phoneNumber = reader.GetString(4);
+                    var banned = reader.GetBoolean(5);
+                    var type = reader.GetString(6);
+                    var keyWordsSearchers = reader.GetString(7);
+                    user = new User(userName, firstName, lastName, email, phoneNumber, banned,
+                        type, keyWordsSearchers);
+                }
+                return user;
+            });
         }
 
         public void AddUser(User user, string password, string type = "User")
@@ -54,14 +77,13 @@ namespace VacationMasters.UserManagement
 
         public bool CheckIfUserExists(string userName)
         {
-            var sql = string.Format("Select ID From Users UserName = {0}", userName);
+            var sql = string.Format("Select ID From Users Where UserName = {0};", userName);
             if (_dbWrapper.QueryValue<int>(sql) == 0) return false;
             return true;
-
         }
         public bool CheckIfEmailExists(string email)
         {
-            var sql = string.Format("Select ID From Users Where Email = {0}", email);
+            var sql = string.Format("Select ID From Users Where Email = {0};", email);
             if (_dbWrapper.QueryValue<int>(sql) == 0) return false;
             return true;
         }
@@ -94,8 +116,24 @@ namespace VacationMasters.UserManagement
 
         public void RemoveUser(string userName)
         {
-            var sql = string.Format("DELETE FROM ChoosePreferences  WHERE IDUser = (SELECT ID FROM Users Where UserName = {0});", userName);
-            sql += string.Format("Delete from Users where UserName = {0};", userName);
+            var sql = string.Format("DELETE FROM ChoosePreferences" +
+                                    " WHERE IDUser = (SELECT ID FROM Users Where UserName = {0});",
+                                    userName);
+            sql += string.Format("Delete from Users where UserName = '{0}';", userName);
+            _dbWrapper.QueryValue<object>(sql);
+        }
+
+        public void BanUser(string userName)
+        {
+            var sql = string.Format("UPDATE Users set Banned = true " +
+                                    "WHERE UserName = '{0}';",userName);
+            _dbWrapper.QueryValue<object>(sql);
+        }
+
+        public void UnbanUser(string userName)
+        {
+            var sql = string.Format("UPDATE Users set Banned = false " +
+                                   "WHERE UserName = '{0}';", userName);
             _dbWrapper.QueryValue<object>(sql);
         }
     }
