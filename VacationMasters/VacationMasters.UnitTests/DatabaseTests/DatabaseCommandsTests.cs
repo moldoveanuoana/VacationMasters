@@ -145,11 +145,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var pack = CreateTestPackage();
 
             Assert.DoesNotThrow(()=>_packageManager.AddPackage(pack));
-
-            var list = _db.GetPackagesByName(pack.Name);
-            Assert.That(list.FirstOrDefault().Name == pack.Name);
-
-            _packageManager.RemovePackage(pack);
+            Assert.DoesNotThrow(()=>_packageManager.RemovePackage(pack));
         }
 
         [Test]
@@ -189,6 +185,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var pack = CreateTestPackage();
 
             _packageManager.AddPackage(pack);
+
             var list = _db.GetPackagesByDate(new DateTime(2015, 7, 16), new DateTime(2015, 7, 26));
             foreach (Package item in list)
             {
