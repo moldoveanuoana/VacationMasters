@@ -124,7 +124,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[17];
+            _typeNameTable = new string[18];
             _typeNameTable[0] = "VacationMasters.Screens.AdminControl";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.UserControl";
             _typeNameTable[2] = "Boolean";
@@ -142,8 +142,9 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
             _typeNameTable[14] = "VacationMasters.Resources.Converters.BooleanToImageConverter";
             _typeNameTable[15] = "Windows.UI.Xaml.Media.ImageSource";
             _typeNameTable[16] = "VacationMasters.Resources.Converters.BooleanToVisibilityConverter";
+            _typeNameTable[17] = "VacationMasters.Screens.BlankPage1";
 
-            _typeTable = new global::System.Type[17];
+            _typeTable = new global::System.Type[18];
             _typeTable[0] = typeof(global::VacationMasters.Screens.AdminControl);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
             _typeTable[2] = typeof(global::System.Boolean);
@@ -161,6 +162,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
             _typeTable[14] = typeof(global::VacationMasters.Resources.Converters.BooleanToImageConverter);
             _typeTable[15] = typeof(global::Windows.UI.Xaml.Media.ImageSource);
             _typeTable[16] = typeof(global::VacationMasters.Resources.Converters.BooleanToVisibilityConverter);
+            _typeTable[17] = typeof(global::VacationMasters.Screens.BlankPage1);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -202,6 +204,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
         private object Activate_13_CircularProgressBar() { return new global::VacationMasters.Resources.CircularProgressBar(); }
         private object Activate_14_BooleanToImageConverter() { return new global::VacationMasters.Resources.Converters.BooleanToImageConverter(); }
         private object Activate_16_BooleanToVisibilityConverter() { return new global::VacationMasters.Resources.Converters.BooleanToVisibilityConverter(); }
+        private object Activate_17_BlankPage1() { return new global::VacationMasters.Screens.BlankPage1(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -321,6 +324,13 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 userType.Activator = Activate_16_BooleanToVisibilityConverter;
                 userType.AddMemberName("TrueValue");
                 userType.AddMemberName("FalseValue");
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 17:   //  VacationMasters.Screens.BlankPage1
+                userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_17_BlankPage1;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -908,6 +918,5 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
         }
     }
 }
-
 
 

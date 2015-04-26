@@ -10,6 +10,7 @@ namespace VacationMasters.UserManagement
     public class UserManager : IUserManager
     {
         private readonly IDbWrapper _dbWrapper;
+        public User CurrentUser { get; set; }
 
         public UserManager(IDbWrapper dbWrapper)
         {
@@ -136,5 +137,6 @@ namespace VacationMasters.UserManagement
                                    "WHERE UserName = '{0}';", userName);
             _dbWrapper.QueryValue<object>(sql);
         }
+
     }
 }
