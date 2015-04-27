@@ -192,7 +192,7 @@ namespace VacationMasters.Wrappers
         {
             return RunCommand(command =>
             {
-                command.CommandText = "SELECT * FROM Packages WHERE BeginDate = " + beginDate + " AND EndDate = " + endDate;
+                command.CommandText = "SELECT * FROM Packages WHERE BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd");
                 return ReadPackages(command);
             });
         }
