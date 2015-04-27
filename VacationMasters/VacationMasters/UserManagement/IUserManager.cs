@@ -5,6 +5,8 @@ namespace VacationMasters.UserManagement
 {
     public interface IUserManager
     {
+        User CurrentUser { get; set; }
+
         /// <summary>
         /// checks whether a given user satisfies the login conditions
         /// Conditions: existing and not banned
