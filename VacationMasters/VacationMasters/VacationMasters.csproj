@@ -105,6 +105,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Essentials\GroupManager.cs" />
     <Compile Include="Essentials\Package.cs" />
     <Compile Include="Essentials\Preference.cs" />
     <Compile Include="Essentials\Recommendation.cs" />
