@@ -115,6 +115,22 @@ namespace VacationMasters.UserManagement
             _dbWrapper.QueryValue<object>(sql);
         }
 
+        public List<String> GetAllEmails()
+        {
+            return _dbWrapper.RunCommand(command =>
+            {
+                command.CommandText = "Select Email from Users;";
+                var reader = command.ExecuteReader();
+                var list = new List<String>();
+                while (reader.Read())
+                {
+                    var email = reader.GetString(0);
+                    list.Add(email);
+                }
+                return list;
+            });
+        }
+
         public void AddPreference(Preference preference)
         {
             var sql = string.Format("INSERT INTO Preferences(Name,Category) values ('{0}','{1}');", preference.Name, preference.Category);

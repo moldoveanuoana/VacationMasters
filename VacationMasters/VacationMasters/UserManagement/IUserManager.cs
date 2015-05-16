@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VacationMasters.Essentials;
 
 namespace VacationMasters.UserManagement
@@ -71,5 +72,10 @@ namespace VacationMasters.UserManagement
         /// </summary>
         /// <param name="userName"></param>
         void UnbanUser(string userName);
+
+        /// <summary>
+        /// Gets all the emails from database
+        /// </summary>
+        List<String> GetAllEmails();
     }
 }
