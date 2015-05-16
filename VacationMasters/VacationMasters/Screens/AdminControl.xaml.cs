@@ -199,5 +199,10 @@ namespace VacationMasters.Screens
             IsUserManagerActive = false;
             IsNewsletterActive = true;
         }
+
+        private void PManager(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
