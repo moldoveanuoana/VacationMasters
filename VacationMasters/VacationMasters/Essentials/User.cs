@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace VacationMasters.Essentials
 {
@@ -19,6 +20,7 @@ namespace VacationMasters.Essentials
         public bool Banned { get; set; }
         public string Email { get; set; }
         public AuthTypes AuthType { get; set; }
+        public List<Preference> Preferences { get; set; }
 
         public User(string userName, string firstName, string lastName, string email, string phoneNumber,
             bool banned, string type, string keyWordSearches)

@@ -10,6 +10,7 @@ namespace VacationMasters.UserManagement
     public class UserManager : IUserManager
     {
         private readonly IDbWrapper _dbWrapper;
+        public User CurrentUser { get; set; }
 
         public UserManager(IDbWrapper dbWrapper)
         {
@@ -77,10 +78,9 @@ namespace VacationMasters.UserManagement
 
         public bool CheckIfUserExists(string userName)
         {
-            var sql = string.Format("Select ID From Users UserName = {0};", userName);
+            var sql = string.Format("Select ID From Users Where UserName = {0};", userName);
             if (_dbWrapper.QueryValue<int>(sql) == 0) return false;
             return true;
-
         }
         public bool CheckIfEmailExists(string email)
         {
@@ -137,5 +137,6 @@ namespace VacationMasters.UserManagement
                                    "WHERE UserName = '{0}';", userName);
             _dbWrapper.QueryValue<object>(sql);
         }
+
     }
 }
