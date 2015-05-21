@@ -88,7 +88,7 @@ namespace VacationMasters.UserManagement
             if (_dbWrapper.QueryValue<int>(sql) == 0) return false;
             return true;
         }
-        public void AddUser(User user, string password, List<int> preferencesIds, string type = "User")
+        public void AddUser(User user, string password, List<int> preferencesIds, List<string> groups, string type = "User")
         {
             var input = CryptographicBuffer.ConvertStringToBinary(password,
            BinaryStringEncoding.Utf8);
@@ -102,9 +102,15 @@ namespace VacationMasters.UserManagement
                 false, type, user.KeyWordSearches);
             sql += "SELECT LAST_INSERT_ID();";
             var idUser = _dbWrapper.QueryValue<int>(sql);
+            sql = string.Empty;
             foreach (var id in preferencesIds)
             {
-                sql = string.Format("INSERT INTO ChoosePreferences(IDUser,IDPreference) values('{0}','{1}');", idUser, id);
+                sql += string.Format("INSERT INTO ChoosePreferences(IDUser,IDPreference) values('{0}','{1}');", idUser, id);
+            }
+            foreach (var group in groups)
+            {
+                var id = _dbWrapper.QueryValue<int>(string.Format("Select Id from Groups Where Name='{0}'", group));
+                sql += string.Format("INSERT INTO ChooseGroups(IDUser,IDGroup) values('{0}','{1}');", idUser, id);
             }
             _dbWrapper.QueryValue<object>(sql);
         }
@@ -120,6 +126,9 @@ namespace VacationMasters.UserManagement
             var sql = string.Format("DELETE FROM ChoosePreferences" +
                                     " WHERE IDUser = (SELECT ID FROM Users Where UserName = {0});",
                                     userName);
+            sql += string.Format("DELETE FROM ChooseGroups" +
+                                   " WHERE IDUser = (SELECT ID FROM Users Where UserName = {0});",
+                                   userName);
             sql += string.Format("Delete from Users where UserName = '{0}';", userName);
             _dbWrapper.QueryValue<object>(sql);
         }
@@ -127,7 +136,7 @@ namespace VacationMasters.UserManagement
         public void BanUser(string userName)
         {
             var sql = string.Format("UPDATE Users set Banned = true " +
-                                    "WHERE UserName = '{0}';",userName);
+                                    "WHERE UserName = '{0}';", userName);
             _dbWrapper.QueryValue<object>(sql);
         }
 
