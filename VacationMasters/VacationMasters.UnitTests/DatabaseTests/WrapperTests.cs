@@ -47,5 +47,6 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var disconnected = connection.State == ConnectionState.Closed;
             Assert.IsTrue(disconnected);
         }
+
     }
 }

@@ -5,6 +5,8 @@ namespace VacationMasters.UserManagement
 {
     public interface IUserManager
     {
+        User CurrentUser { get; set; }
+
         /// <summary>
         /// checks whether a given user satisfies the login conditions
         /// Conditions: existing and not banned
@@ -50,7 +52,7 @@ namespace VacationMasters.UserManagement
         /// <param name="password"></param>
         /// <param name="preferencesId"></param>
         /// <param name="type"></param>
-        void AddUser(User user, string password, List<int> preferencesId, string type = "User");
+        void AddUser(User user, string password, List<int> preferencesId, List<string> groups,  string type = "User");
 
         /// <summary>
         /// Remove user from database

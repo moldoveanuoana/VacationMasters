@@ -105,8 +105,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Essentials\GroupManager.cs" />
     <Compile Include="Essentials\Package.cs" />
     <Compile Include="Essentials\Preference.cs" />
+    <Compile Include="Essentials\Recommendation.cs" />
     <Compile Include="Essentials\User.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -120,6 +122,9 @@
     <Compile Include="Resources\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Screens\AdminControl.xaml.cs">
       <DependentUpon>AdminControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\SearchResults.xaml.cs">
+      <DependentUpon>SearchResults.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
@@ -167,6 +172,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Screens\AdminControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\SearchResults.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
