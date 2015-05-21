@@ -68,16 +68,40 @@
             <TextBlock  Margin="3" TextWrapping="Wrap" Width="88" HorizontalAlignment="Left"   TextAlignment="Right" Text="Preferences"/>
             <StackPanel  Height="20">
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="3" VerticalAlignment="Center" TextAlignment="Right" Width="88" >Country</TextBlock>
-                <ComboBox x:Name="comboBoxCountry"  Margin="3" VerticalAlignment="Center"  Width="200"></ComboBox>
+            <TextBlock  Margin="3" TextWrapping="Wrap" Width="88" HorizontalAlignment="Left"   TextAlignment="Right" Text="Countries"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="left">
+                <Viewbox HorizontalAlignment="Center"
+                             Width="40"
+                             Height="40"
+                             Visibility="{Binding IsOperationInProgress,Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <resources:CircularProgressBar/>
+                </Viewbox>
+                <GridView x:Name="CountriesGridView" SelectionMode="Multiple" Width="Auto" Height="Auto" ShowsScrollingPlaceholders="False"  VerticalAlignment="Stretch"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                           ItemContainerStyle="{StaticResource StoreFrontTileStyle}"
+                    ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}">
+                </GridView>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="3" VerticalAlignment="Center" TextAlignment="Right" Width="88" >Type</TextBlock>
-                <ComboBox  x:Name="comboBoxType" Margin="3"  VerticalAlignment="Center"  Width="200"></ComboBox>
+            <TextBlock  Margin="3" TextWrapping="Wrap" Width="88" HorizontalAlignment="Left"   TextAlignment="Right" Text="Types"/>
+            <StackPanel  Height="20">
             </StackPanel>
-            <StackPanel Height="30">
-                <TextBlock x:Name="errorTxt" Margin="3" FontSize="14" Foreground="Red" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="left">
+                <Viewbox HorizontalAlignment="Center"
+                             Width="40"
+                             Height="40"
+                             Visibility="{Binding IsOperationInProgress,Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <resources:CircularProgressBar/>
+                </Viewbox>
+                <GridView x:Name="TypesGridView" SelectionMode="Multiple" Width="Auto" Height="Auto" ShowsScrollingPlaceholders="False"  VerticalAlignment="Stretch"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                           ItemContainerStyle="{StaticResource StoreFrontTileStyle}"
+                    ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}">
+                </GridView>
+            </StackPanel>
+            <TextBlock  Margin="3" TextWrapping="Wrap" Width="88" HorizontalAlignment="Left"   TextAlignment="Right" Text="Groups"/>
+            <StackPanel  Height="20">
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="left">
                 <Viewbox HorizontalAlignment="Center"
@@ -92,6 +116,9 @@
                     ItemContainerStyle="{StaticResource StoreFrontTileStyle}"
                     ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}">
                 </GridView>
+            </StackPanel>
+            <StackPanel Height="30">
+                <TextBlock x:Name="errorTxt" Margin="3" FontSize="14" Foreground="Red" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="RegisterBtn" Content="Register" Width="100" HorizontalAlignment="Left" Click="RegisterBtn_Click" />
