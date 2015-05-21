@@ -185,8 +185,14 @@ namespace VacationMasters.PackageManagement
                 packagesByUserGroups.AddRange(temp);
             }
 
-            return packagesByUserGroups;
+            var noduplicatespackagesByUserGroups = packagesByUserGroups.Distinct();
+            var finalList = GetPackagesByPreferences();
 
+            finalList.AddRange(noduplicatespackagesByUserGroups);
+
+            finalList.OrderBy(p => p.Rating).ThenBy(p => p.SearchIndex);
+
+            return finalList;
 
         } 
        
