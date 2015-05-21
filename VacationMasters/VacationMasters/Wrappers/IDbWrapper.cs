@@ -1,5 +1,7 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
+using VacationMasters.Essentials;
+using System.Collections.Generic;
 
 namespace VacationMasters.Wrappers
 {
@@ -31,5 +33,11 @@ namespace VacationMasters.Wrappers
         /// </summary>
         /// <param name="func"></param>
         T RunCommand<T>(Func<MySqlCommand, T> func);
+
+        /// <summary>
+        /// Gets packages 
+        /// </summary>
+        /// <param name="sqlQuery"></param>
+        List<Package> ReadPackages(MySqlCommand sqlQuery);
     }
 }
