@@ -105,10 +105,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Essentials\GroupManager.cs" />
     <Compile Include="Essentials\Package.cs" />
     <Compile Include="Essentials\Preference.cs" />
     <Compile Include="Essentials\Recommendation.cs" />
     <Compile Include="Essentials\User.cs" />
+    <Compile Include="Mail\SmtpClient.cs" />
+    <Compile Include="Mail\SmtpCode.cs" />
+    <Compile Include="Mail\SmtpMessage.cs" />
+    <Compile Include="Mail\SmtpPriority.cs" />
+    <Compile Include="Mail\SmtpResponse.cs" />
+    <Compile Include="Mail\SmtpSocket.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -144,8 +151,11 @@
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Resources\Images\background.jpg" />
     <Content Include="Resources\Images\iconBanned.png" />
     <Content Include="Resources\Images\iconClear.png" />
+    <Content Include="Resources\Images\sunset.jpg" />
+    <Content Include="Resources\Images\tropical.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

@@ -47,16 +47,15 @@ namespace VacationMasters.UnitTests.DatabaseTests
         }
 
         [Test]
-        public void AddUserWithPreferencesShouldNotThrow()
+        public void AddUserWithPreferencesAndGroupsShouldNotThrow()
         {
             var password = CreateRandom.String();
             var user = CreateRandomUser();
             var preferences = new List<int>();
-
             preferences.Add(1);
             preferences.Add(2);
-
-            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password, preferences));
+            var groups = new List<string>{"Grupul iubitorilor de mare"};
+            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password, preferences,groups));
             Assert.DoesNotThrow(() => _userManagement.RemoveUser(user.UserName));
         }
 
