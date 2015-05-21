@@ -10,7 +10,10 @@
                                      IsDesignTimeCreatable=True}"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/Images/sunset.jpg"></ImageBrush>
+        </Grid.Background>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
                 <VisualStateGroup.Transitions>
