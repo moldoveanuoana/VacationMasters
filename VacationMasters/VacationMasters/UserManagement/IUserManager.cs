@@ -77,5 +77,7 @@ namespace VacationMasters.UserManagement
         /// Gets all the emails from database
         /// </summary>
         List<String> GetAllEmails();
+
+        List<String> GetStrings(string sql);
     }
 }

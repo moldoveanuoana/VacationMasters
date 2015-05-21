@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VacationMasters.Essentials;
 using VacationMasters.UserManagement;
 using VacationMasters.Wrappers;
@@ -123,7 +124,7 @@ namespace VacationMasters.PackageManagement
 
             var nameMax = frequencyNameArray.ElementAt(index);
 
-            sql = string.Format("Select from preferences d join ChooseDestinations cd on (cd.IDDestination = d.ID)" +
+            sql = string.Format("Select * from preferences d join ChooseDestinations cd on (cd.IDDestination = d.ID)" +
                "join packages p (p.ID = cd.IDPackage) where p.Type = {0} or d.Name = {1};", typeMax, nameMax);
 
             var selectedPackages = _dbWrapper.RunCommand(command =>
@@ -145,6 +146,49 @@ namespace VacationMasters.PackageManagement
 
         }
 
+
+        public List<Package> GetPackagesByUserGroups()
+        {
+            User loggedUser = _userManager.CurrentUser;
+            var packagesByUserGroups = new List<Package>();
+
+            var sql = string.Format("Select Name from Groups g join ChooseGroups cg on g.ID = cg.IDGroup" +
+                                    "join Users u on u.ID = cg.IDUser where u.UserName = {0}", loggedUser.UserName);
+
+            var groups = new List<String>();
+            groups = _userManager.GetStrings(sql);
+            var users = new List<String>();
+
+            foreach (var group in groups)
+            {
+                sql = string.Format("Select ID from Users u join ChooseGroups cg on u.ID = cg.IDUser" +
+                                    "join Groups g on g.ID = cg.IDGroup where Name ={0}", group);
+                var temp = new List<String>();
+                temp = _userManager.GetStrings(sql);
+                users.AddRange(temp);
+            }
+
+            foreach (var user in users)
+            {
+                sql = string.Format("Select * from Packages p join ChoosePackage cp on p.ID = cp.IDPackage" +
+                                    "join Order o on o.ID = cp.IDOrder join Users u on " +
+                                    "u.ID = o.IDUser where u.ID = {0}", user);
+
+                var temp = new List<Package>();
+
+                temp =  _dbWrapper.RunCommand(command =>
+                {
+                    command.CommandText = sql;
+                    return _dbWrapper.ReadPackages(command);
+                });
+
+                packagesByUserGroups.AddRange(temp);
+            }
+
+            return packagesByUserGroups;
+
+
+        } 
        
 
 
