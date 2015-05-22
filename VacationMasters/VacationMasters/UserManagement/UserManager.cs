@@ -132,6 +132,22 @@ namespace VacationMasters.UserManagement
             });
         }
 
+        public List<string> GetStrings(string sql)
+        {
+            return _dbWrapper.RunCommand(command =>
+            {
+                command.CommandText = sql;
+                var reader = command.ExecuteReader();
+                var list = new List<String>();
+                while (reader.Read())
+                {
+                    var email = reader.GetString(0);
+                    list.Add(email);
+                }
+                return list;
+            });
+        }
+
         public void AddPreference(Preference preference)
         {
             var sql = string.Format("INSERT INTO Preferences(Name,Category) values ('{0}','{1}');", preference.Name, preference.Category);
