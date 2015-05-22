@@ -211,6 +211,12 @@ namespace VacationMasters.UnitTests.DatabaseTests
             _packageManager.RemovePackage(pack);
         }
 
+        [Test]
+        public void DummyTest()
+        {
+            
+        }
+
 
     }
 }
