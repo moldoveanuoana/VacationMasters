@@ -244,10 +244,6 @@ namespace VacationMasters
 
         }
 
-        private void Contact(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void GoToAdminControl(object sender, RoutedEventArgs e)
         {
@@ -258,6 +254,14 @@ namespace VacationMasters
         {
             VisualStateManager.GoToState(this, "RegisterControl", true);
         }
+
+        private void GoToContactControl(object sender, RoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "ContactControl", true);
+        }
+
+     
+       
     }
 
 

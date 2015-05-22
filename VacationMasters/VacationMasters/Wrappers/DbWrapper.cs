@@ -101,33 +101,7 @@ namespace VacationMasters.Wrappers
             });
         }
 
-        /* public List<Package> GetAllPackages()
-         {
-             return RunCommand(command =>
-                 {
-                     command.CommandText = "SELECT * FROM Packages";
-                     var reader = command.ExecuteReader();
-                     var list = new List<Package>();
-                     while(reader.Read())
-                     {
-                         var pack = new Package();
-                         pack.ID = reader.GetInt32(0);
-                         pack.Name = reader.GetString(1);
-                         pack.Type = reader.GetString(2);
-                         pack.Included = reader.GetString();
-                         pack.Transport = reader.GetString();
-                         pack.Price = reader.GetDouble();
-                         pack.SearchIndexRate = reader.GetDouble();
-                         pack.BeginDate = reader.GetDateTime();
-                         pack.EndDate = reader.GetDateTime();
-                         pack.Picture = reader.GetBytes();
-                         list.Add(pack);
-                        
-                     }
-                     return list;
-                 });
-         }*/
-
+      
 
         public List<String> GetTypes()
         {
