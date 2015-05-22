@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 using VacationMasters.Essentials;
 using VacationMasters.UserManagement;
 using VacationMasters.Wrappers;
-using System;
+
 
 namespace VacationMasters.Screens
 {
@@ -24,8 +24,9 @@ namespace VacationMasters.Screens
             string userName = this.txtBoxUsrName.Text;
             string password = this.pwdBox.Password;
         
-            if(_userManager.Login(userName, password))
-                VisualStateManager.GoToState(this, "LoginControl", true);  
+            Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => {_userManager.Login(userName, password);});
+
+            VisualStateManager.GoToState(this, "LoginControl", true);  
         }
     }
 }

@@ -305,5 +305,14 @@ namespace VacationMasters.Wrappers
             });
         }
 
+        public List<Package> getRandomPackages()
+        {
+            return RunCommand(command =>
+            {
+                command.CommandText = "SELECT * FROM Packages ORDER BY SearchIndex DESC";
+                return ReadPackages(command);
+            });
+        }
+
     }
 }

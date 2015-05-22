@@ -126,11 +126,9 @@
     </Compile>
     <Compile Include="Resources\Converters\BooleanToImageConverter.cs" />
     <Compile Include="Resources\Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Resources\Converters\BytesToImageConverter.cs" />
     <Compile Include="Screens\AdminControl.xaml.cs">
       <DependentUpon>AdminControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Screens\Contact.xaml.cs">
-      <DependentUpon>Contact.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\SearchResults.xaml.cs">
       <DependentUpon>SearchResults.xaml</DependentUpon>
@@ -187,10 +185,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Screens\AdminControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Screens\Contact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
