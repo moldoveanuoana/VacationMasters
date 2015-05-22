@@ -88,7 +88,7 @@ namespace VacationMasters.UserManagement
             if (_dbWrapper.QueryValue<int>(sql) == 0) return false;
             return true;
         }
-        public void AddUser(User user, string password, List<int> preferencesIds, List<string> groups, string type = "User")
+        public void AddUser(User user, string password, List<string> preferences, List<string> groups, string type = "User")
         {
             var input = CryptographicBuffer.ConvertStringToBinary(password,
            BinaryStringEncoding.Utf8);
@@ -103,8 +103,9 @@ namespace VacationMasters.UserManagement
             sql += "SELECT LAST_INSERT_ID();";
             var idUser = _dbWrapper.QueryValue<int>(sql);
             sql = string.Empty;
-            foreach (var id in preferencesIds)
+            foreach (var preference in preferences)
             {
+                var id = _dbWrapper.QueryValue<int>(string.Format("Select Id from Preferences Where Name='{0}'", preference));
                 sql += string.Format("INSERT INTO ChoosePreferences(IDUser,IDPreference) values('{0}','{1}');", idUser, id);
             }
             foreach (var group in groups)
