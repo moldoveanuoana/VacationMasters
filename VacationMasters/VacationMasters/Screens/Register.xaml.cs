@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -10,40 +13,54 @@ using System.Threading.Tasks;
 
 namespace VacationMasters.Screens
 {
-    public sealed partial class Register : UserControl
+    public sealed partial class Register : UserControl, INotifyPropertyChanged
     {
         public UserManager UserManager { get; set; }
         public DbWrapper DbWrapper { get; set; }
+        public GroupManager GroupManager { get; set; }
+        private bool _isOperationInProgress;
         public Register()
         {
+            this.DataContext = this;
             InitializeComponent();
-            FillPreferencesComboBoxes();
+            FillPreferencesAndGroups();
         }
-        private async void FillPreferencesComboBoxes()
+        public bool IsOperationInProgress
         {
+            get { return _isOperationInProgress; }
+            set
+            {
+                if (value != _isOperationInProgress)
+                {
+                    _isOperationInProgress = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private async void FillPreferencesAndGroups()
+        {
+            IsOperationInProgress = true;
             DbWrapper = new DbWrapper();
             UserManager = new UserManager(DbWrapper);
+            GroupManager = new GroupManager(DbWrapper);
             var preferences = await Task.Run(() => DbWrapper.GetAllPreferences());
-            comboBoxCountry.ItemsSource = preferences.Where(c => c.Category == "Country").Select(d => d.Name).ToArray();
-            comboBoxType.ItemsSource = preferences.Where(c => c.Category == "Type").Select(d => d.Name).ToArray();
+            var groups = await Task.Run(() => GroupManager.GetAllGroups());
+            CountriesGridView.ItemsSource = preferences.Where(c => c.Category == "Country").Select(d => d.Name).ToArray();
+            TypesGridView.ItemsSource = preferences.Where(c => c.Category == "Type").Select(d => d.Name).ToArray();
+            GroupsGridView.ItemsSource = groups.Select(c=>c.Trim()).ToArray();
+            IsOperationInProgress = false;
         }
+
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
+            
             if (VerifyRegisterFields() == false) return;
-            var preferencesIds = new List<int>();
-            var preferences = DbWrapper.GetAllPreferences();
-            if (comboBoxCountry.SelectedValue != null)
-            {
-                var countryPref = preferences.Where(c => c.Name == comboBoxCountry.SelectedValue.ToString()).First();
-                preferencesIds.Add(countryPref.ID);
-            }
-            if (comboBoxType.SelectedValue != null)
-            {
-                var typePref = preferences.Where(c => c.Name == comboBoxType.SelectedValue.ToString()).First();
-                preferencesIds.Add(typePref.ID);
-            }
+            var countriesPreferences = CountriesGridView.SelectedItems.Select(c => c.ToString());
+            var typesPreferences = TypesGridView.SelectedItems.Select(c => c.ToString());
+            var preferences = countriesPreferences.Concat(typesPreferences).ToList();
+            var groups = GroupsGridView.SelectedItems.Select(c => c.ToString()).ToList();
             var user = new User(txtBoxUsrName.Text, txtBoxFrsName.Text, txtBoxLstName.Text, txtBoxEmail.Text, txtBoxPhone.Text, false, "User", null);
-            UserManager.AddUser(user, pwdBox.Password, preferencesIds);
+            UserManager.AddUser(user, pwdBox.Password, preferences, groups);
         }
 
         private bool VerifyRegisterFields()
@@ -91,7 +108,15 @@ namespace VacationMasters.Screens
             }
             return completedFields;
         }
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
         private bool ChangeRequiredTextBlock(TextBlock textblock, TextBox textbox)
         {
             if (string.IsNullOrEmpty(textbox.Text))

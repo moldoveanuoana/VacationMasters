@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VacationMasters.Essentials;
 
 namespace VacationMasters.UserManagement
 {
     public interface IUserManager
     {
+        User CurrentUser { get; set; }
+
         /// <summary>
         /// checks whether a given user satisfies the login conditions
         /// Conditions: existing and not banned
@@ -59,7 +62,7 @@ namespace VacationMasters.UserManagement
         /// <param name="password"></param>
         /// <param name="preferencesId"></param>
         /// <param name="type"></param>
-        void AddUser(User user, string password, List<int> preferencesId, string type = "User");
+        void AddUser(User user, string password, List<string> preferences, List<string> groups,  string type = "User");
 
         /// <summary>
         /// Remove user from database
@@ -85,5 +88,11 @@ namespace VacationMasters.UserManagement
         /// <param name="userName"></param>
         /// <param name="password"></param>
         void Login(string username, string password);
+   
+        /// Gets all the emails from database
+        /// </summary>
+        List<String> GetAllEmails();
+
+        List<String> GetStrings(string sql);
     }
 }

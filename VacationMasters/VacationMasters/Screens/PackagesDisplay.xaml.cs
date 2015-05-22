@@ -40,9 +40,6 @@ namespace VacationMasters.Screens
              DbWrapper = new DbWrapper();
              UserManager = new UserManager(DbWrapper);
              var list = DbWrapper.getRandomPackages();
-            
-             
-             
              
         }
 

@@ -105,9 +105,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Essentials\GroupManager.cs" />
     <Compile Include="Essentials\Package.cs" />
     <Compile Include="Essentials\Preference.cs" />
+    <Compile Include="Essentials\Recommendation.cs" />
     <Compile Include="Essentials\User.cs" />
+    <Compile Include="Mail\SmtpClient.cs" />
+    <Compile Include="Mail\SmtpCode.cs" />
+    <Compile Include="Mail\SmtpMessage.cs" />
+    <Compile Include="Mail\SmtpPriority.cs" />
+    <Compile Include="Mail\SmtpResponse.cs" />
+    <Compile Include="Mail\SmtpSocket.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -124,8 +132,11 @@
     <Compile Include="Screens\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screens\PackageDisplay.xaml.cs">
-      <DependentUpon>PackageDisplay.xaml</DependentUpon>
+    <Compile Include="Screens\PackagesDisplay.xaml.cs">
+      <DependentUpon>PackagesDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\SearchResults.xaml.cs">
+      <DependentUpon>SearchResults.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
@@ -146,8 +157,11 @@
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Resources\Images\background.jpg" />
     <Content Include="Resources\Images\iconBanned.png" />
     <Content Include="Resources\Images\iconClear.png" />
+    <Content Include="Resources\Images\sunset.jpg" />
+    <Content Include="Resources\Images\tropical.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -180,7 +194,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Screens\PackageDisplay.xaml">
+    <Page Include="Screens\PackagesDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\SearchResults.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

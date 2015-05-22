@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="using:VacationMasters.Resources"
-     xmlns:converters="using:VacationMasters.Resources.Converters"
+    xmlns:converters="using:VacationMasters.Resources.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -27,8 +27,7 @@
          Margin="2"
          ItemsSource="{Binding Source={StaticResource groupedItemsViewSource}}"
          SelectionMode="None"
-         IsItemClickEnabled="True"
-         ItemClick="ItemView_ItemClick" >
+         IsItemClickEnabled="True">
         <GridView.ItemTemplate>
             <DataTemplate>
                 <Grid HorizontalAlignment="Left" Width="250" Height="250">

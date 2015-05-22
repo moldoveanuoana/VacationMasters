@@ -4,6 +4,9 @@ using VacationMasters.Essentials;
 using VacationMasters.UnitTests.Infrastructure;
 using VacationMasters.UserManagement;
 using VacationMasters.Wrappers;
+using VacationMasters.PackageManagement;
+using System.Linq;
+using System;
 
 namespace VacationMasters.UnitTests.DatabaseTests
 {
@@ -11,13 +14,19 @@ namespace VacationMasters.UnitTests.DatabaseTests
     {
         private IDbWrapper _dbWrapper;
         private IUserManager _userManagement;
+        private PackageManager _packageManager;
+        private DbWrapper _db;
 
         [SetUp]
         public void SetUp()
         {
             _dbWrapper = new DbWrapper();
+            _db = new DbWrapper();
             _userManagement = new UserManager(_dbWrapper);
+            _packageManager = new PackageManager(_dbWrapper);
         }
+
+
 
         private User CreateRandomUser()
         {
@@ -38,16 +47,15 @@ namespace VacationMasters.UnitTests.DatabaseTests
         }
 
         [Test]
-        public void AddUserWithPreferencesShouldNotThrow()
+        public void AddUserWithPreferencesAndGroupsShouldNotThrow()
         {
             var password = CreateRandom.String();
             var user = CreateRandomUser();
-            var preferences = new List<int>();
-
-            preferences.Add(1);
-            preferences.Add(2);
-
-            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password, preferences));
+            var preferences = new List<string>();
+            preferences.Add("Germania");
+            preferences.Add("Citibreak");
+            var groups = new List<string>{"Grupul iubitorilor de mare"};
+            Assert.DoesNotThrow(() => _userManagement.AddUser(user, password, preferences,groups));
             Assert.DoesNotThrow(() => _userManagement.RemoveUser(user.UserName));
         }
 
@@ -112,8 +120,8 @@ namespace VacationMasters.UnitTests.DatabaseTests
 
             Assert.DoesNotThrow(() => _userManagement.Login(user1.UserName, password1));
             Assert.DoesNotThrow(() => _userManagement.Login(user2.UserName, password2));
-            Assert.IsTrue(UserManager.CurrentUser.UserName == user1.UserName);
-            Assert.IsFalse(UserManager.CurrentUser.UserName == user2.UserName);
+            Assert.IsTrue(_userManagement.CurrentUser.UserName == user1.UserName);
+            Assert.IsFalse(_userManagement.CurrentUser.UserName == user2.UserName);
 
             _userManagement.RemoveUser(user1.UserName);
             _userManagement.RemoveUser(user2.UserName);
@@ -128,7 +136,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
             _userManagement.AddUser(user, password);
 
             Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password));
-            Assert.NotNull(UserManager.CurrentUser);
+            Assert.NotNull(_userManagement.CurrentUser);
 
             _userManagement.RemoveUser(user.UserName);
         }
@@ -141,7 +149,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var user = CreateRandomUser();
 
             Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password1));
-            Assert.IsNull(UserManager.CurrentUser);
+            Assert.IsNull(_userManagement.CurrentUser);
         }
         
         [Test]
@@ -151,13 +159,100 @@ namespace VacationMasters.UnitTests.DatabaseTests
            var user = CreateRandomUser();
 
            Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password));
-           Assert.IsNull(UserManager.CurrentUser);
+           Assert.IsNull(_userManagement.CurrentUser);
         }
 
         public void UserCanChangeHisPassword()
         {
             //TODO:this
         }
+
+        
+        public Package CreateTestPackage()
+        {
+            var package = new Package("testpack", "croaziera", "chestii", "vapor", 7000.0, 2.0, 4.0,new DateTime(2015,7,16),new DateTime(2015,7,26),null);
+            return package;
+        }
+
+        [Test]
+        public void InsertingNewPackageShouldNotThrow()
+        {
+            var pack = CreateTestPackage();
+
+            Assert.DoesNotThrow(()=>_packageManager.AddPackage(pack));
+            Assert.DoesNotThrow(()=>_packageManager.RemovePackage(pack));
+        }
+
+        [Test]
+        public void GivenNameSelectPackageByName()
+        {
+            var pack = CreateTestPackage();
+
+            _packageManager.AddPackage(pack);
+
+            var list = _db.GetPackagesByName(pack.Name);
+            Assert.That(list.FirstOrDefault().Name == pack.Name);
+
+            _packageManager.RemovePackage(pack);
+
+        }
+
+        [Test]
+        public void GivenPriceSelectPackageByPrice()
+        {
+            var pack = CreateTestPackage();
+
+            _packageManager.AddPackage(pack);
+
+            var list = _db.GetPackagesByPrice(1000.0, 8000.0);
+            foreach(Package item in list)
+            {
+                if (item.Name.Equals("testpack"))
+                    Assert.That(item.Price == pack.Price);
+            }
+
+            _packageManager.RemovePackage(pack);
+        }
+
+        [Test]
+        public void GivenDateSelectPackageByDate()
+        {
+            var pack = CreateTestPackage();
+
+            _packageManager.AddPackage(pack);
+
+            var list = _db.GetPackagesByDate(new DateTime(2015, 7, 16), new DateTime(2015, 7, 26));
+            foreach (Package item in list)
+            {
+                if (item.Name.Equals("testpack"))
+                    Assert.That(item.BeginDate == pack.BeginDate && item.EndDate == pack.EndDate);
+            }
+
+            _packageManager.RemovePackage(pack);
+        }
+
+        [Test]
+        public void GivenTypeSelectPackageByType()
+        {
+            var pack = CreateTestPackage();
+
+            _packageManager.AddPackage(pack);
+            var list = _db.getPackagesByType("croaziera");
+            foreach (Package item in list)
+            {
+                if (item.Name.Equals("testpack"))
+                    Assert.That(item.Type == pack.Type);
+            }
+
+            _packageManager.RemovePackage(pack);
+        }
+
+        [Test]
+        public void DummyTest()
+        {
+            
+        }
+
 
     }
 }
