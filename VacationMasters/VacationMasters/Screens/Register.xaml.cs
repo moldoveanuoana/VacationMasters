@@ -45,30 +45,22 @@ namespace VacationMasters.Screens
             GroupManager = new GroupManager(DbWrapper);
             var preferences = await Task.Run(() => DbWrapper.GetAllPreferences());
             var groups = await Task.Run(() => GroupManager.GetAllGroups());
-            comboBoxCountry.ItemsSource = preferences.Where(c => c.Category == "Country").Select(d => d.Name).ToArray();
-            comboBoxType.ItemsSource = preferences.Where(c => c.Category == "Type").Select(d => d.Name).ToArray();
+            CountriesGridView.ItemsSource = preferences.Where(c => c.Category == "Country").Select(d => d.Name).ToArray();
+            TypesGridView.ItemsSource = preferences.Where(c => c.Category == "Type").Select(d => d.Name).ToArray();
             GroupsGridView.ItemsSource = groups.Select(c=>c.Trim()).ToArray();
             IsOperationInProgress = false;
         }
 
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
+            
             if (VerifyRegisterFields() == false) return;
-            var preferencesIds = new List<int>();
-            var preferences = DbWrapper.GetAllPreferences();
-            var groups = GroupsGridView.SelectedItems.Select(c=>c.ToString()).ToList();
-            if (comboBoxCountry.SelectedValue != null)
-            {
-                var countryPref = preferences.Where(c => c.Name == comboBoxCountry.SelectedValue.ToString()).First();
-                preferencesIds.Add(countryPref.ID);
-            }
-            if (comboBoxType.SelectedValue != null)
-            {
-                var typePref = preferences.Where(c => c.Name == comboBoxType.SelectedValue.ToString()).First();
-                preferencesIds.Add(typePref.ID);
-            }
+            var countriesPreferences = CountriesGridView.SelectedItems.Select(c => c.ToString());
+            var typesPreferences = TypesGridView.SelectedItems.Select(c => c.ToString());
+            var preferences = countriesPreferences.Concat(typesPreferences).ToList();
+            var groups = GroupsGridView.SelectedItems.Select(c => c.ToString()).ToList();
             var user = new User(txtBoxUsrName.Text, txtBoxFrsName.Text, txtBoxLstName.Text, txtBoxEmail.Text, txtBoxPhone.Text, false, "User", null);
-            UserManager.AddUser(user, pwdBox.Password, preferencesIds,groups);
+            UserManager.AddUser(user, pwdBox.Password, preferences, groups);
         }
 
         private bool VerifyRegisterFields()
