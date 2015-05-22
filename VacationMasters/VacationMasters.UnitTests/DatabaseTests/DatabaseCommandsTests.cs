@@ -141,7 +141,6 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var user = CreateRandomUser();
 
             Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password1));
-            Assert.IsFalse(_userManagement.Login(user.UserName, password1));
             Assert.IsNull(UserManager.CurrentUser);
         }
         
@@ -152,7 +151,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
            var user = CreateRandomUser();
 
            Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password));
-           Assert.IsTrue(_userManagement.Login(user.UserName, password));
+           Assert.IsNull(UserManager.CurrentUser);
         }
 
         public void UserCanChangeHisPassword()

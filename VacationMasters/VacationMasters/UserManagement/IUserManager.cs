@@ -11,7 +11,7 @@ namespace VacationMasters.UserManagement
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        bool CanLogin(User user);
+        bool CanLogin(string username, string password);
 
         /// <summary>
         /// checks whether a given user exists
@@ -80,9 +80,10 @@ namespace VacationMasters.UserManagement
         void UnbanUser(string userName);
 
         /// <summary>
-        /// Lifts ban for a user, give access back
+        /// Logs the user
         /// </summary>
         /// <param name="userName"></param>
-        bool Login(string username, string password);
+        /// <param name="password"></param>
+        void Login(string username, string password);
     }
 }

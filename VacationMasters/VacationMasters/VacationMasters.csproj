@@ -124,6 +124,9 @@
     <Compile Include="Screens\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\PackageDisplay.xaml.cs">
+      <DependentUpon>PackageDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
@@ -176,6 +179,10 @@
     <Page Include="Screens\Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\PackageDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screens\Register.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -20,14 +20,6 @@ namespace VacationMasters.UserManagement
             _dbWrapper = dbWrapper;
         }
 
-        public bool CanLogin(User user)
-        {
-            if (!CheckIfUserExists(user.UserName))
-                return false;
-
-            return !user.Banned;
-        }
-
         public bool CheckCredentials(string userName, string password)
         {
             if (!CheckIfUserExists(userName))
@@ -155,9 +147,16 @@ namespace VacationMasters.UserManagement
             _dbWrapper.QueryValue<object>(sql);
         }
 
-        public bool Login(string userName, string password)
+        public void Login(string userName, string password)
         {
-            if (CurrentUser != null && userName != String.Empty && CheckIfUserExists(userName) == true)
+            if (CanLogin(userName, password))
+                CurrentUser = GetUser(userName);
+        }
+
+        public bool CanLogin(string userName, string password)
+        {
+            bool fieldsCompleted = userName != String.Empty && password!= String.Empty;
+            if (CurrentUser == null && fieldsCompleted && CheckIfUserExists(userName) == true)
             {
                 var currUser = GetUser(userName);
                 if (currUser.Banned)
@@ -173,16 +172,24 @@ namespace VacationMasters.UserManagement
                     DisplayPopup(message);
                     return false;
                 }
-
-                CurrentUser = GetUser(userName);
                 return true;
             }
-            else 
+        
+            if (!fieldsCompleted)
             {
-              String message = "All fields are mandatory!";
+                String message = "All fields are mandatory!";
+                DisplayPopup(message);
+                return false;
+            }
+
+          if (CheckIfUserExists(userName) == true)
+          {
+              String message = "Incorrect credentials!";
               DisplayPopup(message);
               return false;
-            }
+          }
+
+          return false;
         }
 
         private void DisplayPopup(string message)
