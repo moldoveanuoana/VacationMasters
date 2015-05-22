@@ -20,6 +20,22 @@ namespace VacationMasters.PackageManagement
             _userManager = new UserManager(_dbWrapper);
         }
 
+        public List<Package> SearchPackages(string searchQuery)
+        {
+            List<Package> searchedPackages = new List<Package>();
+
+            var packagesByName = _dbWrapper.GetPackagesByName(searchQuery);
+            var packagesByType = _dbWrapper.getPackagesByType(searchQuery);
+
+            if (packagesByName != null)
+                searchedPackages.AddRange(packagesByName);
+
+            if(packagesByType !=null)
+                searchedPackages.AddRange(packagesByType);
+
+            return searchedPackages;
+        } 
+
         public void AddPackage(Package package)
         {
             var sql = string.Format("INSERT INTO Packages(Name, Type, Included, Transport, Price, SearchIndex, Rating,"
