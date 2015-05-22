@@ -15,13 +15,11 @@ namespace VacationMasters.UnitTests.DatabaseTests
         private IDbWrapper _dbWrapper;
         private IUserManager _userManagement;
         private PackageManager _packageManager;
-        private DbWrapper _db;
 
         [SetUp]
         public void SetUp()
         {
             _dbWrapper = new DbWrapper();
-            _db = new DbWrapper();
             _userManagement = new UserManager(_dbWrapper);
             _packageManager = new PackageManager(_dbWrapper);
         }
@@ -154,7 +152,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
 
             _packageManager.AddPackage(pack);
 
-            var list = _db.GetPackagesByName(pack.Name);
+            var list = _dbWrapper.GetPackagesByName(pack.Name);
             Assert.That(list.FirstOrDefault().Name == pack.Name);
 
             _packageManager.RemovePackage(pack);
@@ -168,7 +166,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
 
             _packageManager.AddPackage(pack);
 
-            var list = _db.GetPackagesByPrice(1000.0, 8000.0);
+            var list = _dbWrapper.GetPackagesByPrice(1000.0, 8000.0);
             foreach(Package item in list)
             {
                 if (item.Name.Equals("testpack"))
@@ -185,7 +183,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
 
             _packageManager.AddPackage(pack);
 
-            var list = _db.GetPackagesByDate(new DateTime(2015, 7, 16), new DateTime(2015, 7, 26));
+            var list = _dbWrapper.GetPackagesByDate(new DateTime(2015, 7, 16), new DateTime(2015, 7, 26));
             foreach (Package item in list)
             {
                 if (item.Name.Equals("testpack"))
@@ -201,7 +199,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var pack = CreateTestPackage();
 
             _packageManager.AddPackage(pack);
-            var list = _db.getPackagesByType("croaziera");
+            var list = _dbWrapper.getPackagesByType("croaziera");
             foreach (Package item in list)
             {
                 if (item.Name.Equals("testpack"))
