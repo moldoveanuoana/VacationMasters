@@ -236,7 +236,7 @@ namespace VacationMasters
 
         private void Packages(object sender, RoutedEventArgs e)
         {
-            // this.Frame.Navigate(typeof(AdminControl), null);
+            VisualStateManager.GoToState(this, "PackagesV", true);
         }
 
         private void UserPanel(object sender, RoutedEventArgs e)
@@ -260,8 +260,10 @@ namespace VacationMasters
             VisualStateManager.GoToState(this, "ContactControl", true);
         }
 
-     
-       
+        private void GoToLoginControl(object sender, RoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "LoginControl", true);
+        }
     }
 
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using VacationMasters.Essentials;
 using VacationMasters.UserManagement;
@@ -43,7 +43,21 @@ namespace VacationMasters.PackageManagement
                                       + "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}');",
                                       package.Name, package.Type, package.Included, package.Transport, package.Price,
                                       package.SearchIndex, package.Rating, package.BeginDate.ToString("yyyy-MM-dd HH:mm:ss"), package.EndDate.ToString("yyyy-MM-dd HH:mm:ss"), package.Picture);
+
             _dbWrapper.QueryValue<object>(sql);
+        }
+       
+        public void Display(List<Package> l)
+        {
+            var list = l;
+
+
+            foreach (Package pack in list)
+            {
+
+
+            }
+
         }
 
         public void RemovePackage(Package package)
@@ -212,7 +226,5 @@ namespace VacationMasters.PackageManagement
 
         } 
        
-
-
     }
 }
