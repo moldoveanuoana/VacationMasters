@@ -126,7 +126,6 @@
     </Compile>
     <Compile Include="Resources\Converters\BooleanToImageConverter.cs" />
     <Compile Include="Resources\Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Resources\Converters\BytesToImageConverter.cs" />
     <Compile Include="Screens\AdminControl.xaml.cs">
       <DependentUpon>AdminControl.xaml</DependentUpon>
     </Compile>

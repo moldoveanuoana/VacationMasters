@@ -17,56 +17,50 @@
                               FalseIcon="/Resources/Images/iconClear.png"
                               TrueIcon="/Resources/Images/iconBanned.png"/>
       <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-
-      <converters:BytesToImageConverter  x:Key="BytesToImageConverter"/>
     </ResourceDictionary>
   </UserControl.Resources>
-    <GridView
-         x:Name="itemGridView"
-         Margin="2"
-         SelectionMode="None"
-         IsItemClickEnabled="True" >
-        <GridView.ItemTemplate>
-            <DataTemplate>
-                <Grid HorizontalAlignment="Left" Width="250" Height="250">
-                    <Border>
-                     <!--   <Image Source="{Binding Picture, Converter={StaticResource BytesToImageConverter}}" Width="30%"/> -->
-                    </Border>
-                    <StackPanel  HorizontalAlignment="Right" >
-                        <TextBlock Text="{Binding Name}"  MaxHeight="60" MinHeight="20" Margin="15,0,15,0"/>
-                        <TextBlock Text="{Binding Price}"  TextWrapping="NoWrap" Margin="15,0,15,10"/>
-                        <TextBlock Text="{Binding Rating}"  TextWrapping="NoWrap" Margin="15,0,15,10"/>
-                       </StackPanel>
-                </Grid>
-            </DataTemplate>
-        </GridView.ItemTemplate>
+  <GridView
+       x:Name="itemGridView"
+       Margin="2"
+       ItemsSource="{Binding List}"
+       SelectionMode="None"
+       IsItemClickEnabled="True" >
+    <GridView.ItemTemplate>
+      <DataTemplate>
+        <Grid HorizontalAlignment="Left" Width="250" Height="250">
+          <Border>
+            <Image Source="{Binding Photo}"/>
+          </Border>
+          <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Pachet:"  MaxHeight="60" MinHeight="20"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Name}"  MaxHeight="60" MinHeight="20"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Pret:" MaxHeight="60" MinHeight="20"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Price}"  TextWrapping="NoWrap"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Rating:"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Rating}"  TextWrapping="NoWrap" Margin="15,0,15,10"/>
+
+          </Grid>
+        </Grid>
+      </DataTemplate>
+    </GridView.ItemTemplate>
 
     <GridView.ItemsPanel>
       <ItemsPanelTemplate>
-        <ItemsWrapGrid GroupPadding="0,0,70,0"/>
+        <ItemsWrapGrid Orientation="Horizontal" GroupPadding="0,0,70,0"/>
       </ItemsPanelTemplate>
     </GridView.ItemsPanel>
 
-    <GridView.GroupStyle>
-      <GroupStyle>
-        <GroupStyle.HeaderTemplate>
-          <DataTemplate>
-            <Grid Margin="0,0,0,2">
-              <Button Foreground="{ThemeResource ApplicationHeaderForegroundThemeBrush}"
-                      AutomationProperties.Name="Group Title"
-                      Style="{StaticResource TextBlockButtonStyle}" >
-                <StackPanel Orientation="Horizontal">
-                  <TextBlock Text="{Binding Title}" Margin="0,-11,10,10" Style="{StaticResource SubheaderTextBlockStyle}" TextWrapping="NoWrap" />
-                  <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-11,0,10" Style="{StaticResource SubheaderTextBlockStyle}" TextWrapping="NoWrap" />
-                </StackPanel>
-              </Button>
-            </Grid>
-          </DataTemplate>
-        </GroupStyle.HeaderTemplate>
-      </GroupStyle>
-    </GridView.GroupStyle>
-
-    <ScrollViewer  Visibility="{Binding IsOperationInProgress, Converter = {StaticResource BooleanToVisibilityConverter}}">
+    <ScrollViewer Visibility="{Binding IsOperationInProgress, Converter = {StaticResource BooleanToVisibilityConverter}}">
       <resources:CircularProgressBar/>
     </ScrollViewer>
 
