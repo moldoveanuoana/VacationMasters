@@ -53,7 +53,7 @@ namespace VacationMasters.Screens
 
             DbWrapper = new DbWrapper();
             UserManager = new UserManager(DbWrapper);
-            List = new ObservableCollection<Package>(DbWrapper.getRandomPackages());
+            //List = new ObservableCollection<Package>(DbWrapper.getRandomPackages());
             IsOperationInProgress = false;
         }
 

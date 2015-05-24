@@ -231,9 +231,21 @@
                     Grid.ColumnSpan="2"
                     Grid.Column="0" />
             </Grid>
-
         </Border>
-        
+
+        <Border x:Name="AddPackagesView"
+                Visibility="{Binding AddPackageDisplay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Grid.Row="0" 
+                Grid.Column="1"
+                MinHeight="400"
+                MinWidth="500"
+                Grid.ColumnSpan="4"
+                Grid.RowSpan="3"
+                BorderBrush="{StaticResource Brush.White}"
+                BorderThickness="1"
+                CornerRadius="19">
+            <screens:AgentPage />
+        </Border>
         <StackPanel
             Grid.Row="0" 
             Grid.Column="0"
@@ -257,6 +269,12 @@
                 Foreground="Black"
                 FontWeight="Normal" 
                 Click="PManager"/>
+            <Button
+                Content="Add Packages"
+                BorderThickness="0"
+                Foreground="Black"
+                FontWeight="Normal" 
+                Click="AddPackages"/>
         </StackPanel>
     </Grid>
 </UserControl>

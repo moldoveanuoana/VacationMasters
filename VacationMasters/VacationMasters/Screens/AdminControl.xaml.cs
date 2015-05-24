@@ -29,6 +29,7 @@ namespace VacationMasters.Screens
         private ObservableCollection<Package> _list;
         private bool _isPackageActive;
         private bool _packageDisplay;
+        private bool _addPackageDisplay;
 
         public AdminControl()
         {
@@ -177,6 +178,19 @@ namespace VacationMasters.Screens
             }
         }
 
+        public bool AddPackageDisplay
+        {
+            get { return _addPackageDisplay; }
+            set
+            {
+                if (_addPackageDisplay != value)
+                {
+                    _addPackageDisplay = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
@@ -224,6 +238,7 @@ namespace VacationMasters.Screens
             IsNewsletterActive = false;
             IsUserManagerActive = true;
             IsPackageActive = false;
+            AddPackageDisplay = false;
         }
 
         private void Newsletter(object sender, RoutedEventArgs e)
@@ -231,6 +246,7 @@ namespace VacationMasters.Screens
             IsUserManagerActive = false;
             IsNewsletterActive = true;
             IsPackageActive = false;
+            AddPackageDisplay = false;
         }
 
         private void SearchPackage(object sender, RoutedEventArgs e)
@@ -260,6 +276,7 @@ namespace VacationMasters.Screens
             IsPackageActive = true;
             IsNewsletterActive = false;
             IsUserManagerActive = false;
+            AddPackageDisplay = false;
         }
 
         private void DeletePackage(object sender, RoutedEventArgs e)
@@ -282,6 +299,14 @@ namespace VacationMasters.Screens
                 var messageDialog = new MessageDialog("Package not found."); 
                 messageDialog.ShowAsync();
             }
+        }
+
+        private void AddPackages(object sender, RoutedEventArgs e)
+        {
+            IsPackageActive = false;
+            IsNewsletterActive = false;
+            IsUserManagerActive = false;
+            AddPackageDisplay = true;
         }
     }
 }
