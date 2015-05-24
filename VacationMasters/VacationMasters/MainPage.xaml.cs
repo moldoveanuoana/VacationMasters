@@ -264,6 +264,11 @@ namespace VacationMasters
         {
             VisualStateManager.GoToState(this, "LoginControl", true);
         }
+
+        private void GoToAgentPage(object sender, RoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "AgentPageControl", true);
+        }
     }
 
 

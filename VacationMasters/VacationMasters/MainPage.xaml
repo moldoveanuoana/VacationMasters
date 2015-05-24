@@ -106,6 +106,30 @@
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
+                <VisualState x:Name="AgentPageControl">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AdminControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RegisterControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AgentPageView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <Grid.ColumnDefinitions>
@@ -176,13 +200,15 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
                 <Button x:Name="home" Content="Home" FontSize="16"  HorizontalAlignment="Left" Grid.Column="0" Click="Home"  />
                 <Button x:Name="packagesbtn" Content="Packages" FontSize="16"  HorizontalAlignment="Left" Grid.Column="1" Click="Packages"  />
                 <Button x:Name="user_panel" Content="User Panel" FontSize="16"  HorizontalAlignment="Left" Grid.Column="2" Click="UserPanel"  />
-                <Button x:Name="admin_control" Content="Admin Control" FontSize="16"  HorizontalAlignment="Left" Grid.Column="4" Click="GoToAdminControl"/>
+                <Button x:Name="admin_control" Content="Admin Page" FontSize="16"  HorizontalAlignment="Left" Grid.Column="4" Click="GoToAdminControl"/>
                 <Button x:Name="contact" Content="Contact" FontSize="16"  HorizontalAlignment="Left" Grid.Column="3" Click="GoToContactControl" />
+                <Button x:Name ="AgentButton" Content="Agent Page" Grid.Column="5" Click="GoToAgentPage"/>
             </Grid>
         </Grid >
         <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="0,0,0,63"  >
@@ -192,6 +218,7 @@
                 <screens:Contact x:Name="ContactControlView" Visibility="Collapsed" />
                 <screens:Login x:Name="LoginControlView" Visibility="Collapsed"/>
                 <screens:PackagesDisplay x:Name="PackagesDisplayView" Visibility="Collapsed"/>
+                <screens:AgentPage x:Name="AgentPageView" Visibility ="Collapsed"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>
