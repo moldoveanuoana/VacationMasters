@@ -10,69 +10,68 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <converters:BooleanToImageConverter x:Key="BooleanToImageConverter"
-                                    FalseIcon="/Resources/Images/iconClear.png"
-                                    TrueIcon="/Resources/Images/iconBanned.png"/>
-            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
-            <converters:BytesToImageConverter  x:Key="BytesToImageConverter"/>
-        </ResourceDictionary>
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <converters:BooleanToImageConverter x:Key="BooleanToImageConverter"
+                              FalseIcon="/Resources/Images/iconClear.png"
+                              TrueIcon="/Resources/Images/iconBanned.png"/>
+      <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
-    </UserControl.Resources>
-    
+      <converters:BytesToImageConverter  x:Key="BytesToImageConverter"/>
+    </ResourceDictionary>
 
-    <GridView
-         x:Name="itemGridView"
-         Margin="2"
-         SelectionMode="None"
-         IsItemClickEnabled="True"
-         ItemClick="ItemView_ItemClick" >
-        <GridView.ItemTemplate>
-            <DataTemplate>
-                <Grid HorizontalAlignment="Left" Width="250" Height="250">
-                    <Border>
-                     <!--   <Image Source="{Binding Picture, Converter={StaticResource BytesToImageConverter}}" Width="30%"/> -->
-                    </Border>
-                    <StackPanel  HorizontalAlignment="Right" >
-                        <TextBlock Text="{Binding Name}"  MaxHeight="60" MinHeight="20" Margin="15,0,15,0"/>
-                        <TextBlock Text="{Binding Price}"  TextWrapping="NoWrap" Margin="15,0,15,10"/>
-                        <TextBlock Text="{Binding Rating}"  TextWrapping="NoWrap" Margin="15,0,15,10"/>
-                       </StackPanel>
-                </Grid>
-            </DataTemplate>
-        </GridView.ItemTemplate>
+  </UserControl.Resources>
 
-        <GridView.ItemsPanel>
-            <ItemsPanelTemplate>
-                <ItemsWrapGrid GroupPadding="0,0,70,0"/>
-            </ItemsPanelTemplate>
-        </GridView.ItemsPanel>
 
-        <GridView.GroupStyle>
-            <GroupStyle>
-                <GroupStyle.HeaderTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,0,0,2">
-                            <Button Foreground="{ThemeResource ApplicationHeaderForegroundThemeBrush}"
-                                    AutomationProperties.Name="Group Title"
-                                    Style="{StaticResource TextBlockButtonStyle}" >
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Title}" Margin="0,-11,10,10" Style="{StaticResource SubheaderTextBlockStyle}" TextWrapping="NoWrap" />
-                                    <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-11,0,10" Style="{StaticResource SubheaderTextBlockStyle}" TextWrapping="NoWrap" />
-                                </StackPanel>
-                            </Button>
-                        </Grid>
-                    </DataTemplate>
-                </GroupStyle.HeaderTemplate>
-            </GroupStyle>
-        </GridView.GroupStyle>
+  <GridView
+       x:Name="itemGridView"
+       Margin="2"
+       SelectionMode="None"
+       IsItemClickEnabled="True">
+    <GridView.ItemTemplate>
+      <DataTemplate>
+        <Grid HorizontalAlignment="Left" Width="250" Height="250">
+          <Border>
+            <!--   <Image Source="{Binding Picture, Converter={StaticResource BytesToImageConverter}}" Width="30%"/> -->
+          </Border>
+          <StackPanel  HorizontalAlignment="Right" >
+            <TextBlock Text="{Binding Name}"  MaxHeight="60" MinHeight="20" Margin="15,0,15,0"/>
+            <TextBlock Text="{Binding Price}"  TextWrapping="NoWrap" Margin="15,0,15,10"/>
+            <TextBlock Text="{Binding Rating}"  TextWrapping="NoWrap" Margin="15,0,15,10"/>
+          </StackPanel>
+        </Grid>
+      </DataTemplate>
+    </GridView.ItemTemplate>
 
-        <ScrollViewer  Visibility="{Binding IsOperationInProgress, Converter = {StaticResource BooleanToVisibilityConverter}}">
-            <resources:CircularProgressBar/>
-        </ScrollViewer>
+    <GridView.ItemsPanel>
+      <ItemsPanelTemplate>
+        <ItemsWrapGrid GroupPadding="0,0,70,0"/>
+      </ItemsPanelTemplate>
+    </GridView.ItemsPanel>
 
-    </GridView>
+    <GridView.GroupStyle>
+      <GroupStyle>
+        <GroupStyle.HeaderTemplate>
+          <DataTemplate>
+            <Grid Margin="0,0,0,2">
+              <Button Foreground="{ThemeResource ApplicationHeaderForegroundThemeBrush}"
+                      AutomationProperties.Name="Group Title"
+                      Style="{StaticResource TextBlockButtonStyle}" >
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{Binding Title}" Margin="0,-11,10,10" Style="{StaticResource SubheaderTextBlockStyle}" TextWrapping="NoWrap" />
+                  <TextBlock Text="{StaticResource ChevronGlyph}" FontFamily="Segoe UI Symbol" Margin="0,-11,0,10" Style="{StaticResource SubheaderTextBlockStyle}" TextWrapping="NoWrap" />
+                </StackPanel>
+              </Button>
+            </Grid>
+          </DataTemplate>
+        </GroupStyle.HeaderTemplate>
+      </GroupStyle>
+    </GridView.GroupStyle>
+
+    <ScrollViewer  Visibility="{Binding IsOperationInProgress, Converter = {StaticResource BooleanToVisibilityConverter}}">
+      <resources:CircularProgressBar/>
+    </ScrollViewer>
+
+  </GridView>
 </UserControl>

@@ -88,18 +88,11 @@ namespace VacationMasters.UserManagement
         List<String> GetAllEmails();
 
         List<String> GetStrings(string sql);
-<<<<<<< HEAD
-        
-
-        bool Login(string username, string password);
-
-=======
 
         /// Logs the user
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="password"></param>
         void Login(string username, string password);
->>>>>>> changes
     }
 }

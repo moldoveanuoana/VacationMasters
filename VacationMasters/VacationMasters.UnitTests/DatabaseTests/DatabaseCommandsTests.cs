@@ -118,8 +118,8 @@ namespace VacationMasters.UnitTests.DatabaseTests
 
             Assert.DoesNotThrow(() => _userManagement.Login(user1.UserName, password1));
             Assert.DoesNotThrow(() => _userManagement.Login(user2.UserName, password2));
-            Assert.IsTrue(UserManager.CurrentUser.UserName == user1.UserName);
-            Assert.IsFalse(UserManager.CurrentUser.UserName == user2.UserName);
+            Assert.IsTrue(_userManagement.CurrentUser.UserName == user1.UserName);
+            Assert.IsFalse(_userManagement.CurrentUser.UserName == user2.UserName);
 
             _userManagement.RemoveUser(user1.UserName);
             _userManagement.RemoveUser(user2.UserName);
@@ -134,7 +134,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
             _userManagement.AddUser(user, password);
 
             Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password));
-            Assert.NotNull(UserManager.CurrentUser);
+            Assert.NotNull(_userManagement.CurrentUser);
 
             _userManagement.RemoveUser(user.UserName);
         }
@@ -147,7 +147,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var user = CreateRandomUser();
 
             Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password1));
-            Assert.IsNull(UserManager.CurrentUser);
+            Assert.IsNull(_userManagement.CurrentUser);
         }
         
         [Test]
@@ -157,7 +157,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
            var user = CreateRandomUser();
 
            Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password));
-           Assert.IsNull(UserManager.CurrentUser);
+           Assert.IsNull(_userManagement.CurrentUser);
         }
 
         public void UserCanChangeHisPassword()
