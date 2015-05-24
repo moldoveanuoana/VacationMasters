@@ -68,6 +68,26 @@
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
+                <VisualState x:Name="PackagesV">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AdminControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RegisterControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <Grid.ColumnDefinitions>
@@ -141,7 +161,7 @@
                     <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
                 <Button x:Name="home" Content="Home" FontSize="16"  HorizontalAlignment="Left" Grid.Column="0" Click="Home"  />
-                <Button x:Name="packages" Content="Packages" FontSize="16"  HorizontalAlignment="Left" Grid.Column="1" Click="Packages"  />
+                <Button x:Name="packagesbtn" Content="Packages" FontSize="16"  HorizontalAlignment="Left" Grid.Column="1" Click="Packages"  />
                 <Button x:Name="user_panel" Content="User Panel" FontSize="16"  HorizontalAlignment="Left" Grid.Column="2" Click="UserPanel"  />
                 <Button x:Name="admin_control" Content="Admin Control" FontSize="16"  HorizontalAlignment="Left" Grid.Column="4" Click="GoToAdminControl"/>
                 <Button x:Name="contact" Content="Contact" FontSize="16"  HorizontalAlignment="Left" Grid.Column="3" Click="Contact" />
@@ -152,6 +172,7 @@
             <screens:AdminControl x:Name="AdminControlView" Visibility="Collapsed"/>
             <screens:Register x:Name="RegisterControlView" Visibility="Collapsed"/>
             <screens:Login x:Name="LoginControlView" Visibility="Collapsed"/>
+            <screens:PackagesDisplay x:Name="PackagesDisplayView" Visibility="Collapsed"/>
             </StackPanel>
         </ScrollViewer>
         <Grid Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom">

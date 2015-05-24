@@ -5,6 +5,7 @@ using VacationMasters.UserManagement;
 using VacationMasters.Wrappers;
 using System.Linq;
 
+
 namespace VacationMasters.PackageManagement
 {
     public class PackageManager
@@ -35,19 +36,6 @@ namespace VacationMasters.PackageManagement
             _dbWrapper.QueryValue<object>(sql);
         }
        
-        public void Display(List<Package> l)
-        {
-            var list = l;
-
-
-            foreach (Package pack in list)
-            {
-
-
-            }
-
-        }
-
         public List<Package> GetPackagesByPreferences()
         {
             User loggedUser = _userManager.CurrentUser;
