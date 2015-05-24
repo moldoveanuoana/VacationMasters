@@ -13,9 +13,6 @@
 
   <UserControl.Resources>
     <ResourceDictionary>
-      <converters:BooleanToImageConverter x:Key="BooleanToImageConverter"
-                              FalseIcon="/Resources/Images/iconClear.png"
-                              TrueIcon="/Resources/Images/iconBanned.png"/>
       <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </ResourceDictionary>
   </UserControl.Resources>
