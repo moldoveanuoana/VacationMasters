@@ -5,17 +5,34 @@
     xmlns:local="using:VacationMasters.Screens"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    d:DesignHeight="780"
+    d:DesignWidth="1024"
+    d:DataContext="{d:DesignInstance Type=local:AgentPage, 
+                                     IsDesignTimeCreatable=True}">
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -23,18 +40,126 @@
         <TextBlock 
             Grid.Row="0"
             Grid.Column="0"
-            Grid.ColumnSpan="2" 
-            FontSize="48"
+            Grid.ColumnSpan="9" 
+            FontSize="36"
             HorizontalAlignment="Center"
-            Text="Adauga un nou pachet"/>
+            Text="Add new package"
+            Margin="0,0,0,20"/>
         <TextBlock
-            Grid.Row="1"
+            Grid.Row="2"
+            FontSize="12"
             Grid.Column="0"
-            Text="Nume pachet:"
-            HorizontalAlignment="Right"/>
+            Text="Package Name:"
+            HorizontalAlignment="Right"
+            Margin="0,10,0,0"/>
         <TextBox 
-            Grid.Row="1"
+            x:Name="PackageName"
+            Grid.Row="2"
             Grid.Column="1"
-            TextAlignment="Left"/>
+            VerticalAlignment="Top"
+            Grid.ColumnSpan="2"
+            TextAlignment="Left"
+            Margin="0,0,0,10"/>
+        <TextBlock
+            Grid.Row="3"
+            FontSize="12"
+            Grid.Column="0"
+            Text="Category:"
+            HorizontalAlignment="Right"
+            Margin="0,10,0,0"/>
+        <ComboBox
+            x:Name="Cateogry"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top"
+            Grid.Column="1"
+            Margin="0,0,0,10"/>
+        <TextBlock
+            Grid.Row="4"
+            FontSize="12"
+            Grid.Column="0"
+            Text="Included:"
+            HorizontalAlignment="Right"
+            Margin="0,10,0,0"/>
+        <TextBox
+            x:Name="Included"
+            Grid.Row="4"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top"
+            Grid.Column="1"
+            Margin="0,0,0,10"/>
+        <TextBlock
+            FontSize="12"
+            Grid.Row="5"
+            Grid.Column="0"
+            Text="Transport:"
+            HorizontalAlignment="Right"
+            Margin="0,10,0,0"/>
+        <TextBox
+            Grid.Row="5"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top"
+            Grid.Column="1"/>
+        <TextBlock
+            FontSize="12"
+            Grid.Row="6"
+            Grid.Column="0"
+            Text="Price:"
+            HorizontalAlignment="Right"
+            Margin="0,10,0,0"/>
+        <TextBox
+            x:Name="Price"
+            Grid.Row="6"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top"
+            Grid.Column="1"
+            Margin="0,0,0,10"/>
+        <TextBox
+            x:Name="Transport"
+            Grid.Row="5"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top"
+            Grid.Column="1"
+            Margin="0,0,0,10"/>
+        <TextBlock
+            FontSize="12"
+            Grid.Row="7"
+            Grid.Column="0"
+            Text="Begin Date:"
+            HorizontalAlignment="Right"
+            Margin="0,10,0,0"/>
+        <DatePicker
+            x:Name="BeginDate"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Grid.Column="1"
+            Grid.Row="7"
+            Grid.ColumnSpan="3"
+            Margin="0,0,0,10"/>
+        <TextBlock
+            FontSize="12"
+            Grid.Row="8"
+            Grid.Column="0"
+            Text="End Date:"
+            HorizontalAlignment="Right"
+            Margin="0,10,0,0"/>
+        <DatePicker
+            x:Name="EndDate"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Grid.Column="1"
+            Grid.Row="8"
+            Grid.ColumnSpan="3"
+            Margin="0,0,0,10"/>
+        <Button 
+            Content="Select image..."
+            Grid.Row="9"
+            Grid.Column="1"
+            Grid.ColumnSpan="2" Click="LoadImage"/>
+        <Button 
+            Grid.Row="10"
+            Grid.Column="4"
+            Content="Save" Click="Save"/>
+
     </Grid>
 </UserControl>
