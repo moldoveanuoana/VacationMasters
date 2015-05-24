@@ -39,7 +39,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Border x:Name="userManagerView"
@@ -182,7 +182,7 @@
         </Border>
 
         <Border x:Name="PackageView"
-                Visibility="Visible"
+                 Visibility="{Binding IsPackageActive, Converter={StaticResource BooleanToVisibilityConverter}}"
                 Grid.Row="0" 
                 Grid.Column="1"
                 MinHeight="400"
@@ -216,7 +216,14 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     Content ="Search"
-                    BorderThickness="0"/>
+                    BorderThickness="0" Click="SearchPackage"/>
+                
+                <screens:PackagesDisplay 
+                    Visibility="{Binding PackageDisplay, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    DataContext="{Binding}"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Grid.Column="0" />
             </Grid>
 
         </Border>
