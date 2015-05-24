@@ -20,29 +20,26 @@
 
       <converters:BytesToImageConverter  x:Key="BytesToImageConverter"/>
     </ResourceDictionary>
-
   </UserControl.Resources>
-
-
-  <GridView
-       x:Name="itemGridView"
-       Margin="2"
-       SelectionMode="None"
-       IsItemClickEnabled="True">
-    <GridView.ItemTemplate>
-      <DataTemplate>
-        <Grid HorizontalAlignment="Left" Width="250" Height="250">
-          <Border>
-            <!--   <Image Source="{Binding Picture, Converter={StaticResource BytesToImageConverter}}" Width="30%"/> -->
-          </Border>
-          <StackPanel  HorizontalAlignment="Right" >
-            <TextBlock Text="{Binding Name}"  MaxHeight="60" MinHeight="20" Margin="15,0,15,0"/>
-            <TextBlock Text="{Binding Price}"  TextWrapping="NoWrap" Margin="15,0,15,10"/>
-            <TextBlock Text="{Binding Rating}"  TextWrapping="NoWrap" Margin="15,0,15,10"/>
-          </StackPanel>
-        </Grid>
-      </DataTemplate>
-    </GridView.ItemTemplate>
+    <GridView
+         x:Name="itemGridView"
+         Margin="2"
+         SelectionMode="None"
+         IsItemClickEnabled="True" >
+        <GridView.ItemTemplate>
+            <DataTemplate>
+                <Grid HorizontalAlignment="Left" Width="250" Height="250">
+                    <Border>
+                     <!--   <Image Source="{Binding Picture, Converter={StaticResource BytesToImageConverter}}" Width="30%"/> -->
+                    </Border>
+                    <StackPanel  HorizontalAlignment="Right" >
+                        <TextBlock Text="{Binding Name}"  MaxHeight="60" MinHeight="20" Margin="15,0,15,0"/>
+                        <TextBlock Text="{Binding Price}"  TextWrapping="NoWrap" Margin="15,0,15,10"/>
+                        <TextBlock Text="{Binding Rating}"  TextWrapping="NoWrap" Margin="15,0,15,10"/>
+                       </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </GridView.ItemTemplate>
 
     <GridView.ItemsPanel>
       <ItemsPanelTemplate>
