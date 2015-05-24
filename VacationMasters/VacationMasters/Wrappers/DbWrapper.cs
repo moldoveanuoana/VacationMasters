@@ -297,14 +297,6 @@ namespace VacationMasters.Wrappers
             });
         }
 
-        public void UpdateRating(int ID, int starNum)
-        {
-            RunCommand(command =>
-            {
-                command.CommandText = string.Format("UPDATE Packages SET Rating = ((Rating * TotalVotes) + {0})/(TotalVotes+1),TotalVotes = TotalVotes+1 ", starNum);
-            });
-        }
-
         public List<Package> getRandomPackages()
         {
             return RunCommand(command =>
@@ -313,6 +305,14 @@ namespace VacationMasters.Wrappers
                 return ReadPackages(command);
             });
         }
+
+        public void UpdateRating(int ID, int starNum)
+        {
+            RunCommand(command =>
+            {
+                command.CommandText = string.Format("UPDATE Packages SET Rating = ((Rating * TotalVotes) + {0})/(TotalVotes+1),TotalVotes = TotalVotes+1 ", starNum);
+            });
+        }      
 
     }
 }

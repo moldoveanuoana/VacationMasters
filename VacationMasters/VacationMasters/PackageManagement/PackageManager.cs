@@ -5,6 +5,7 @@ using VacationMasters.UserManagement;
 using VacationMasters.Wrappers;
 using System.Linq;
 
+
 namespace VacationMasters.PackageManagement
 {
     public class PackageManager
@@ -58,7 +59,6 @@ namespace VacationMasters.PackageManagement
             }
 
         }
-       
 
         public void RemovePackage(Package package)
         {
