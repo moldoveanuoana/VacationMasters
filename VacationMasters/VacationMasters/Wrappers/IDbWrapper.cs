@@ -84,5 +84,6 @@ namespace VacationMasters.Wrappers
         List<Package> getPackagesByAll(String name, double minPrice, double maxPrice, DateTime beginDate,
             DateTime endDate, String type);
 
+        List<String> GetTypes();
     }
 }
