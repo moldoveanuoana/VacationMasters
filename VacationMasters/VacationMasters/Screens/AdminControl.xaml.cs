@@ -9,6 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using VacationMasters.Essentials;
 using VacationMasters.Mail;
+using VacationMasters.PackageManagement;
 using VacationMasters.UserManagement;
 using VacationMasters.Wrappers;
 
@@ -19,6 +20,7 @@ namespace VacationMasters.Screens
 
         private readonly IUserManager _userManager;
         private readonly IDbWrapper _dbWrapper;
+        private readonly PackageManager _packageManager;
         private bool _banned;
         private bool _isUserSearched;
         private bool _isOperationInProgress;
@@ -33,6 +35,7 @@ namespace VacationMasters.Screens
             this.DataContext = this;
             _dbWrapper = new DbWrapper();
             _userManager = new UserManager(_dbWrapper);
+            _packageManager = new PackageManager(_dbWrapper);
             this.InitializeComponent();
         }
 
@@ -237,7 +240,7 @@ namespace VacationMasters.Screens
             if (package == null)
                 return;
 
-            List = new ObservableCollection<Package>(_dbWrapper.GetPackagesByName(package));
+            List = new ObservableCollection<Package>(_packageManager.SearchPackages(package));
 
             PackageDisplay = true;
         }
@@ -257,6 +260,28 @@ namespace VacationMasters.Screens
             IsPackageActive = true;
             IsNewsletterActive = false;
             IsUserManagerActive = false;
+        }
+
+        private void DeletePackage(object sender, RoutedEventArgs e)
+        {
+            var package = PackageSearchBox.Text;
+
+            if (package == null)
+            {
+                var messageDialog = new MessageDialog("Package not found.");
+                messageDialog.ShowAsync();
+            }
+
+            try
+            {
+                var pckg = _dbWrapper.GetPackagesByName(package).FirstOrDefault();
+                _packageManager.RemovePackage(pckg);
+            }
+            catch (Exception)
+            {
+                var messageDialog = new MessageDialog("Package not found."); 
+                messageDialog.ShowAsync();
+            }
         }
     }
 }
