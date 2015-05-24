@@ -14,7 +14,16 @@ namespace VacationMasters.UserManagement
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        bool CanLogin(User user);
+        bool CanLogin(string username, string password);
+
+        /// <summary>
+        /// checks whether a given user exists
+        /// Conditions: existing and password equivalence
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        bool CheckIfUserExists(string userName);
 
         /// <summary>
         /// Checks whether the combination UserName/Password worked or not
@@ -53,7 +62,7 @@ namespace VacationMasters.UserManagement
         /// <param name="password"></param>
         /// <param name="preferencesId"></param>
         /// <param name="type"></param>
-        void AddUser(User user, string password, List<int> preferencesId, List<string> groups,  string type = "User");
+        void AddUser(User user, string password, List<string> preferences, List<string> groups,  string type = "User");
 
         /// <summary>
         /// Remove user from database
@@ -77,5 +86,13 @@ namespace VacationMasters.UserManagement
         /// Gets all the emails from database
         /// </summary>
         List<String> GetAllEmails();
+
+        List<String> GetStrings(string sql);
+
+        /// Logs the user
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        void Login(string username, string password);
     }
 }

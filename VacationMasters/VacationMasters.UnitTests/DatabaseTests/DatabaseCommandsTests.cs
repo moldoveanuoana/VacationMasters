@@ -15,13 +15,11 @@ namespace VacationMasters.UnitTests.DatabaseTests
         private IDbWrapper _dbWrapper;
         private IUserManager _userManagement;
         private PackageManager _packageManager;
-        private DbWrapper _db;
 
         [SetUp]
         public void SetUp()
         {
             _dbWrapper = new DbWrapper();
-            _db = new DbWrapper();
             _userManagement = new UserManager(_dbWrapper);
             _packageManager = new PackageManager(_dbWrapper);
         }
@@ -51,9 +49,9 @@ namespace VacationMasters.UnitTests.DatabaseTests
         {
             var password = CreateRandom.String();
             var user = CreateRandomUser();
-            var preferences = new List<int>();
-            preferences.Add(1);
-            preferences.Add(2);
+            var preferences = new List<string>();
+            preferences.Add("Germania");
+            preferences.Add("Citibreak");
             var groups = new List<string>{"Grupul iubitorilor de mare"};
             Assert.DoesNotThrow(() => _userManagement.AddUser(user, password, preferences,groups));
             Assert.DoesNotThrow(() => _userManagement.RemoveUser(user.UserName));
@@ -106,24 +104,60 @@ namespace VacationMasters.UnitTests.DatabaseTests
             _userManagement.RemoveUser(user.UserName);
         }
 
+        [Test]
         public void MultipleUsersCanLoginAtTheSameTime()
         {
-            //TODO:this
+            var password1 = CreateRandom.String();
+            var user1 = CreateRandomUser();
+
+            var password2 = CreateRandom.String();
+            var user2 = CreateRandomUser();
+
+            _userManagement.AddUser(user1, password1);
+            _userManagement.AddUser(user2, password2);
+
+            Assert.DoesNotThrow(() => _userManagement.Login(user1.UserName, password1));
+            Assert.DoesNotThrow(() => _userManagement.Login(user2.UserName, password2));
+            Assert.IsTrue(_userManagement.CurrentUser.UserName == user1.UserName);
+            Assert.IsFalse(_userManagement.CurrentUser.UserName == user2.UserName);
+
+            _userManagement.RemoveUser(user1.UserName);
+            _userManagement.RemoveUser(user2.UserName);
         }
 
+        [Test]
         public void ValidUserWithPasswordPassCredentialChecking()
         {
-            //TODO:this
+            var password = CreateRandom.String();
+            var user = CreateRandomUser();
+
+            _userManagement.AddUser(user, password);
+
+            Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password));
+            Assert.NotNull(_userManagement.CurrentUser);
+
+            _userManagement.RemoveUser(user.UserName);
         }
 
+        [Test]
         public void ValidUserWithWrongPasswordFailsCredentialChecking()
         {
-            //TODO:this
-        }
+            var password = CreateRandom.String();
+            var password1 = CreateRandom.String();
+            var user = CreateRandomUser();
 
+            Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password1));
+            Assert.IsNull(_userManagement.CurrentUser);
+        }
+        
+        [Test]
         public void NonExistingUserTriesToLogin()
         {
-            //TODO:this
+           var password = CreateRandom.String();
+           var user = CreateRandomUser();
+
+           Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password));
+           Assert.IsNull(_userManagement.CurrentUser);
         }
 
         public void UserCanChangeHisPassword()
@@ -154,7 +188,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
 
             _packageManager.AddPackage(pack);
 
-            var list = _db.GetPackagesByName(pack.Name);
+            var list = _dbWrapper.GetPackagesByName(pack.Name);
             Assert.That(list.FirstOrDefault().Name == pack.Name);
 
             _packageManager.RemovePackage(pack);
@@ -168,7 +202,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
 
             _packageManager.AddPackage(pack);
 
-            var list = _db.GetPackagesByPrice(1000.0, 8000.0);
+            var list = _dbWrapper.GetPackagesByPrice(1000.0, 8000.0);
             foreach(Package item in list)
             {
                 if (item.Name.Equals("testpack"))
@@ -185,7 +219,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
 
             _packageManager.AddPackage(pack);
 
-            var list = _db.GetPackagesByDate(new DateTime(2015, 7, 16), new DateTime(2015, 7, 26));
+            var list = _dbWrapper.GetPackagesByDate(new DateTime(2015, 7, 16), new DateTime(2015, 7, 26));
             foreach (Package item in list)
             {
                 if (item.Name.Equals("testpack"))
@@ -201,7 +235,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var pack = CreateTestPackage();
 
             _packageManager.AddPackage(pack);
-            var list = _db.getPackagesByType("croaziera");
+            var list = _dbWrapper.getPackagesByType("croaziera");
             foreach (Package item in list)
             {
                 if (item.Name.Equals("testpack"))
@@ -209,6 +243,12 @@ namespace VacationMasters.UnitTests.DatabaseTests
             }
 
             _packageManager.RemovePackage(pack);
+        }
+
+        [Test]
+        public void DummyTest()
+        {
+            
         }
 
 

@@ -1,4 +1,8 @@
 ﻿using System;
+using System.IO;
+using Windows.Storage.Streams;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace VacationMasters.Essentials
 {
@@ -15,6 +19,27 @@ namespace VacationMasters.Essentials
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
         public byte[] Picture { get; set; }
+
+        public ImageSource Photo
+        {
+            get
+            {
+                if (Picture == null)
+                    return null;
+                byte[] imageBytes = Picture;
+
+                var image = new BitmapImage();
+                var ms = new InMemoryRandomAccessStream();
+                ms.AsStreamForWrite().Write(imageBytes, 0, imageBytes.Length);
+                ms.Seek(0);
+
+                image.SetSource(ms);
+                ImageSource src = image;
+
+                return src;
+
+            }
+        }
         
 
         public Package(string name,string type,string included,string transport,double price,double searchIndex,double rating,
