@@ -39,8 +39,8 @@ namespace VacationMasters.PackageManagement
         public void AddPackage(Package package)
         {
             var sql = string.Format("INSERT INTO Packages(Name, Type, Included, Transport, Price, SearchIndex, Rating,"
-                                      + "BeginDate, EndDate, Picture) "
-                                      + "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}');",
+                                      + "BeginDate, EndDate, Picture,TotalVotes) "
+                                      + "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}','0');",
                                       package.Name, package.Type, package.Included, package.Transport, package.Price,
                                       package.SearchIndex, package.Rating, package.BeginDate.ToString("yyyy-MM-dd HH:mm:ss"), package.EndDate.ToString("yyyy-MM-dd HH:mm:ss"), package.Picture);
 
@@ -62,7 +62,7 @@ namespace VacationMasters.PackageManagement
 
         public void RemovePackage(Package package)
         {
-            var sql = string.Format("DELETE FROM Packages WHERE ID = {0} ", package.ID);
+            var sql = string.Format("Delete From ChoosePackage Where IDPackage = {0}; DELETE FROM Packages WHERE ID = {0};  ", package.ID);
             _dbWrapper.QueryValue<object>(sql);
         }
 
@@ -232,7 +232,7 @@ namespace VacationMasters.PackageManagement
         }
         public bool CheckIfUserDidVote(int packageId, string userName)
         {
-            var sql = string.Format("SELECT c.HasVoted FROM Users u JOIN  Orders o  ON  u.ID = o.IDUser JOIN ChoosePackage c ON o.ID = c.IDOrder Where c.IDPackage = {0} AND  u.UserName= '{1}' ", packageId, userName);
+            var sql = string.Format("SELECT c.HasRated FROM Users u JOIN  Orders o  ON  u.ID = o.IDUser JOIN ChoosePackage c ON o.ID = c.IDOrder Where c.IDPackage = {0} AND  u.UserName= '{1}' ", packageId, userName);
             return _dbWrapper.QueryValue<bool>(sql);
         }
         public int RetrieveUserId(string userName)
@@ -247,7 +247,7 @@ namespace VacationMasters.PackageManagement
                         "values('{0}', '{1}', '{2}', '{3}');", userId, "Reserved", now.ToString("yyyy-MM-dd HH:mm:ss"), price);
             sql += "SELECT LAST_INSERT_ID();";
             var idOrder = _dbWrapper.QueryValue<int>(sql);
-            sql = string.Format("INSERT INTO ChoosePackage(IDOrder,IDPackage,HasVoted) values('{0}','{1}','0');", idOrder, id);
+            sql = string.Format("INSERT INTO ChoosePackage(IDOrder,IDPackage,HasRated) values('{0}','{1}','0');", idOrder, id);
             _dbWrapper.QueryValue<object>(sql);
         }
 
@@ -259,11 +259,10 @@ namespace VacationMasters.PackageManagement
             _dbWrapper.QueryValue<object>(sql);
         }
 
-        public void UpdateRating(int packageId, double rating, string userName)
+        public void UpdateRating(int packageId, double rating, int orderId)
         {
-            var userId = RetrieveUserId(userName);
             var sql = string.Format("UPDATE Packages" + " SET Rating = (Rating*TotalVotes+{1})/(TotalVotes+1)" +
-            " WHERE Id = {0};"+" UPDATE Packages SET TotalVotes = TotalVotes + 1  Where Id={0}; "+ "UPDATE ChoosePackage SET HasVoted = 1 Where IdPackage = {0} And IdUser = {2}; ", packageId, rating,userId);
+            " WHERE Id = {0};"+" UPDATE Packages SET TotalVotes = TotalVotes + 1  Where Id={0}; "+ "UPDATE ChoosePackage SET HasRated = 1 Where IDPackage = {0} And IDOrder = {2}; ", packageId, rating,orderId);
             _dbWrapper.QueryValue<object>(sql);
         }
        
