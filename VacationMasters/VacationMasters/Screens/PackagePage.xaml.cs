@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
+using VacationMasters.Essentials;
 using VacationMasters.PackageManagement;
 using VacationMasters.Wrappers;
 
@@ -38,12 +39,14 @@ namespace VacationMasters.Screens
             if (_orderId == 0)
             {
                 _packageManager.ReservePackage(MainPage.CurrentUser.UserName, DateTime.Now, package.Price, package.ID);
+                this.UpdatePackage();
                 var messageDialog = new MessageDialog("The reservation has been made");
                 messageDialog.ShowAsync();
             }
             else
             {
                 _packageManager.CancelReservation(package.ID, _orderId);
+                this.UpdatePackage();
                 var messageDialog = new MessageDialog("The order has been canceled");
                 messageDialog.ShowAsync();
             }
@@ -64,15 +67,18 @@ namespace VacationMasters.Screens
             {
                 _orderId = _packageManager.CheckIfUserHasOrderedThePackage(package.ID, MainPage.CurrentUser.UserName);
                 var hasVoted = _packageManager.CheckIfUserDidVote(package.ID, MainPage.CurrentUser.UserName);
-                if (_orderId != 0) ReserveOrCancel.Content = "Cancel";
-                if (_orderId != 0 && hasVoted == false) Rating.IsEnabled = true;
+                if (_orderId != 0) ReserveOrCancel.Content = "Cancel"; 
+                else ReserveOrCancel.Content = "Reserve";
+                if (_orderId != 0 && hasVoted == false) 
+                {Rating.IsEnabled = true; Rating.ApplyTemplate();}
+                else Rating.IsEnabled = false;
             }
         }
 
         private void Rating_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             if (MainPage.CurrentUser != null)
-                _packageManager.UpdateRating(MainPage.SelectedPackage.ID, Rating.Value, MainPage.CurrentUser.UserName);
+                _packageManager.UpdateRating(MainPage.SelectedPackage.ID, Rating.Value, _orderId);
         }
     }
 }
