@@ -15,7 +15,8 @@ namespace VacationMasters
     public sealed partial class MainPage : Page
     {
         public DbWrapper DbWrapper { get; set; }
-
+        public static User CurrentUser { get; set; }
+        public static Package SelectedPackage { get; set; } 
          public MainPage()
         {
              this.DbWrapper = new DbWrapper();
@@ -268,6 +269,11 @@ namespace VacationMasters
         private void GoToAgentPage(object sender, RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "AgentPageControl", true);
+        }
+        public void UpdateSelectedPackage(Package package)
+        {
+            SelectedPackage = package;
+            this.PackagesPageView.UpdatePackage();
         }
     }
 
