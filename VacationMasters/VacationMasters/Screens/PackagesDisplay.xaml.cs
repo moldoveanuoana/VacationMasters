@@ -6,6 +6,7 @@ using VacationMasters.UserManagement;
 using VacationMasters.Essentials;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Windows.UI.Xaml;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -75,6 +76,14 @@ namespace VacationMasters.Screens
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        private void ItemGridView_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            var frame = (Frame)Window.Current.Content;
+            var page = (MainPage)frame.Content;
+            page.UpdateSelectedPackage((Package)e.ClickedItem);
+            VisualStateManager.GoToState(page, "PackagePage", true);
         }
     }
 

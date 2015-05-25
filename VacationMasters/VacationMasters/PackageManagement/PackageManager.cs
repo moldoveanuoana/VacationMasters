@@ -68,7 +68,7 @@ namespace VacationMasters.PackageManagement
 
         public List<Package> GetPackagesByPreferences()
         {
-            User loggedUser = _userManager.CurrentUser;
+            User loggedUser = MainPage.CurrentUser;
             List<Package> packagesByPrefrences = new List<Package>();
             foreach (var pref in loggedUser.Preferences)
             {
@@ -101,7 +101,7 @@ namespace VacationMasters.PackageManagement
 
         public List<Package> GetPackagesByHistoric()
         {
-            User loggedUser = _userManager.CurrentUser;
+            User loggedUser = MainPage.CurrentUser;
             List<Package> packagesByHistoric = new List<Package>();
 
             string sql = "Select * from packages p join choosepackage cp on(p.ID = cp.IDPackage)" +
@@ -179,7 +179,7 @@ namespace VacationMasters.PackageManagement
 
         public List<Package> GetPackagesByUserGroups()
         {
-            User loggedUser = _userManager.CurrentUser;
+            User loggedUser = MainPage.CurrentUser;
             var packagesByUserGroups = new List<Package>();
 
             var sql = string.Format("Select Name from Groups g join ChooseGroups cg on g.ID = cg.IDGroup" +
@@ -224,7 +224,48 @@ namespace VacationMasters.PackageManagement
 
             return finalList;
 
-        } 
+        }
+        public int CheckIfUserHasOrderedThePackage(int packageId, string userName)
+        {
+            var sql = string.Format("SELECT o.Id FROM Users u JOIN  Orders o  ON  u.ID = o.IDUser JOIN ChoosePackage c ON o.ID = c.IDOrder Where c.IDPackage = {0} AND  u.UserName= '{1}' ", packageId, userName);
+            return _dbWrapper.QueryValue<int>(sql);
+        }
+        public bool CheckIfUserDidVote(int packageId, string userName)
+        {
+            var sql = string.Format("SELECT c.HasVoted FROM Users u JOIN  Orders o  ON  u.ID = o.IDUser JOIN ChoosePackage c ON o.ID = c.IDOrder Where c.IDPackage = {0} AND  u.UserName= '{1}' ", packageId, userName);
+            return _dbWrapper.QueryValue<bool>(sql);
+        }
+        public int RetrieveUserId(string userName)
+        {
+            var sql = string.Format("Select ID From Users  Where UserName = '{0}';", userName);
+            return _dbWrapper.QueryValue<int>(sql);
+        }
+        public void ReservePackage(string userName, DateTime now, double price, int id)
+        {
+            var userId = RetrieveUserId(userName);
+            var sql = string.Format("INSERT INTO Orders(IDUser,Status, Date , TotalPrice)" +
+                        "values('{0}', '{1}', '{2}', '{3}');", userId, "Reserved", now.ToString("yyyy-MM-dd HH:mm:ss"), price);
+            sql += "SELECT LAST_INSERT_ID();";
+            var idOrder = _dbWrapper.QueryValue<int>(sql);
+            sql = string.Format("INSERT INTO ChoosePackage(IDOrder,IDPackage,HasVoted) values('{0}','{1}','0');", idOrder, id);
+            _dbWrapper.QueryValue<object>(sql);
+        }
+
+        public void CancelReservation(int packageId, int orderId)
+        {
+            var sql = string.Format("DELETE FROM ChoosePackage" +
+                        " WHERE IDPackage = {0} AND IDOrder = {1};", packageId, orderId);
+            sql += string.Format("Delete from Orders where ID = '{0}';", orderId);
+            _dbWrapper.QueryValue<object>(sql);
+        }
+
+        public void UpdateRating(int packageId, double rating, string userName)
+        {
+            var userId = RetrieveUserId(userName);
+            var sql = string.Format("UPDATE Packages" + " SET Rating = (Rating*TotalVotes+{1})/(TotalVotes+1)" +
+            " WHERE Id = {0};"+" UPDATE Packages SET TotalVotes = TotalVotes + 1  Where Id={0}; "+ "UPDATE ChoosePackage SET HasVoted = 1 Where IdPackage = {0} And IdUser = {2}; ", packageId, rating,userId);
+            _dbWrapper.QueryValue<object>(sql);
+        }
        
     }
 }

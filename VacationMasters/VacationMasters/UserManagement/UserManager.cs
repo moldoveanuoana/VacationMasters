@@ -12,7 +12,6 @@ namespace VacationMasters.UserManagement
     public class UserManager : IUserManager
     {
         private readonly IDbWrapper _dbWrapper;
-        public User CurrentUser { get; set; }
 
         public UserManager(IDbWrapper dbWrapper)
         {
@@ -191,13 +190,13 @@ namespace VacationMasters.UserManagement
         public void Login(string userName, string password)
         {
             if (CanLogin(userName, password))
-                CurrentUser = GetUser(userName);
+                MainPage.CurrentUser = GetUser(userName);
         }
 
         public bool CanLogin(string userName, string password)
         {
             bool fieldsCompleted = userName != String.Empty && password!= String.Empty;
-            if (CurrentUser == null && fieldsCompleted && CheckIfUserExists(userName) == true)
+            if (MainPage.CurrentUser == null && fieldsCompleted && CheckIfUserExists(userName) == true)
             {
                 var currUser = GetUser(userName);
                 if (currUser.Banned)

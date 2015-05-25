@@ -135,6 +135,9 @@
     <Compile Include="Screens\Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\PackagePage.xaml.cs">
+      <DependentUpon>PackagePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\PackagesDisplay.xaml.cs">
       <DependentUpon>PackagesDisplay.xaml</DependentUpon>
     </Compile>
@@ -156,6 +159,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="packages.config" />
     <None Include="VacationMasters_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Screens\PackagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Screens\PackagesDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -222,6 +230,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Callisto">
+      <HintPath>..\packages\Callisto.1.4.0\lib\netcore451\Callisto.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data.RT">
       <HintPath>..\..\ThirdPartyLibraries\MySql.Data.RT.dll</HintPath>
     </Reference>
