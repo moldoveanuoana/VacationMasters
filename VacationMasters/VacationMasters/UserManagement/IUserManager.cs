@@ -6,7 +6,6 @@ namespace VacationMasters.UserManagement
 {
     public interface IUserManager
     {
-        User CurrentUser { get; set; }
 
         /// <summary>
         /// checks whether a given user satisfies the login conditions
@@ -14,7 +13,16 @@ namespace VacationMasters.UserManagement
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        bool CanLogin(User user);
+        bool CanLogin(string username, string password);
+
+        /// <summary>
+        /// checks whether a given user exists
+        /// Conditions: existing and password equivalence
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        bool CheckIfUserExists(string userName);
 
         /// <summary>
         /// Checks whether the combination UserName/Password worked or not
@@ -79,5 +87,11 @@ namespace VacationMasters.UserManagement
         List<String> GetAllEmails();
 
         List<String> GetStrings(string sql);
+
+        /// Logs the user
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        void Login(string username, string password);
     }
 }

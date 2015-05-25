@@ -129,11 +129,23 @@
     <Compile Include="Screens\AdminControl.xaml.cs">
       <DependentUpon>AdminControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\AgentPage.xaml.cs">
+      <DependentUpon>AgentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\PackagePage.xaml.cs">
+      <DependentUpon>PackagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\PackagesDisplay.xaml.cs">
+      <DependentUpon>PackagesDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\SearchResults.xaml.cs">
       <DependentUpon>SearchResults.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
@@ -147,6 +159,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="packages.config" />
     <None Include="VacationMasters_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -187,13 +200,29 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Screens\Contact.xaml">
+    <Page Include="Screens\AgentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Contact.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\PackagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\PackagesDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Screens\SearchResults.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Screens\Register.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -201,11 +230,16 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Callisto">
+      <HintPath>..\..\ThirdPartyLibraries\packages\Callisto.1.4.0\lib\netcore451\Callisto.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data.RT">
       <HintPath>..\..\ThirdPartyLibraries\MySql.Data.RT.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

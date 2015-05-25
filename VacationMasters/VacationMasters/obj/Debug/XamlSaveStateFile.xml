@@ -1,5 +1,6 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <ReferenceAssembly PathName="c:\users\irina\documents\github\vacationmasters\thirdpartylibraries\mysql.data.rt.dll" HashGuid="e1f8864d-84a4-ccd6-9aeb-163ed9dc3c15" />
+    <LocalAssembly PathName="c:\users\emanuel\documents\github\repository\vacationmasters\vacationmasters\vacationmasters\obj\debug\intermediatexaml\vacationmasters.exe" HashGuid="43aebc4c-12c8-610e-66dc-1729b6b68b51" />
+    <ReferenceAssembly PathName="c:\users\emanuel\documents\github\repository\vacationmasters\thirdpartylibraries\mysql.data.rt.dll" HashGuid="e1f8864d-84a4-ccd6-9aeb-163ed9dc3c15" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>

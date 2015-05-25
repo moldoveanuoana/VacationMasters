@@ -297,13 +297,22 @@ namespace VacationMasters.Wrappers
             });
         }
 
+        public List<Package> getRandomPackages()
+        {
+            return RunCommand(command =>
+            {
+                command.CommandText = "SELECT * FROM Packages ORDER BY SearchIndex DESC";
+                return ReadPackages(command);
+            });
+        }
+
         public void UpdateRating(int ID, int starNum)
         {
             RunCommand(command =>
             {
                 command.CommandText = string.Format("UPDATE Packages SET Rating = ((Rating * TotalVotes) + {0})/(TotalVotes+1),TotalVotes = TotalVotes+1 ", starNum);
             });
-        }
+        }      
 
     }
 }
