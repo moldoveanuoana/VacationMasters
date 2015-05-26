@@ -35,15 +35,16 @@ namespace VacationMasters
              Task.Run(() => Initialize());
         }
 
-         private async void Initialize()
-         {
-             var types = DbWrapper.GetTypes();
-             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-             {
-                 foreach (String t in types)
-                     type_combo.Items.Add(t);
-             });
-         }
+        private async void Initialize()
+        {
+            var types = DbWrapper.GetTypes();
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                foreach (String t in types)
+                    type_combo.Items.Add(t);
+                Home(null, null);
+            });
+        }
 
         public Visibility CollapsedVisibility
         {
@@ -57,20 +58,20 @@ namespace VacationMasters
 
         private void Search(object sender, RoutedEventArgs e)
         {
-
-
             if (!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
                 && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
                 search_criterion = 1;
                 pk_name = name.Text;
+
             }
 
             if (String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
                 && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
+
                 search_criterion = 2;
                 pk_min_price = Convert.ToInt32(min_price.Text);
                 pk_max_price = Convert.ToInt32(max_price.Text);
@@ -92,6 +93,7 @@ namespace VacationMasters
                 search_criterion = 4;
                 pk_type = type_combo.SelectedValue.ToString();
             }
+
 
             if(String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
                 && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
@@ -115,6 +117,7 @@ namespace VacationMasters
                 pk_type = type_combo.SelectedValue.ToString();
             }
 
+
             if(String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
                 && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
@@ -124,6 +127,7 @@ namespace VacationMasters
                 pk_end_date = end_date.Date.Date;
                 pk_type = type_combo.SelectedValue.ToString();    
             }
+
 
             if(!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
                 && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
@@ -218,11 +222,6 @@ namespace VacationMasters
         }
 
         private void Home(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Packages(object sender, RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "PackagesV", true);
         }
