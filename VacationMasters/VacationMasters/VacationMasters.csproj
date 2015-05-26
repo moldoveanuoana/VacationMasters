@@ -126,12 +126,17 @@
     </Compile>
     <Compile Include="Resources\Converters\BooleanToImageConverter.cs" />
     <Compile Include="Resources\Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Resources\Converters\BytesToImageConverter.cs" />
     <Compile Include="Screens\AdminControl.xaml.cs">
       <DependentUpon>AdminControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\CancelOrder.xaml.cs">
+      <DependentUpon>CancelOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\AgentPage.xaml.cs">
+      <DependentUpon>AgentPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Screens\Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>
@@ -139,14 +144,20 @@
     <Compile Include="Screens\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\PackagePage.xaml.cs">
+      <DependentUpon>PackagePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\PackagesDisplay.xaml.cs">
       <DependentUpon>PackagesDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Screens\SearchResults.xaml.cs">
-      <DependentUpon>SearchResults.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Screens\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\SearchResult.xaml.cs">
+      <DependentUpon>SearchResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\UserPage.xaml.cs">
+      <DependentUpon>UserPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserManagement\IUserManager.cs" />
     <Compile Include="UserManagement\UserManager.cs" />
@@ -157,10 +168,14 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="packages.config" />
     <None Include="VacationMasters_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.scale-100.png" />
+    <Content Include="Assets\logo_splash.scale-100.png" />
+    <Content Include="Assets\logo_vm.png" />
+    <Content Include="Assets\logo_vm_220.scale-140.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
@@ -213,7 +228,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Screens\SearchResults.xaml">
+    <Page Include="Screens\AgentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\CancelOrder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\PackagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,8 +244,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Screens\SearchResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\UserPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Callisto">
+      <HintPath>..\..\ThirdPartyLibraries\packages\Callisto.1.4.0\lib\netcore451\Callisto.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data.RT">
       <HintPath>..\..\ThirdPartyLibraries\MySql.Data.RT.dll</HintPath>
     </Reference>

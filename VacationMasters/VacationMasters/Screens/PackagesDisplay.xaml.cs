@@ -7,6 +7,7 @@ using VacationMasters.Essentials;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
+using VacationMasters.PackageManagement;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -22,6 +23,7 @@ namespace VacationMasters.Screens
         private IUserManager _userManager;
         private ObservableCollection<Package> _list;
         public UserManager UserManager { get; set; }
+        public PackageManager PackManager { get; set; }
         public DbWrapper DbWrapper { get; set; }
         public bool IsOperationInProgress
         {
@@ -35,7 +37,6 @@ namespace VacationMasters.Screens
                 }
             }
         }
-
 
         public PackagesDisplay()
         {
@@ -54,7 +55,14 @@ namespace VacationMasters.Screens
 
             DbWrapper = new DbWrapper();
             UserManager = new UserManager(DbWrapper);
-            List = new ObservableCollection<Package>(DbWrapper.getRandomPackages());
+       
+            PackManager = new PackageManager(DbWrapper);
+            MainPage.CurrentUser = UserManager.GetUser("abc");
+            if (UserManager.CurrentUser == null)
+                List = new ObservableCollection<Package>(DbWrapper.getRandomPackages());
+            else
+                List = new ObservableCollection<Package>(PackManager.GetPackagesByRecommendation());
+           
             IsOperationInProgress = false;
         }
 
@@ -82,10 +90,10 @@ namespace VacationMasters.Screens
         {
             var frame = (Frame)Window.Current.Content;
             var page = (MainPage)frame.Content;
-            //page.UpdateSelectedPackage((Package)e.ClickedItem);
+            page.UpdateSelectedPackage((Package)e.ClickedItem);
+       
             VisualStateManager.GoToState(page, "PackagePage", true);
         }
     }
-
-
 }
+

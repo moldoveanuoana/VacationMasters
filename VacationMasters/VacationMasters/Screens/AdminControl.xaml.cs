@@ -1,16 +1,15 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 using VacationMasters.Essentials;
 using VacationMasters.Mail;
+using VacationMasters.PackageManagement;
 using VacationMasters.UserManagement;
 using VacationMasters.Wrappers;
 
@@ -20,17 +19,24 @@ namespace VacationMasters.Screens
     {
 
         private readonly IUserManager _userManager;
+        private readonly IDbWrapper _dbWrapper;
+        private readonly PackageManager _packageManager;
         private bool _banned;
         private bool _isUserSearched;
         private bool _isOperationInProgress;
         private bool _isUserManagerActive;
         private bool _isNewsletterActive;
+        private ObservableCollection<Package> _list;
+        private bool _isPackageActive;
+        private bool _packageDisplay;
+        private bool _addPackageDisplay;
 
         public AdminControl()
         {
             this.DataContext = this;
-            var dbWrapper = new DbWrapper();
-            _userManager = new UserManager(dbWrapper);
+            _dbWrapper = new DbWrapper();
+            _userManager = new UserManager(_dbWrapper);
+            _packageManager = new PackageManager(_dbWrapper);
             this.InitializeComponent();
         }
 
@@ -146,6 +152,45 @@ namespace VacationMasters.Screens
             }
         }
 
+        public bool IsPackageActive
+        {
+            get { return _isPackageActive; }
+            set
+            {
+                if (_isPackageActive != value)
+                {
+                    _isPackageActive = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public bool PackageDisplay
+        {
+            get { return _packageDisplay; }
+            set
+            {
+                if (_packageDisplay != value)
+                {
+                    _packageDisplay = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public bool AddPackageDisplay
+        {
+            get { return _addPackageDisplay; }
+            set
+            {
+                if (_addPackageDisplay != value)
+                {
+                    _addPackageDisplay = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
@@ -192,17 +237,76 @@ namespace VacationMasters.Screens
         {
             IsNewsletterActive = false;
             IsUserManagerActive = true;
+            IsPackageActive = false;
+            AddPackageDisplay = false;
         }
 
         private void Newsletter(object sender, RoutedEventArgs e)
         {
             IsUserManagerActive = false;
             IsNewsletterActive = true;
+            IsPackageActive = false;
+            AddPackageDisplay = false;
+        }
+
+        private void SearchPackage(object sender, RoutedEventArgs e)
+        {
+            var package = PackageSearchBox.Text;
+
+            if (package == null)
+                return;
+
+            List = new ObservableCollection<Package>(_packageManager.SearchPackages(package));
+
+            PackageDisplay = true;
+        }
+
+        public ObservableCollection<Package> List
+        {
+            get { return _list; }
+            set
+            {
+                _list = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private void PManager(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            IsPackageActive = true;
+            IsNewsletterActive = false;
+            IsUserManagerActive = false;
+            AddPackageDisplay = false;
+        }
+
+        private void DeletePackage(object sender, RoutedEventArgs e)
+        {
+            var package = PackageSearchBox.Text;
+
+            if (package == null)
+            {
+                var messageDialog = new MessageDialog("Package not found.");
+                messageDialog.ShowAsync();
+            }
+
+            try
+            {
+                var pckg = _dbWrapper.GetPackagesByName(package).FirstOrDefault();
+                _packageManager.RemovePackage(pckg);
+            }
+            catch (Exception)
+            {
+                var messageDialog = new MessageDialog("Package not found."); 
+                messageDialog.ShowAsync();
+            }
+        }
+
+        private void AddPackages(object sender, RoutedEventArgs e)
+        {
+            IsPackageActive = false;
+            IsNewsletterActive = false;
+            IsUserManagerActive = false;
+            AddPackageDisplay = true;
         }
     }
 }
