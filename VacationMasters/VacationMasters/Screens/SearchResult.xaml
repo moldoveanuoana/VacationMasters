@@ -1,0 +1,66 @@
+﻿<UserControl
+    x:Class="VacationMasters.Screens.SearchResult"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VacationMasters.Screens"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     xmlns:resources="using:VacationMasters.Resources"
+     xmlns:converters="using:VacationMasters.Resources.Converters"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <GridView
+       x:Name="itemGridView"
+       Margin="2"
+       ItemsSource="{Binding List}"
+       SelectionMode="None"
+       IsItemClickEnabled="True"
+       ItemClick="ItemGridView_OnItemClick">
+        <GridView.ItemTemplate>
+            <DataTemplate>
+                <Grid HorizontalAlignment="Left" Width="250" Height="250">
+                    <Border>
+                        <Image Source="{Binding Photo}"/>
+                    </Border>
+                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Pachet:"  MaxHeight="60" MinHeight="20"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Name}"  MaxHeight="60" MinHeight="20"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Pret:" MaxHeight="60" MinHeight="20"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Price}"  TextWrapping="NoWrap"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Rating:"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Rating}"  TextWrapping="NoWrap" Margin="15,0,15,10"/>
+
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+        </GridView.ItemTemplate>
+
+        <GridView.ItemsPanel>
+            <ItemsPanelTemplate>
+                <ItemsWrapGrid Orientation="Horizontal" GroupPadding="0,0,70,0"/>
+            </ItemsPanelTemplate>
+        </GridView.ItemsPanel>
+
+        <ScrollViewer Visibility="{Binding IsOperationInProgress, Converter = {StaticResource BooleanToVisibilityConverter}}">
+            <resources:CircularProgressBar/>
+        </ScrollViewer>
+
+    </GridView>
+</UserControl>

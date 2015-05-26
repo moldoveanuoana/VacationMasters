@@ -179,6 +179,8 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var pack = CreateTestPackage();
 
             Assert.DoesNotThrow(() => _packageManager.AddPackage(pack));
+            var idPack = _dbWrapper.QueryValue<int>(string.Format("Select Id From Packages Where Name='{0}'", pack.Name));
+            pack.ID = idPack;
             Assert.DoesNotThrow(() => _packageManager.RemovePackage(pack));
         }
 
@@ -191,6 +193,8 @@ namespace VacationMasters.UnitTests.DatabaseTests
 
             var list = _dbWrapper.GetPackagesByName(pack.Name);
             Assert.That(list.FirstOrDefault().Name == pack.Name);
+            var idPack = _dbWrapper.QueryValue<int>(string.Format("Select Id From Packages Where Name='{0}'", pack.Name));
+            pack.ID = idPack;
 
             _packageManager.RemovePackage(pack);
 
@@ -209,6 +213,8 @@ namespace VacationMasters.UnitTests.DatabaseTests
                 if (item.Name.Equals("testpack"))
                     Assert.That(item.Price == pack.Price);
             }
+            var idPack = _dbWrapper.QueryValue<int>(string.Format("Select Id From Packages Where Name='{0}'", pack.Name));
+            pack.ID = idPack;
 
             _packageManager.RemovePackage(pack);
         }
@@ -226,6 +232,8 @@ namespace VacationMasters.UnitTests.DatabaseTests
                 if (item.Name.Equals("testpack"))
                     Assert.That(item.BeginDate == pack.BeginDate && item.EndDate == pack.EndDate);
             }
+            var idPack = _dbWrapper.QueryValue<int>(string.Format("Select Id From Packages Where Name='{0}'", pack.Name));
+            pack.ID = idPack;
 
             _packageManager.RemovePackage(pack);
         }
@@ -242,7 +250,8 @@ namespace VacationMasters.UnitTests.DatabaseTests
                 if (item.Name.Equals("testpack"))
                     Assert.That(item.Type == pack.Type);
             }
-
+            var idPack = _dbWrapper.QueryValue<int>(string.Format("Select Id From Packages Where Name='{0}'", pack.Name));
+            pack.ID = idPack;
             _packageManager.RemovePackage(pack);
         }
 
