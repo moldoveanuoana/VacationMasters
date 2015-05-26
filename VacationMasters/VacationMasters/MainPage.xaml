@@ -301,7 +301,7 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Left" Margin="34,28,0,0" TextWrapping="Wrap" Text="? LOGO ?" VerticalAlignment="Top" FontSize="16"/>
+        <Image Source="/Assets/logo_vm.png" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Grid Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Left" Margin="10,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

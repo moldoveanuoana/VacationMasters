@@ -30,8 +30,8 @@ namespace VacationMasters
              this.InitializeComponent();
              this.DataContext = this;
              this.InitializeComponent();
-             begin_date.Date = begin_date.MinYear.Date;
-             end_date.Date = end_date.MinYear.Date;
+             begin_date.Date = DateTimeOffset.Now.Date;
+             end_date.Date = DateTimeOffset.Now.Date;
              Task.Run(() => Initialize());
         }
 
@@ -60,7 +60,7 @@ namespace VacationMasters
 
 
             if (!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && DateTimeOffset.Equals(begin_date.Date.Date.Date,begin_date.MinYear.Date.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
                 search_criterion = 1;
@@ -68,7 +68,7 @@ namespace VacationMasters
             }
 
             if (String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
                 search_criterion = 2;
@@ -77,7 +77,7 @@ namespace VacationMasters
             }
 
             if(String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && ! DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
                 search_criterion = 3;
@@ -86,7 +86,7 @@ namespace VacationMasters
             }
             
             if(String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) && 
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) && 
                 type_combo.SelectedItem != null)
             {
                 search_criterion = 4;
@@ -94,7 +94,7 @@ namespace VacationMasters
             }
 
             if(String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && ! DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
                 search_criterion = 5;
@@ -106,7 +106,7 @@ namespace VacationMasters
             }
 
             if(String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
                 search_criterion = 6;
@@ -116,7 +116,7 @@ namespace VacationMasters
             }
 
             if(String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && ! DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
                 search_criterion = 7;
@@ -126,7 +126,7 @@ namespace VacationMasters
             }
 
             if(!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
                 search_criterion = 8;
@@ -136,7 +136,7 @@ namespace VacationMasters
             }
 
             if(!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && ! DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
                 search_criterion = 9;
@@ -146,7 +146,7 @@ namespace VacationMasters
             }
 
             if(!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
                 search_criterion = 10;
@@ -155,7 +155,7 @@ namespace VacationMasters
             }
 
             if(!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && ! DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
                 search_criterion = 11;
@@ -167,7 +167,7 @@ namespace VacationMasters
             }
 
             if(!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
                 search_criterion = 12;
@@ -178,7 +178,7 @@ namespace VacationMasters
             }
 
             if(!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && ! DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
                 search_criterion = 13;
@@ -189,7 +189,7 @@ namespace VacationMasters
             }
 
             if(String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && ! DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
                 search_criterion = 14;
@@ -201,7 +201,7 @@ namespace VacationMasters
             }
 
             if(!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && ! DateTimeOffset.Equals(begin_date.Date.Date,begin_date.MinYear.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,end_date.MinYear.Date) &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
                 search_criterion = 15;

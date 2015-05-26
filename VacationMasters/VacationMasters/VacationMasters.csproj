@@ -164,6 +164,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.scale-100.png" />
+    <Content Include="Assets\logo_splash.scale-100.png" />
+    <Content Include="Assets\logo_vm.png" />
+    <Content Include="Assets\logo_vm_220.scale-140.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
