@@ -6,8 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:screens="using:VacationMasters.Screens"
-    d:DataContext="{d:DesignInstance Type=local:MainPage, 
-    IsDesignTimeCreatable=True}"
+    d:DataContext="{d:DesignInstance Type=local:MainPage, IsDesignTimeCreatable=True}"
     mc:Ignorable="d">
 
     <Grid >
@@ -38,6 +37,22 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AgentPageView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="RegisterControl">
@@ -62,7 +77,7 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-                        
+
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
@@ -112,10 +127,18 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
-                    <VisualState x:Name="LoginControl">
-                        <Storyboard>
+                <VisualState x:Name="LoginControl">
+                    <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AdminControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
@@ -124,7 +147,7 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-                            
+
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
@@ -142,6 +165,14 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SearchView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -177,6 +208,14 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="AgentPageControl">
@@ -206,35 +245,31 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SearchView"
->>>>>>> 6722d6cd8a3d56296c1af2608b4ceee906b5b5d3
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
-<<<<<<< HEAD
+
                 <VisualState x:Name="UserPageControl">
-=======
-                <VisualState x:Name="PackagePage">
->>>>>>> 6722d6cd8a3d56296c1af2608b4ceee906b5b5d3
                     <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AdminControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RegisterControlView"
-                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
-                        </ObjectAnimationUsingKeyFrames>
-<<<<<<< HEAD
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
-                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
-=======
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -252,20 +287,22 @@
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SearchView"
->>>>>>> 6722d6cd8a3d56296c1af2608b4ceee906b5b5d3
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
-<<<<<<< HEAD
-                <VisualState x:Name="CancelOrderControl">
-=======
-                <VisualState x:Name="SearchResult" >
->>>>>>> 6722d6cd8a3d56296c1af2608b4ceee906b5b5d3
+
+
+                <VisualState x:Name="PackagePage">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AdminControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
@@ -275,13 +312,105 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
-<<<<<<< HEAD
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AgentPageView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SearchView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
-=======
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="CancelOrderControl">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AdminControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RegisterControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AgentPageView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesPageView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SearchView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="SearchResult" >
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AdminControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RegisterControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserPageControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CancelOrderControlView"
+                                                 Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
@@ -304,7 +433,6 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SearchView"
->>>>>>> 6722d6cd8a3d56296c1af2608b4ceee906b5b5d3
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -392,21 +520,18 @@
         </Grid >
         <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="0,0,0,63"  >
             <StackPanel>
-<<<<<<< HEAD
-            <screens:AdminControl x:Name="AdminControlView" Visibility="Collapsed"/>
-            <screens:Register x:Name="RegisterControlView" Visibility="Collapsed"/>
-            <screens:UserPage x:Name="UserPageControlView" Visibility="Collapsed"/>
-            <screens:CancelOrder x:Name ="CancelOrderControlView" Visibility="Collapsed"/>
-=======
+
                 <screens:AdminControl x:Name="AdminControlView" Visibility="Collapsed"/>
                 <screens:Register x:Name="RegisterControlView" Visibility="Collapsed"/>
+                <screens:UserPage x:Name="UserPageControlView" Visibility="Collapsed"/>
+                <screens:CancelOrder x:Name ="CancelOrderControlView" Visibility="Collapsed"/>
                 <screens:Contact x:Name="ContactControlView" Visibility="Collapsed" />
                 <screens:Login x:Name="LoginControlView" Visibility="Collapsed"/>
                 <screens:PackagesDisplay x:Name="PackagesDisplayView" Visibility="Collapsed"/>
                 <screens:AgentPage x:Name="AgentPageView" Visibility ="Collapsed"/>
                 <screens:PackagePage x:Name="PackagesPageView" Visibility="Collapsed"/>
                 <screens:SearchResult x:Name="SearchView" Visibility="Collapsed"/>
->>>>>>> 6722d6cd8a3d56296c1af2608b4ceee906b5b5d3
+
             </StackPanel>
         </ScrollViewer>
     </Grid>
