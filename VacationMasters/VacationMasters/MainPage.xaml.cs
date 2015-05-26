@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using VacationMasters.UserManagement;
 using VacationMasters.Wrappers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,9 +15,13 @@ namespace VacationMasters
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
+        
         public DbWrapper DbWrapper { get; set; }
+        public bool _isNotLogged = true;
+        public bool _isLogged = false;
+        private string _helou;
         public static User CurrentUser { get; set; }
         public static Package SelectedPackage { get; set; }
         public static int search_criterion;
@@ -46,6 +53,31 @@ namespace VacationMasters
             });
         }
 
+        public  bool IsNotLogged
+        {
+            get { return _isNotLogged; }
+            set
+            {
+                if (_isNotLogged != value)
+                {
+                    _isNotLogged = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsLogged
+        {
+            get { return _isLogged; }
+            set
+            {
+                if (_isLogged != value)
+                {
+                    _isLogged = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
         public Visibility CollapsedVisibility
         {
             get { return Visibility.Collapsed; }
@@ -250,6 +282,33 @@ namespace VacationMasters
         private void GoToLoginControl(object sender, RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "LoginControl", true);
+        }
+
+        private void SignOutControl(object sender, RoutedEventArgs e)
+        {
+            UserManager.CurrentUser = null;
+            IsNotLogged = true;
+            IsLogged = false;
+        }
+
+        public string Hellou
+        {
+            get { return _helou; }
+            set
+            {
+                _helou = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         private void GoToAgentPage(object sender, RoutedEventArgs e)
