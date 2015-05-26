@@ -1,7 +1,7 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
     <LocalAssembly PathName="c:\users\emanuel\documents\github\repository\vacationmasters\vacationmasters\vacationmasters\obj\debug\intermediatexaml\vacationmasters.exe" HashGuid="bc83eb2f-9128-9e3b-3b07-ed14bcf77406" />
-    <ReferenceAssembly PathName="c:\users\emanuel\documents\github\repository\vacationmasters\vacationmasters\vacationmasters\bin\debug\callisto.dll" HashGuid="2e1ab8d4-b948-5a13-39d6-e24ac2a3055f" />
+    <ReferenceAssembly PathName="c:\users\emanuel\documents\github\repository\vacationmasters\thirdpartylibraries\packages\callisto.1.4.0\lib\netcore451\callisto.dll" HashGuid="2e1ab8d4-b948-5a13-39d6-e24ac2a3055f" />
     <ReferenceAssembly PathName="c:\users\emanuel\documents\github\repository\vacationmasters\thirdpartylibraries\mysql.data.rt.dll" HashGuid="e1f8864d-84a4-ccd6-9aeb-163ed9dc3c15" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>
