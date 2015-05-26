@@ -60,7 +60,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 xamlType = CreateXamlType(typeIndex);
             }
             var userXamlType = xamlType as global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType;
-            if(xamlType == null || (userXamlType != null && userXamlType.IsReturnTypeStub))
+            if(xamlType == null || (userXamlType != null && userXamlType.IsReturnTypeStub && !userXamlType.IsLocalType))
             {
                 global::Windows.UI.Xaml.Markup.IXamlType libXamlType = CheckOtherMetadataProvidersForType(type);
                 if (libXamlType != null)
@@ -96,7 +96,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 xamlType = CreateXamlType(typeIndex);
             }
             var userXamlType = xamlType as global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType;
-            if(xamlType == null || (userXamlType != null && userXamlType.IsReturnTypeStub))
+            if(xamlType == null || (userXamlType != null && userXamlType.IsReturnTypeStub && !userXamlType.IsLocalType))
             {
                 global::Windows.UI.Xaml.Markup.IXamlType libXamlType = CheckOtherMetadataProvidersForName(typeName);
                 if (libXamlType != null)
@@ -319,6 +319,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 userType.AddMemberName("PackageDisplay");
                 userType.AddMemberName("AddPackageDisplay");
                 userType.AddMemberName("List");
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
@@ -363,6 +364,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 userType.AddMemberName("EndDate");
                 userType.AddMemberName("Picture");
                 userType.AddMemberName("Photo");
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
@@ -416,24 +418,28 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 userType.AddMemberName("DbWrapper");
                 userType.AddMemberName("GroupManager");
                 userType.AddMemberName("IsOperationInProgress");
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
             case 17:   //  VacationMasters.UserManagement.UserManager
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
             case 18:   //  VacationMasters.Wrappers.DbWrapper
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
             case 19:   //  VacationMasters.Essentials.GroupManager
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
@@ -441,6 +447,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
                 userType.Activator = Activate_20_UserPage;
                 userType.AddMemberName("IsOperationInProgress");
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
@@ -448,18 +455,21 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
                 userType.Activator = Activate_21_CancelOrder;
                 userType.AddMemberName("IsOperationInProgress");
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
             case 22:   //  VacationMasters.Screens.Contact
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
                 userType.Activator = Activate_22_Contact;
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
             case 23:   //  VacationMasters.Screens.Login
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
                 userType.Activator = Activate_23_Login;
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
@@ -470,18 +480,21 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 userType.AddMemberName("DbWrapper");
                 userType.AddMemberName("IsOperationInProgress");
                 userType.AddMemberName("List");
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
             case 25:   //  VacationMasters.Screens.AgentPage
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
                 userType.Activator = Activate_25_AgentPage;
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
             case 26:   //  VacationMasters.Screens.PackagePage
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
                 userType.Activator = Activate_26_PackagePage;
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
@@ -492,6 +505,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 userType.AddMemberName("DbWrapper");
                 userType.AddMemberName("IsOperationInProgress");
                 userType.AddMemberName("List");
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
@@ -501,6 +515,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 userType.AddMemberName("DbWrapper");
                 userType.AddMemberName("CollapsedVisibility");
                 userType.AddMemberName("VisibleVisibility");
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
@@ -524,6 +539,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
             case 32:   //  VacationMasters.Resources.CircularProgressBar
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
                 userType.Activator = Activate_32_CircularProgressBar;
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
@@ -532,6 +548,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 userType.Activator = Activate_33_BooleanToImageConverter;
                 userType.AddMemberName("FalseIcon");
                 userType.AddMemberName("TrueIcon");
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
@@ -540,6 +557,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 userType.Activator = Activate_34_BooleanToVisibilityConverter;
                 userType.AddMemberName("TrueValue");
                 userType.AddMemberName("FalseValue");
+                userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
@@ -1514,6 +1532,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
         virtual public bool IsMarkupExtension { get { throw new global::System.NotImplementedException(); } }
         virtual public bool IsBindable { get { throw new global::System.NotImplementedException(); } }
         virtual public bool IsReturnTypeStub { get { throw new global::System.NotImplementedException(); } }
+        virtual public bool IsLocalType { get { throw new global::System.NotImplementedException(); } }
         virtual public global::Windows.UI.Xaml.Markup.IXamlType ItemType { get { throw new global::System.NotImplementedException(); } }
         virtual public global::Windows.UI.Xaml.Markup.IXamlType KeyType { get { throw new global::System.NotImplementedException(); } }
         virtual public object ActivateInstance() { throw new global::System.NotImplementedException(); }
@@ -1538,6 +1557,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
         bool _isMarkupExtension;
         bool _isBindable;
         bool _isReturnTypeStub;
+        bool _isLocalType;
 
         string _contentPropertyName;
         string _itemTypeName;
@@ -1562,6 +1582,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
         override public bool IsMarkupExtension { get { return _isMarkupExtension; } }
         override public bool IsBindable { get { return _isBindable; } }
         override public bool IsReturnTypeStub { get { return _isReturnTypeStub; } }
+        override public bool IsLocalType { get { return _isLocalType; } }
 
         override public global::Windows.UI.Xaml.Markup.IXamlMember ContentProperty
         {
@@ -1693,6 +1714,11 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
         public void SetIsReturnTypeStub()
         {
             _isReturnTypeStub = true;
+        }
+
+        public void SetIsLocalType()
+        {
+            _isLocalType = true;
         }
 
         public void SetItemTypeName(string itemTypeName)
