@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using VacationMasters.Essentials;
 using VacationMasters.PackageManagement;
+using VacationMasters.UserManagement;
 using VacationMasters.Wrappers;
 
 // The User Control item template is documented at http://go.micosoft.com/fwlink/?LinkId=234236
@@ -30,7 +31,7 @@ namespace VacationMasters.Screens
         private void ReserveOrCancel_OnClick(object sender, RoutedEventArgs e)
         {
             var package = MainPage.SelectedPackage;
-            if (MainPage.CurrentUser == null)
+            if (UserManager.CurrentUser == null)
             {
                 var messageDialog = new MessageDialog("Please login in order to reserve");
                 messageDialog.ShowAsync();
@@ -38,7 +39,7 @@ namespace VacationMasters.Screens
             }
             if (_orderId == 0)
             {
-                _packageManager.ReservePackage(MainPage.CurrentUser.UserName, DateTime.Now, package.Price, package.ID);
+                _packageManager.ReservePackage(UserManager.CurrentUser.UserName, DateTime.Now, package.Price, package.ID);
                 this.UpdatePackage();
                 var messageDialog = new MessageDialog("The reservation has been made");
                 messageDialog.ShowAsync();
@@ -63,10 +64,10 @@ namespace VacationMasters.Screens
             PriceTextBlock.Text = tab + package.Price;
             DateTextBlock.Text = tab + package.BeginDate + " - " + package.EndDate;
             Rating.Value = package.Rating;
-            if (MainPage.CurrentUser != null)
+            if (UserManager.CurrentUser != null)
             {
-                _orderId = _packageManager.CheckIfUserHasOrderedThePackage(package.ID, MainPage.CurrentUser.UserName);
-                var hasVoted = _packageManager.CheckIfUserDidVote(package.ID, MainPage.CurrentUser.UserName);
+                _orderId = _packageManager.CheckIfUserHasOrderedThePackage(package.ID, UserManager.CurrentUser.UserName);
+                var hasVoted = _packageManager.CheckIfUserDidVote(package.ID, UserManager.CurrentUser.UserName);
                 if (_orderId != 0) ReserveOrCancel.Content = "Cancel";
                 else ReserveOrCancel.Content = "Reserve";
                 if (_orderId != 0 && hasVoted == false)
@@ -77,7 +78,7 @@ namespace VacationMasters.Screens
 
         private void Rating_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            if (MainPage.CurrentUser != null)
+            if (UserManager.CurrentUser != null)
                 _packageManager.UpdateRating(MainPage.SelectedPackage.ID, Rating.Value, _orderId);
         }
     }

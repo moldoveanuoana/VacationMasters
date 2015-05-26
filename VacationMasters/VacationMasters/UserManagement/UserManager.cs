@@ -394,7 +394,7 @@ namespace VacationMasters.UserManagement
         public int CanLogin(string userName, string password)
         {
             bool fieldsCompleted = userName != String.Empty && password != String.Empty;
-            if (MainPage.CurrentUser == null && fieldsCompleted && CheckIfUserExists(userName) == true)
+            if (UserManager.CurrentUser == null && fieldsCompleted && CheckIfUserExists(userName) == true)
             {
                 var currUser = GetUser(userName);
                 if (currUser.Banned)

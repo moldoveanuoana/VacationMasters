@@ -57,8 +57,8 @@ namespace VacationMasters.Screens
             UserManager = new UserManager(DbWrapper);
        
             PackManager = new PackageManager(DbWrapper);
-            MainPage.CurrentUser = UserManager.GetUser("abc");
-            if (UserManager.CurrentUser == null)
+
+            if (UserManager.CurrentUser == null) 
                 List = new ObservableCollection<Package>(DbWrapper.getRandomPackages());
             else
                 List = new ObservableCollection<Package>(PackManager.GetPackagesByRecommendation());
