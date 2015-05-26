@@ -241,7 +241,7 @@ namespace VacationMasters
 
         private void UserPanel(object sender, RoutedEventArgs e)
         {
-
+            VisualStateManager.GoToState(this, "UserPageControl", true);
         }
 
         private void Contact(object sender, RoutedEventArgs e)

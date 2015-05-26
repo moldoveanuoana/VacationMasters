@@ -32,6 +32,19 @@ namespace VacationMasters.UserManagement
         {
             throw new NotImplementedException();
         }
+        public string GetMail(string userName)
+        {
+
+            var sql = string.Format("SELECT Email FROM Users where UserName = '{0}';", userName);
+            var mail = _dbWrapper.QueryValue<string>(sql);
+            return mail;
+        }
+        public string GetPassword(string userName)
+        {
+            var sql = string.Format("SELECT Password FROM Users where UserName = '{0}';", userName);
+            var password = _dbWrapper.QueryValue<string>(sql);
+            return password;
+        }
 
         public User GetUser(string userName)
         {
@@ -76,6 +89,105 @@ namespace VacationMasters.UserManagement
             _dbWrapper.QueryValue<object>(sql);
         }
 
+        public int GetID(string userName)
+        {
+            var sql = string.Format("Select ID from Users where UserName = '{0}';", userName);
+            var id = _dbWrapper.QueryValue<int>(sql);
+            return id;
+        }
+        public void DeletePreferences(string userName)
+
+        {
+            var id = GetID(userName);
+            var sql = string.Format("Delete from ChoosePreferences where IDUser = {0};",id);
+            _dbWrapper.QueryValue<object>(sql);
+        }
+
+        public void DeleteGroups(string userName)
+        {
+            var id = GetID(userName);
+            var sql = string.Format("Delete from ChooseGroups where IDUser = {0};", id);
+            _dbWrapper.QueryValue<object>(sql);
+        }
+
+        public int GetNewsletter(string userName)
+        {
+            var sql = string.Format("Select Newsletter from Users where UserName = '{0}';", userName);
+            var n = _dbWrapper.QueryValue<int>(sql);
+            return n;
+        }
+
+        public void UpdateUser(string user, bool newsletter, string email, string password, string passwordConfirm, List<string>preferences, List<string>groups)
+        {
+
+            if (email != GetMail(user))
+            {
+                var sqlemail = string.Format("Update Users set Email = '{0}' where UserName = '{1}';", email, user);
+                _dbWrapper.QueryValue<object>(sqlemail);
+            }
+            if (password != "Password")
+            {
+                if (password == passwordConfirm)
+
+                {
+                    var input = CryptographicBuffer.ConvertStringToBinary(password,
+                        BinaryStringEncoding.Utf8);
+                    var hasher = HashAlgorithmProvider.OpenAlgorithm("SHA256");
+                    var hashed = hasher.HashData(input);
+                    var pwd = CryptographicBuffer.EncodeToBase64String(hashed);
+                    var sqlpassword = string.Format("Update Users set Password = '{0}' where UserName = '{1}';", pwd, user);
+                    _dbWrapper.QueryValue<object>(sqlpassword);
+                }
+            }
+
+            DeletePreferences(user);
+            DeleteGroups(user);
+            var idUser = GetID(user);
+            
+            foreach (var preference in preferences)
+            {
+                var id = _dbWrapper.QueryValue<int>(string.Format("Select Id from Preferences Where Name='{0}'", preference));
+                var sqlpreferences = string.Format("INSERT INTO ChoosePreferences(IDUser,IDPreference) values('{0}','{1}');", idUser, id);
+                _dbWrapper.QueryValue<object>(sqlpreferences);
+            }
+
+            foreach (var group in groups)
+            {
+                var id = _dbWrapper.QueryValue<int>(string.Format("Select Id from Groups Where Name='{0}'", group));
+                var sqlgroups = string.Format("INSERT INTO ChooseGroups(IDUser,IDGroup) values('{0}','{1}');", idUser, id);
+                _dbWrapper.QueryValue<object>(sqlgroups);
+            }
+
+            if (newsletter)
+            {
+                var sqlnewsletter = string.Format("Update Users set Newsletter = 1 where UserName = '{0}';", user);
+                _dbWrapper.QueryValue<object>(sqlnewsletter);
+            }
+            else
+            {
+                var sqlnewsletter = string.Format("Update Users set Newsletter = 0 where UserName = '{0}';", user);
+                _dbWrapper.QueryValue<object>(sqlnewsletter);
+            }
+        }
+
+        public List<string> GetOrders(string userName)
+        {
+            var idUser = GetID(userName);
+            return _dbWrapper.RunCommand(command =>
+            {
+                command.CommandText = string.Format("Select Status from Orders where IDUser = {0} ;", idUser);
+                   
+                var reader = command.ExecuteReader();
+                var list = new List<String>();
+                while (reader.Read())
+                {
+                    var name = reader.GetString(0);
+
+                    list.Add(name);
+                }
+                return list;
+            });
+        }
         public bool CheckIfUserExists(string userName)
         {
             var sql = string.Format("Select ID From Users Where UserName = {0};", userName);
@@ -127,6 +239,44 @@ namespace VacationMasters.UserManagement
                 {
                     var email = reader.GetString(0);
                     list.Add(email);
+                }
+                return list;
+            });
+        }
+        public List<String> GetPreferencesCountryUser(string userName)
+        {
+            return _dbWrapper.RunCommand(command =>
+            {
+                command.CommandText = string.Format("Select Name from Preferences, ChoosePreferences, Users where " +
+                    "Preferences.ID = ChoosePreferences.IDPreference and Category = 'Country' and " +
+                    "ChoosePreferences.IDUser = Users.ID and UserName = '{0}'; ", userName);
+                var reader = command.ExecuteReader();
+                var list = new List<String>();
+                while (reader.Read())
+                {
+                    var name = reader.GetString(0);
+
+                    list.Add(name);
+                }
+                return list;
+            });
+        }
+
+        public List<String> GetPreferencesTypeUser(string userName)
+        {
+            return _dbWrapper.RunCommand(command =>
+            {
+                command.CommandText = string.Format("Select Name from Preferences, ChoosePreferences, Users where " +
+                                                    "Preferences.ID = ChoosePreferences.IDPreference and Category = 'Type' and " +
+                                                    "ChoosePreferences.IDUser = Users.ID and UserName = '{0}'; ",
+                    userName);
+                var reader = command.ExecuteReader();
+                var list = new List<String>();
+                while (reader.Read())
+                {
+                    var name = reader.GetString(0);
+
+                    list.Add(name);
                 }
                 return list;
             });
