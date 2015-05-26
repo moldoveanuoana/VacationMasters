@@ -15,27 +15,36 @@ namespace VacationMasters
     public sealed partial class MainPage : Page
     {
         public DbWrapper DbWrapper { get; set; }
-
+        public static User CurrentUser { get; set; }
+        public static Package SelectedPackage { get; set; }
+        public static int search_criterion;
+        public static String pk_name;
+        public static int pk_min_price;
+        public static int pk_max_price;
+        public static DateTime pk_begin_date;
+        public static DateTime pk_end_date;
+        public static String pk_type;
          public MainPage()
         {
              this.DbWrapper = new DbWrapper();
              this.InitializeComponent();
              this.DataContext = this;
              this.InitializeComponent();
-             begin_date.Date = DateTimeOffset.MinValue;
-             end_date.Date = DateTimeOffset.MinValue;
+             begin_date.Date = DateTimeOffset.Now.Date;
+             end_date.Date = DateTimeOffset.Now.Date;
              Task.Run(() => Initialize());
         }
 
-         private async void Initialize()
-         {
-             var types = DbWrapper.GetTypes();
-             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-             {
-                 foreach (String t in types)
-                     type_combo.Items.Add(t);
-             });
-         }
+        private async void Initialize()
+        {
+            var types = DbWrapper.GetTypes();
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                foreach (String t in types)
+                    type_combo.Items.Add(t);
+                Home(null, null);
+            });
+        }
 
         public Visibility CollapsedVisibility
         {
@@ -49,199 +58,177 @@ namespace VacationMasters
 
         private void Search(object sender, RoutedEventArgs e)
         {
-            if(!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue && 
+            if (!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
-                var packages = DbWrapper.GetPackagesByName(name.Text);
-                foreach(Package pack in packages)
-                {
-                    //set gridview components
-                }
+                search_criterion = 1;
+                pk_name = name.Text;
+
             }
 
             if (String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue &&
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
-                var packages = DbWrapper.GetPackagesByPrice(Convert.ToInt32(min_price.Text), Convert.ToInt32(max_price.Text));
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                    
-                }
 
-
+                search_criterion = 2;
+                pk_min_price = Convert.ToInt32(min_price.Text);
+                pk_max_price = Convert.ToInt32(max_price.Text);
             }
 
             if(String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
-                var packages = DbWrapper.GetPackagesByDate(begin_date.Date.DateTime,end_date.Date.DateTime);
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                    
-                }
+                search_criterion = 3;
+                pk_begin_date = begin_date.Date.Date;
+                pk_end_date = end_date.Date.Date;
             }
             
             if(String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue && 
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) && 
                 type_combo.SelectedItem != null)
             {
-                var packages = DbWrapper.getPackagesByType(type_combo.SelectedValue.ToString());
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                }
+                search_criterion = 4;
+                pk_type = type_combo.SelectedValue.ToString();
             }
 
+
             if(String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
-                var packages = DbWrapper.getPackagesByPriceDate(Convert.ToInt32(min_price.Text), Convert.ToInt32(max_price.Text), 
-                               begin_date.Date.DateTime, end_date.Date.DateTime);
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                }
+                search_criterion = 5;
+                pk_min_price = Convert.ToInt32(min_price.Text);
+                pk_max_price = Convert.ToInt32(max_price.Text);
+                pk_begin_date = begin_date.Date.Date;
+                pk_end_date = end_date.Date.Date;
+               
             }
 
             if(String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue &&
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
-                var packages = DbWrapper.getPackagesByPriceType(Convert.ToInt32(min_price.Text), Convert.ToInt32(max_price.Text),
-                                                                type_combo.SelectedValue.ToString());
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                }
+                search_criterion = 6;
+                pk_min_price = Convert.ToInt32(min_price.Text);
+                pk_max_price = Convert.ToInt32(max_price.Text);
+                pk_type = type_combo.SelectedValue.ToString();
             }
+
 
             if(String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
-                var packages = DbWrapper.getPackagesByDateType(begin_date.Date.DateTime, end_date.Date.DateTime, type_combo.SelectedValue.ToString());
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                }
+                search_criterion = 7;
+                pk_begin_date = begin_date.Date.Date;
+                pk_end_date = end_date.Date.Date;
+                pk_type = type_combo.SelectedValue.ToString();    
             }
 
+
             if(!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue &&
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
-                var packages = DbWrapper.getPackagesByNamePrice(name.Text, Convert.ToInt32(min_price.Text), Convert.ToInt32(min_price.Text));
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                }
+                search_criterion = 8;
+                pk_name = name.Text;
+                pk_min_price = Convert.ToInt32(min_price.Text);
+                pk_max_price = Convert.ToInt32(max_price.Text);
             }
 
             if(!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
-                var packages = DbWrapper.getPackagesByNameDate(name.Text, begin_date.Date.DateTime, end_date.Date.DateTime);
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                }
+                search_criterion = 9;
+                pk_name = name.Text;
+                pk_begin_date = begin_date.Date.Date;
+                pk_end_date = end_date.Date.Date;
             }
 
             if(!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue &&
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
-                var packages = DbWrapper.getPackagesByNameType(name.Text, type_combo.SelectedValue.ToString());
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                }
+                search_criterion = 10;
+                pk_name = name.Text;
+                pk_type = type_combo.SelectedValue.ToString();
             }
 
             if(!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem == null)
             {
-                var packages = DbWrapper.getPackagesByNamePriceDate(name.Text, Convert.ToInt32(min_price), Convert.ToInt32(max_price),
-                                                                    begin_date.Date.DateTime, end_date.Date.DateTime);
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                }
+                search_criterion = 11;
+                pk_name = name.Text;
+                pk_min_price = Convert.ToInt32(min_price.Text);
+                pk_max_price = Convert.ToInt32(max_price.Text);
+                pk_begin_date = begin_date.Date.Date;
+                pk_end_date = end_date.Date.Date;  
             }
 
             if(!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue &&
+                && DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) &&  DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
-                var packages = DbWrapper.getPackagesByNamePriceType(name.Text, Convert.ToInt32(min_price), Convert.ToInt32(max_price),
-                                                                    type_combo.SelectedValue.ToString());
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                }
+                search_criterion = 12;
+                pk_name = name.Text;
+                pk_min_price = Convert.ToInt32(min_price.Text);
+                pk_max_price = Convert.ToInt32(max_price.Text);
+                pk_type = type_combo.SelectedValue.ToString();
             }
 
             if(!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
-                var packages = DbWrapper.getPackagesByNameDateType(name.Text, begin_date.Date.DateTime, end_date.Date.DateTime,
-                                                                  type_combo.SelectedValue.ToString());
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                }
+                search_criterion = 13;
+                pk_name = name.Text;
+                pk_begin_date = begin_date.Date.Date;
+                pk_end_date = end_date.Date.Date;
+                pk_type = type_combo.SelectedValue.ToString();
             }
 
             if(String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
-                var packages = DbWrapper.getPackagesByPriceDateType(Convert.ToInt32(min_price), Convert.ToInt32(max_price),
-                                                                    begin_date.Date.DateTime, end_date.Date.DateTime,
-                                                                    type_combo.SelectedValue.ToString());
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                }
+                search_criterion = 14;
+                pk_min_price = Convert.ToInt32(min_price.Text);
+                pk_max_price = Convert.ToInt32(max_price.Text);
+                pk_begin_date = begin_date.Date.Date;
+                pk_end_date = end_date.Date.Date;
+                pk_type = type_combo.SelectedValue.ToString();
             }
 
             if(!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
+                && ! DateTimeOffset.Equals(begin_date.Date.Date,DateTimeOffset.Now.Date) && ! DateTimeOffset.Equals(end_date.Date.Date,DateTimeOffset.Now.Date) &&
                 type_combo.SelectedItem != null)
             {
-                var packages = DbWrapper.getPackagesByAll(name.Text, Convert.ToInt32(min_price), Convert.ToInt32(max_price),
-                                                          begin_date.Date.DateTime, end_date.Date.DateTime,
-                                                          type_combo.SelectedValue.ToString());
-                foreach (Package pack in packages)
-                {
-                    //set gridview components
-                }
+                search_criterion = 15;
+                pk_name = name.Text;
+                pk_min_price = Convert.ToInt32(min_price.Text);
+                pk_max_price = Convert.ToInt32(max_price.Text);
+                pk_begin_date = begin_date.Date.Date;
+                pk_end_date = end_date.Date.Date;
+                pk_type = type_combo.SelectedValue.ToString();
             }
+            VisualStateManager.GoToState(this, "SearchResult", true);
+            this.SearchView.Initialize();
 
         }
 
         private void Home(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Packages(object sender, RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "PackagesV", true);
         }
 
         private void UserPanel(object sender, RoutedEventArgs e)
         {
-
+            VisualStateManager.GoToState(this, "UserPageControl", true);
         }
 
 
@@ -268,6 +255,11 @@ namespace VacationMasters
         private void GoToAgentPage(object sender, RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "AgentPageControl", true);
+        }
+        public void UpdateSelectedPackage(Package package)
+        {
+            SelectedPackage = package;
+            this.PackagesPageView.UpdatePackage();
         }
     }
 

@@ -142,6 +142,17 @@ namespace VacationMasters.Wrappers
             return list;
         }
 
+        public List<String> ReadDestinationName(MySqlCommand command)
+        {
+            var reader = command.ExecuteReader();
+            var list = new List<String>();
+            while(reader.Read())
+            {
+                list.Add(reader.GetString(0));
+            }
+            return list;
+        }
+
         public List<Package> GetPackagesByName(String name)
         {
             return RunCommand(command =>
@@ -185,7 +196,7 @@ namespace VacationMasters.Wrappers
         {
             return RunCommand(command =>
             {
-                command.CommandText = "SELECT * FROM Packages WHERE BeginDate = " + beginDate + " AND EndDate = " + endDate
+                command.CommandText = "SELECT * FROM Packages WHERE BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd")
                                       + " AND Price BETWEEN " + minPrice + " AND " + maxPrice;
                 return ReadPackages(command);
             });
@@ -205,7 +216,7 @@ namespace VacationMasters.Wrappers
         {
             return RunCommand(command =>
             {
-                command.CommandText = "SELECT * FROM Packages WHERE BeginDate = " + beginDate + " AND EndDate = " + endDate
+                command.CommandText = "SELECT * FROM Packages WHERE BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd")
                                        + " AND Type = '" + type + "'";
                 return ReadPackages(command);
             });
@@ -226,7 +237,7 @@ namespace VacationMasters.Wrappers
             return RunCommand(command =>
             {
                 command.CommandText = "SELECT * FROM Packages WHERE Name = '" + name + "'"
-                                      + " AND BeginDate = " + beginDate + " AND EndDate = " + endDate;
+                                      + " AND BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd");
                 return ReadPackages(command);
             });
         }
@@ -247,7 +258,7 @@ namespace VacationMasters.Wrappers
             {
                 command.CommandText = "SELECT * FROM Packages WHERE Name = '" + name + "'"
                                        + " AND Price BETWEEN " + minPrice + " AND " + maxPrice
-                                       + " AND BeginDate = " + beginDate + " AND EndDate = " + endDate;
+                                       + " AND BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd");
                 return ReadPackages(command);
             });
         }
@@ -268,7 +279,7 @@ namespace VacationMasters.Wrappers
             return RunCommand(command =>
             {
                 command.CommandText = "SELECT * FROM Packages WHERE Name = '" + name + "'"
-                                        + " AND BeginDate = " + beginDate + " AND EndDate = " + endDate
+                                        + " AND BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd")
                                        + " AND Type = '" + type + "'";
                 return ReadPackages(command);
             });
@@ -279,7 +290,7 @@ namespace VacationMasters.Wrappers
             return RunCommand(command =>
             {
                 command.CommandText = "SELECT * FROM Packages WHERE Price BETWEEN " + minPrice + " AND " + maxPrice
-                                      + " AND BeginDate = " + beginDate + " AND EndDate = " + endDate
+                                      + " AND BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd")
                                       + " AND Type = '" + type + "'";
                 return ReadPackages(command);
             });
@@ -291,7 +302,7 @@ namespace VacationMasters.Wrappers
             {
                 command.CommandText = "SELECT * FROM Packages WHERE Name = '" + name + "'"
                                        + " AND Price BETWEEN " + minPrice + " AND " + maxPrice
-                                       + " AND BeginDate = " + beginDate + " AND EndDate = " + endDate
+                                       + " AND BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd")
                                        + " AND Type = '" + type + "'";
                 return ReadPackages(command);
             });

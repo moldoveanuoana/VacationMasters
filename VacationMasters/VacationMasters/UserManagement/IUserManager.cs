@@ -6,7 +6,6 @@ namespace VacationMasters.UserManagement
 {
     public interface IUserManager
     {
-        User CurrentUser { get; set; }
 
         /// <summary>
         /// checks whether a given user satisfies the login conditions
@@ -75,7 +74,12 @@ namespace VacationMasters.UserManagement
         /// </summary>
         /// <param name="userName"></param>
         void BanUser(string userName);
+        string GetMail(string userName);
+        /// 
+        string GetPassword(string userName);
+        void UpdateUser(string user, bool newsletter, string email, string password, string passwordConfirm, List<string>preferences, List<string>groups);
 
+        int GetNewsletter(string userName);
         /// <summary>
         /// Lifts ban for a user, give access back
         /// </summary>
@@ -94,5 +98,7 @@ namespace VacationMasters.UserManagement
         /// <param name="userName"></param>
         /// <param name="password"></param>
         void Login(string username, string password);
+
+        List<Preference> GetPreferencesByUser(string userName);
     }
 }
