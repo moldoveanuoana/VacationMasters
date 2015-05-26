@@ -228,7 +228,7 @@ namespace VacationMasters
 
         private void UserPanel(object sender, RoutedEventArgs e)
         {
-
+            VisualStateManager.GoToState(this, "UserPageControl", true);
         }
 
 

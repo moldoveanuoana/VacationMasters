@@ -1,0 +1,140 @@
+﻿<UserControl 
+    x:Class="VacationMasters.Screens.UserPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VacationMasters.Screens"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="using:VacationMasters.Resources"
+    xmlns:converters="using:VacationMasters.Resources.Converters"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="StoreFrontTileStyle"  TargetType="GridViewItem">
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="292" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,0,8,8" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Top" />
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="TabNavigation" Value="Local" />
+        </Style>
+        <ItemsPanelTemplate x:Key="StoreFrontGridItemsPanelTemplate">
+            <ItemsWrapGrid MaximumRowsOrColumns="3"/>
+        </ItemsPanelTemplate>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+       </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="4*"/>
+             <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+                
+
+
+            </Grid.RowDefinitions>
+
+
+            <Image HorizontalAlignment="Left"  VerticalAlignment="Top"  Grid.Row="0" Grid.Column="0"/>
+            <Button Content="Browse" HorizontalAlignment="Left" FontSize="16"  VerticalAlignment="Top" Click="Browse"  Grid.Column="1" Grid.Row="0" />
+            <TextBox Name="text_box_email"  Margin="0,5,0,0"  MinWidth="250" HorizontalAlignment="Left" FontSize="16" TextWrapping="Wrap" Text="E-mail" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0"  />
+            <PasswordBox Name="password_box"  Margin ="0,5,0,0" MinWidth="250" HorizontalAlignment="Left"  VerticalAlignment="Top" Password="Password&#xD;&#xA;Password" Grid.Row="2" Grid.Column="0" />
+            <PasswordBox Name="confirm_password_box"  Margin ="0,5,0,0" MinWidth="250" HorizontalAlignment="Left" VerticalAlignment="Top"  Password="Password&#xD;&#xA;Password" Grid.Row="3" Grid.Column="0" />
+            <RadioButton Name="radio_button" Content="Newsletter" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="4" Grid.Column="0" />
+            <Button Content="Order History" HorizontalAlignment="Left"  FontSize="16" Click="OrderHistory" VerticalAlignment="Top"  Grid.Column="1" Grid.Row="3" />
+            <Button Content="Save Changes" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="SaveChanges" Grid.Column="1" Grid.Row="8" />
+
+            <TextBlock  Margin="3" TextWrapping="Wrap" Width="88" HorizontalAlignment="Left" Grid.Row="5"  Grid.Column="0" TextAlignment="Right" Text="Countries"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="left" Grid.Row="5" Grid.Column="1">
+                <Viewbox HorizontalAlignment="Center"
+                             Width="40"
+                             Height="40"
+                             Visibility="{Binding IsOperationInProgress,Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <resources:CircularProgressBar/>
+                </Viewbox>
+                <GridView x:Name="CountriesGridView" SelectionMode="Multiple" Width="Auto" Height="Auto" ShowsScrollingPlaceholders="False"  VerticalAlignment="Stretch"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                           ItemContainerStyle="{StaticResource StoreFrontTileStyle}"
+                    ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}">
+                </GridView>
+            </StackPanel>
+            
+            <TextBlock  Margin="3" TextWrapping="Wrap" Width="88" HorizontalAlignment="Left"   TextAlignment="Right" Text="Types" Grid.Row="6" Grid.Column="0"/>
+        
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="left"   Grid.Row="6" Grid.Column="1">
+                <Viewbox HorizontalAlignment="Center"
+                             Width="40"
+                             Height="40"
+                           
+                             Visibility="{Binding IsOperationInProgress,Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <resources:CircularProgressBar/>
+                </Viewbox>
+                <GridView x:Name="TypesGridView" SelectionMode="Multiple" Width="Auto" Height="Auto" ShowsScrollingPlaceholders="False"  VerticalAlignment="Stretch"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                           ItemContainerStyle="{StaticResource StoreFrontTileStyle}"
+                    ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}">
+                </GridView>
+                </StackPanel>
+            <TextBlock  Margin="3" TextWrapping="Wrap" Width="88" HorizontalAlignment="Left"   TextAlignment="Right" Text="Groups" Grid.Row="7" Grid.Column="0"/>
+
+            <StackPanel Grid.Row ="7" Grid.Column="1">
+                <Viewbox HorizontalAlignment="Center"
+                             Width="40"
+                             Height="40"
+                           
+                             Visibility="{Binding IsOperationInProgress,Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <resources:CircularProgressBar/>
+                </Viewbox>
+                <GridView x:Name="GroupsGridView" SelectionMode="Multiple" Width="Auto" Height="Auto" ShowsScrollingPlaceholders="False"  VerticalAlignment="Stretch"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    ItemContainerStyle="{StaticResource StoreFrontTileStyle}"
+                    ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}">
+                </GridView>
+            </StackPanel>
+
+        </Grid>
+        <Grid Grid.Row="0" Margin="0,-129,0,129">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+        </Grid>
+    </Grid>
+
+</UserControl>
