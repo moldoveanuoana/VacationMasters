@@ -101,33 +101,7 @@ namespace VacationMasters.Wrappers
             });
         }
 
-        /* public List<Package> GetAllPackages()
-         {
-             return RunCommand(command =>
-                 {
-                     command.CommandText = "SELECT * FROM Packages";
-                     var reader = command.ExecuteReader();
-                     var list = new List<Package>();
-                     while(reader.Read())
-                     {
-                         var pack = new Package();
-                         pack.ID = reader.GetInt32(0);
-                         pack.Name = reader.GetString(1);
-                         pack.Type = reader.GetString(2);
-                         pack.Included = reader.GetString();
-                         pack.Transport = reader.GetString();
-                         pack.Price = reader.GetDouble();
-                         pack.SearchIndexRate = reader.GetDouble();
-                         pack.BeginDate = reader.GetDateTime();
-                         pack.EndDate = reader.GetDateTime();
-                         pack.Picture = reader.GetBytes();
-                         list.Add(pack);
-                        
-                     }
-                     return list;
-                 });
-         }*/
-
+      
 
         public List<String> GetTypes()
         {
@@ -211,7 +185,7 @@ namespace VacationMasters.Wrappers
         {
             return RunCommand(command =>
             {
-                command.CommandText = "SELECT * FROM Packages WHERE BeginDate = " + beginDate + " AND EndDate = " + endDate
+                command.CommandText = "SELECT * FROM Packages WHERE BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd")
                                       + " AND Price BETWEEN " + minPrice + " AND " + maxPrice;
                 return ReadPackages(command);
             });
@@ -231,7 +205,7 @@ namespace VacationMasters.Wrappers
         {
             return RunCommand(command =>
             {
-                command.CommandText = "SELECT * FROM Packages WHERE BeginDate = " + beginDate + " AND EndDate = " + endDate
+                command.CommandText = "SELECT * FROM Packages WHERE BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd")
                                        + " AND Type = '" + type + "'";
                 return ReadPackages(command);
             });
@@ -252,7 +226,7 @@ namespace VacationMasters.Wrappers
             return RunCommand(command =>
             {
                 command.CommandText = "SELECT * FROM Packages WHERE Name = '" + name + "'"
-                                      + " AND BeginDate = " + beginDate + " AND EndDate = " + endDate;
+                                      + " AND BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd");
                 return ReadPackages(command);
             });
         }
@@ -273,7 +247,7 @@ namespace VacationMasters.Wrappers
             {
                 command.CommandText = "SELECT * FROM Packages WHERE Name = '" + name + "'"
                                        + " AND Price BETWEEN " + minPrice + " AND " + maxPrice
-                                       + " AND BeginDate = " + beginDate + " AND EndDate = " + endDate;
+                                       + " AND BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd");
                 return ReadPackages(command);
             });
         }
@@ -294,7 +268,7 @@ namespace VacationMasters.Wrappers
             return RunCommand(command =>
             {
                 command.CommandText = "SELECT * FROM Packages WHERE Name = '" + name + "'"
-                                        + " AND BeginDate = " + beginDate + " AND EndDate = " + endDate
+                                        + " AND BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd")
                                        + " AND Type = '" + type + "'";
                 return ReadPackages(command);
             });
@@ -305,7 +279,7 @@ namespace VacationMasters.Wrappers
             return RunCommand(command =>
             {
                 command.CommandText = "SELECT * FROM Packages WHERE Price BETWEEN " + minPrice + " AND " + maxPrice
-                                      + " AND BeginDate = " + beginDate + " AND EndDate = " + endDate
+                                      + " AND BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd")
                                       + " AND Type = '" + type + "'";
                 return ReadPackages(command);
             });
@@ -317,8 +291,17 @@ namespace VacationMasters.Wrappers
             {
                 command.CommandText = "SELECT * FROM Packages WHERE Name = '" + name + "'"
                                        + " AND Price BETWEEN " + minPrice + " AND " + maxPrice
-                                       + " AND BeginDate = " + beginDate + " AND EndDate = " + endDate
+                                       + " AND BeginDate = " + beginDate.ToString("yyyy-MM-dd") + " AND EndDate = " + endDate.ToString("yyyy-MM-dd")
                                        + " AND Type = '" + type + "'";
+                return ReadPackages(command);
+            });
+        }
+
+        public List<Package> getRandomPackages()
+        {
+            return RunCommand(command =>
+            {
+                command.CommandText = "SELECT * FROM Packages ORDER BY SearchIndex DESC";
                 return ReadPackages(command);
             });
         }
@@ -329,7 +312,7 @@ namespace VacationMasters.Wrappers
             {
                 command.CommandText = string.Format("UPDATE Packages SET Rating = ((Rating * TotalVotes) + {0})/(TotalVotes+1),TotalVotes = TotalVotes+1 ", starNum);
             });
-        }
+        }      
 
     }
 }

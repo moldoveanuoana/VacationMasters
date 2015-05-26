@@ -39,5 +39,51 @@ namespace VacationMasters.Wrappers
         /// </summary>
         /// <param name="sqlQuery"></param>
         List<Package> ReadPackages(MySqlCommand sqlQuery);
+
+        /// <summary>
+        /// Gets all packages 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        List<Package> GetPackagesByName(String name);
+
+        /// <summary>
+        /// Gets all packages that 
+        /// </summary>
+        /// <param name="minPrice"></param>
+        /// <param name="maxPrice"></param>
+        /// <returns></returns>
+        List<Package> GetPackagesByPrice(double minPrice, double maxPrice);
+
+        List<Package> GetPackagesByDate(DateTime beginDate, DateTime endDate);
+
+        List<Package> getPackagesByType(String type);
+
+        List<Package> getPackagesByPriceDate(double minPrice, double maxPrice, DateTime beginDate, DateTime endDate);
+
+        List<Package> getPackagesByPriceType(double minPrice, double maxPrice, String type);
+
+        List<Package> getPackagesByDateType(DateTime beginDate, DateTime endDate, String type);
+
+        List<Package> getPackagesByNamePrice(String name, double minPrice, double maxPrice);
+
+        List<Package> getPackagesByNameDate(String name, DateTime beginDate, DateTime endDate);
+
+        List<Package> getPackagesByNameType(String name, String type);
+
+        List<Package> getPackagesByNamePriceDate(String name, double minPrice, double maxPrice, DateTime beginDate,
+            DateTime endDate);
+
+        List<Package> getPackagesByNamePriceType(String name, double minPrice, double maxPrice, String type);
+
+        List<Package> getPackagesByNameDateType(String name, DateTime beginDate, DateTime endDate, String type);
+
+        List<Package> getPackagesByPriceDateType(double minPrice, double maxPrice, DateTime beginDate, DateTime endDate,
+            String type);
+
+        List<Package> getPackagesByAll(String name, double minPrice, double maxPrice, DateTime beginDate,
+            DateTime endDate, String type);
+
+        List<String> GetTypes();
     }
 }

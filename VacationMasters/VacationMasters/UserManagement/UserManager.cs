@@ -4,33 +4,40 @@ using Windows.Security.Cryptography.Core;
 using VacationMasters.Essentials;
 using VacationMasters.Wrappers;
 using System.Collections.Generic;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace VacationMasters.UserManagement
 {
     public class UserManager : IUserManager
     {
         private readonly IDbWrapper _dbWrapper;
-        public User CurrentUser { get; set; }
 
         public UserManager(IDbWrapper dbWrapper)
         {
             _dbWrapper = dbWrapper;
         }
 
-        public bool CanLogin(User user)
-        {
-            //TODO: check for existing user
-            return !user.Banned;
-        }
-
         public bool CheckCredentials(string userName, string password)
         {
-            throw new NotImplementedException();
+            if (!CheckIfUserExists(userName))
+                return false;
+
+            var sql = string.Format("SELECT password FROM Users UserName = {0}", userName);
+            var usrPwd = _dbWrapper.QueryValue<object>(sql);
+            string pwd = EncryptPassword(userName, password);
+
+            if (String.Compare(usrPwd.ToString(), pwd) != 0)
+                return false;
+
+            return true;
         }
 
         public void ChangePassword(string userName, string newPassword)
         {
-            throw new NotImplementedException();
+            string newPwd = EncryptPassword(userName, newPassword);
+            var sql = string.Format("Update Users Set password ='{0}'", newPwd);
+            _dbWrapper.QueryValue<object>(sql);
         }
         public string GetMail(string userName)
         {
@@ -282,6 +289,22 @@ namespace VacationMasters.UserManagement
             });
         }
 
+        public List<string> GetStrings(string sql)
+        {
+            return _dbWrapper.RunCommand(command =>
+            {
+                command.CommandText = sql;
+                var reader = command.ExecuteReader();
+                var list = new List<String>();
+                while (reader.Read())
+                {
+                    var email = reader.GetString(0);
+                    list.Add(email);
+                }
+                return list;
+            });
+        }
+
         public void AddPreference(Preference preference)
         {
             var sql = string.Format("INSERT INTO Preferences(Name,Category) values ('{0}','{1}');", preference.Name, preference.Category);
@@ -312,6 +335,73 @@ namespace VacationMasters.UserManagement
             var sql = string.Format("UPDATE Users set Banned = false " +
                                    "WHERE UserName = '{0}';", userName);
             _dbWrapper.QueryValue<object>(sql);
+        }
+
+        public void Login(string userName, string password)
+        {
+            if (CanLogin(userName, password))
+                MainPage.CurrentUser = GetUser(userName);
+        }
+
+        public bool CanLogin(string userName, string password)
+        {
+            bool fieldsCompleted = userName != String.Empty && password!= String.Empty;
+            if (MainPage.CurrentUser == null && fieldsCompleted && CheckIfUserExists(userName) == true)
+            {
+                var currUser = GetUser(userName);
+                if (currUser.Banned)
+                {
+                    String message = "You have been baned!";
+                    DisplayPopup(message);
+                    return false;
+                }
+
+                if (CheckCredentials(userName, password) == false)
+                {
+                    String message = "Incorrect username or password!";
+                    DisplayPopup(message);
+                    return false;
+                }
+                return true;
+            }
+        
+            if (!fieldsCompleted)
+            {
+                String message = "All fields are mandatory!";
+                DisplayPopup(message);
+                return false;
+            }
+
+          if (CheckIfUserExists(userName) == true)
+          {
+              String message = "Incorrect credentials!";
+              DisplayPopup(message);
+              return false;
+          }
+
+          return false;
+        }
+
+        private void DisplayPopup(string message)
+        {
+            Popup validationPopup = new Popup();
+            validationPopup.VerticalOffset = 200;
+            validationPopup.HorizontalOffset = 300;
+            
+             TextBlock popupText = new TextBlock();
+             popupText.Text = message;
+             validationPopup.Child = popupText;
+        }
+
+        private string EncryptPassword(string userName, string password)
+        {
+            var input = CryptographicBuffer.ConvertStringToBinary(password,
+            BinaryStringEncoding.Utf8);
+            var hasher = HashAlgorithmProvider.OpenAlgorithm("SHA256");
+            var hashed = hasher.HashData(input);
+            var pwd = CryptographicBuffer.EncodeToBase64String(hashed);
+
+            return pwd.ToString();
         }
 
     }
