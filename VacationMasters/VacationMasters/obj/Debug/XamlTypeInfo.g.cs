@@ -148,7 +148,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[38];
+            _typeNameTable = new string[39];
             _typeNameTable[0] = "VacationMasters.Screens.AdminControl";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.UserControl";
             _typeNameTable[2] = "Boolean";
@@ -172,23 +172,24 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
             _typeNameTable[20] = "VacationMasters.Screens.Contact";
             _typeNameTable[21] = "VacationMasters.Screens.Login";
             _typeNameTable[22] = "VacationMasters.Screens.PackagesDisplay";
-            _typeNameTable[23] = "VacationMasters.Screens.AgentPage";
-            _typeNameTable[24] = "VacationMasters.Screens.PackagePage";
-            _typeNameTable[25] = "VacationMasters.Screens.SearchResult";
-            _typeNameTable[26] = "VacationMasters.MainPage";
-            _typeNameTable[27] = "Windows.UI.Xaml.Controls.Page";
-            _typeNameTable[28] = "Windows.UI.Xaml.Visibility";
-            _typeNameTable[29] = "Windows.UI.Color";
-            _typeNameTable[30] = "VacationMasters.Resources.CircularProgressBar";
-            _typeNameTable[31] = "VacationMasters.Resources.Converters.BooleanToImageConverter";
-            _typeNameTable[32] = "VacationMasters.Resources.Converters.BooleanToVisibilityConverter";
-            _typeNameTable[33] = "Callisto.Controls.Rating";
-            _typeNameTable[34] = "Windows.UI.Xaml.Controls.ItemsControl";
-            _typeNameTable[35] = "Callisto.Controls.RatingSelectionMode";
-            _typeNameTable[36] = "System.Enum";
-            _typeNameTable[37] = "Windows.UI.Xaml.Media.SolidColorBrush";
+            _typeNameTable[23] = "VacationMasters.PackageManagement.PackageManager";
+            _typeNameTable[24] = "VacationMasters.Screens.AgentPage";
+            _typeNameTable[25] = "VacationMasters.Screens.PackagePage";
+            _typeNameTable[26] = "VacationMasters.Screens.SearchResult";
+            _typeNameTable[27] = "VacationMasters.MainPage";
+            _typeNameTable[28] = "Windows.UI.Xaml.Controls.Page";
+            _typeNameTable[29] = "Windows.UI.Xaml.Visibility";
+            _typeNameTable[30] = "Windows.UI.Color";
+            _typeNameTable[31] = "VacationMasters.Resources.CircularProgressBar";
+            _typeNameTable[32] = "VacationMasters.Resources.Converters.BooleanToImageConverter";
+            _typeNameTable[33] = "VacationMasters.Resources.Converters.BooleanToVisibilityConverter";
+            _typeNameTable[34] = "Callisto.Controls.Rating";
+            _typeNameTable[35] = "Windows.UI.Xaml.Controls.ItemsControl";
+            _typeNameTable[36] = "Callisto.Controls.RatingSelectionMode";
+            _typeNameTable[37] = "System.Enum";
+            _typeNameTable[38] = "Windows.UI.Xaml.Media.SolidColorBrush";
 
-            _typeTable = new global::System.Type[38];
+            _typeTable = new global::System.Type[39];
             _typeTable[0] = typeof(global::VacationMasters.Screens.AdminControl);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
             _typeTable[2] = typeof(global::System.Boolean);
@@ -212,21 +213,22 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
             _typeTable[20] = typeof(global::VacationMasters.Screens.Contact);
             _typeTable[21] = typeof(global::VacationMasters.Screens.Login);
             _typeTable[22] = typeof(global::VacationMasters.Screens.PackagesDisplay);
-            _typeTable[23] = typeof(global::VacationMasters.Screens.AgentPage);
-            _typeTable[24] = typeof(global::VacationMasters.Screens.PackagePage);
-            _typeTable[25] = typeof(global::VacationMasters.Screens.SearchResult);
-            _typeTable[26] = typeof(global::VacationMasters.MainPage);
-            _typeTable[27] = typeof(global::Windows.UI.Xaml.Controls.Page);
-            _typeTable[28] = typeof(global::Windows.UI.Xaml.Visibility);
-            _typeTable[29] = typeof(global::Windows.UI.Color);
-            _typeTable[30] = typeof(global::VacationMasters.Resources.CircularProgressBar);
-            _typeTable[31] = typeof(global::VacationMasters.Resources.Converters.BooleanToImageConverter);
-            _typeTable[32] = typeof(global::VacationMasters.Resources.Converters.BooleanToVisibilityConverter);
-            _typeTable[33] = typeof(global::Callisto.Controls.Rating);
-            _typeTable[34] = typeof(global::Windows.UI.Xaml.Controls.ItemsControl);
-            _typeTable[35] = typeof(global::Callisto.Controls.RatingSelectionMode);
-            _typeTable[36] = typeof(global::System.Enum);
-            _typeTable[37] = typeof(global::Windows.UI.Xaml.Media.SolidColorBrush);
+            _typeTable[23] = typeof(global::VacationMasters.PackageManagement.PackageManager);
+            _typeTable[24] = typeof(global::VacationMasters.Screens.AgentPage);
+            _typeTable[25] = typeof(global::VacationMasters.Screens.PackagePage);
+            _typeTable[26] = typeof(global::VacationMasters.Screens.SearchResult);
+            _typeTable[27] = typeof(global::VacationMasters.MainPage);
+            _typeTable[28] = typeof(global::Windows.UI.Xaml.Controls.Page);
+            _typeTable[29] = typeof(global::Windows.UI.Xaml.Visibility);
+            _typeTable[30] = typeof(global::Windows.UI.Color);
+            _typeTable[31] = typeof(global::VacationMasters.Resources.CircularProgressBar);
+            _typeTable[32] = typeof(global::VacationMasters.Resources.Converters.BooleanToImageConverter);
+            _typeTable[33] = typeof(global::VacationMasters.Resources.Converters.BooleanToVisibilityConverter);
+            _typeTable[34] = typeof(global::Callisto.Controls.Rating);
+            _typeTable[35] = typeof(global::Windows.UI.Xaml.Controls.ItemsControl);
+            _typeTable[36] = typeof(global::Callisto.Controls.RatingSelectionMode);
+            _typeTable[37] = typeof(global::System.Enum);
+            _typeTable[38] = typeof(global::Windows.UI.Xaml.Media.SolidColorBrush);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -270,14 +272,14 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
         private object Activate_20_Contact() { return new global::VacationMasters.Screens.Contact(); }
         private object Activate_21_Login() { return new global::VacationMasters.Screens.Login(); }
         private object Activate_22_PackagesDisplay() { return new global::VacationMasters.Screens.PackagesDisplay(); }
-        private object Activate_23_AgentPage() { return new global::VacationMasters.Screens.AgentPage(); }
-        private object Activate_24_PackagePage() { return new global::VacationMasters.Screens.PackagePage(); }
-        private object Activate_25_SearchResult() { return new global::VacationMasters.Screens.SearchResult(); }
-        private object Activate_26_MainPage() { return new global::VacationMasters.MainPage(); }
-        private object Activate_30_CircularProgressBar() { return new global::VacationMasters.Resources.CircularProgressBar(); }
-        private object Activate_31_BooleanToImageConverter() { return new global::VacationMasters.Resources.Converters.BooleanToImageConverter(); }
-        private object Activate_32_BooleanToVisibilityConverter() { return new global::VacationMasters.Resources.Converters.BooleanToVisibilityConverter(); }
-        private object Activate_33_Rating() { return new global::Callisto.Controls.Rating(); }
+        private object Activate_24_AgentPage() { return new global::VacationMasters.Screens.AgentPage(); }
+        private object Activate_25_PackagePage() { return new global::VacationMasters.Screens.PackagePage(); }
+        private object Activate_26_SearchResult() { return new global::VacationMasters.Screens.SearchResult(); }
+        private object Activate_27_MainPage() { return new global::VacationMasters.MainPage(); }
+        private object Activate_31_CircularProgressBar() { return new global::VacationMasters.Resources.CircularProgressBar(); }
+        private object Activate_32_BooleanToImageConverter() { return new global::VacationMasters.Resources.Converters.BooleanToImageConverter(); }
+        private object Activate_33_BooleanToVisibilityConverter() { return new global::VacationMasters.Resources.Converters.BooleanToVisibilityConverter(); }
+        private object Activate_34_Rating() { return new global::Callisto.Controls.Rating(); }
         private void VectorAdd_3_ObservableCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::VacationMasters.Essentials.Package>)instance;
@@ -455,6 +457,7 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
                 userType.Activator = Activate_22_PackagesDisplay;
                 userType.AddMemberName("UserManager");
+                userType.AddMemberName("PackManager");
                 userType.AddMemberName("DbWrapper");
                 userType.AddMemberName("IsOperationInProgress");
                 userType.AddMemberName("List");
@@ -462,23 +465,30 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 23:   //  VacationMasters.Screens.AgentPage
-                userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_23_AgentPage;
+            case 23:   //  VacationMasters.PackageManagement.PackageManager
+                userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 24:   //  VacationMasters.Screens.PackagePage
+            case 24:   //  VacationMasters.Screens.AgentPage
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_24_PackagePage;
+                userType.Activator = Activate_24_AgentPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 25:   //  VacationMasters.Screens.SearchResult
+            case 25:   //  VacationMasters.Screens.PackagePage
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_25_SearchResult;
+                userType.Activator = Activate_25_PackagePage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 26:   //  VacationMasters.Screens.SearchResult
+                userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
+                userType.Activator = Activate_26_SearchResult;
                 userType.AddMemberName("UserManager");
                 userType.AddMemberName("DbWrapper");
                 userType.AddMemberName("IsOperationInProgress");
@@ -487,9 +497,9 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 26:   //  VacationMasters.MainPage
+            case 27:   //  VacationMasters.MainPage
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_26_MainPage;
+                userType.Activator = Activate_27_MainPage;
                 userType.AddMemberName("DbWrapper");
                 userType.AddMemberName("CollapsedVisibility");
                 userType.AddMemberName("VisibleVisibility");
@@ -497,15 +507,15 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 27:   //  Windows.UI.Xaml.Controls.Page
+            case 28:   //  Windows.UI.Xaml.Controls.Page
                 xamlType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 28:   //  Windows.UI.Xaml.Visibility
+            case 29:   //  Windows.UI.Xaml.Visibility
                 xamlType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 29:   //  Windows.UI.Color
+            case 30:   //  Windows.UI.Color
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
                 userType.AddMemberName("A");
                 userType.AddMemberName("B");
@@ -514,34 +524,34 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 30:   //  VacationMasters.Resources.CircularProgressBar
+            case 31:   //  VacationMasters.Resources.CircularProgressBar
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_30_CircularProgressBar;
+                userType.Activator = Activate_31_CircularProgressBar;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 31:   //  VacationMasters.Resources.Converters.BooleanToImageConverter
+            case 32:   //  VacationMasters.Resources.Converters.BooleanToImageConverter
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_31_BooleanToImageConverter;
+                userType.Activator = Activate_32_BooleanToImageConverter;
                 userType.AddMemberName("FalseIcon");
                 userType.AddMemberName("TrueIcon");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 32:   //  VacationMasters.Resources.Converters.BooleanToVisibilityConverter
+            case 33:   //  VacationMasters.Resources.Converters.BooleanToVisibilityConverter
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_32_BooleanToVisibilityConverter;
+                userType.Activator = Activate_33_BooleanToVisibilityConverter;
                 userType.AddMemberName("TrueValue");
                 userType.AddMemberName("FalseValue");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 33:   //  Callisto.Controls.Rating
+            case 34:   //  Callisto.Controls.Rating
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.ItemsControl"));
-                userType.Activator = Activate_33_Rating;
+                userType.Activator = Activate_34_Rating;
                 userType.AddMemberName("Value");
                 userType.AddMemberName("ItemCount");
                 userType.AddMemberName("SelectionMode");
@@ -552,23 +562,23 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 34:   //  Windows.UI.Xaml.Controls.ItemsControl
+            case 35:   //  Windows.UI.Xaml.Controls.ItemsControl
                 xamlType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 35:   //  Callisto.Controls.RatingSelectionMode
+            case 36:   //  Callisto.Controls.RatingSelectionMode
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
                 userType.AddEnumValue("Continuous", global::Callisto.Controls.RatingSelectionMode.Continuous);
                 userType.AddEnumValue("Individual", global::Callisto.Controls.RatingSelectionMode.Individual);
                 xamlType = userType;
                 break;
 
-            case 36:   //  System.Enum
+            case 37:   //  System.Enum
                 userType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
                 xamlType = userType;
                 break;
 
-            case 37:   //  Windows.UI.Xaml.Media.SolidColorBrush
+            case 38:   //  Windows.UI.Xaml.Media.SolidColorBrush
                 xamlType = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
             }
@@ -884,237 +894,247 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
             var that = (global::VacationMasters.Screens.PackagesDisplay)instance;
             that.UserManager = (global::VacationMasters.UserManagement.UserManager)Value;
         }
-        private object get_26_PackagesDisplay_DbWrapper(object instance)
+        private object get_26_PackagesDisplay_PackManager(object instance)
+        {
+            var that = (global::VacationMasters.Screens.PackagesDisplay)instance;
+            return that.PackManager;
+        }
+        private void set_26_PackagesDisplay_PackManager(object instance, object Value)
+        {
+            var that = (global::VacationMasters.Screens.PackagesDisplay)instance;
+            that.PackManager = (global::VacationMasters.PackageManagement.PackageManager)Value;
+        }
+        private object get_27_PackagesDisplay_DbWrapper(object instance)
         {
             var that = (global::VacationMasters.Screens.PackagesDisplay)instance;
             return that.DbWrapper;
         }
-        private void set_26_PackagesDisplay_DbWrapper(object instance, object Value)
+        private void set_27_PackagesDisplay_DbWrapper(object instance, object Value)
         {
             var that = (global::VacationMasters.Screens.PackagesDisplay)instance;
             that.DbWrapper = (global::VacationMasters.Wrappers.DbWrapper)Value;
         }
-        private object get_27_PackagesDisplay_IsOperationInProgress(object instance)
+        private object get_28_PackagesDisplay_IsOperationInProgress(object instance)
         {
             var that = (global::VacationMasters.Screens.PackagesDisplay)instance;
             return that.IsOperationInProgress;
         }
-        private void set_27_PackagesDisplay_IsOperationInProgress(object instance, object Value)
+        private void set_28_PackagesDisplay_IsOperationInProgress(object instance, object Value)
         {
             var that = (global::VacationMasters.Screens.PackagesDisplay)instance;
             that.IsOperationInProgress = (global::System.Boolean)Value;
         }
-        private object get_28_PackagesDisplay_List(object instance)
+        private object get_29_PackagesDisplay_List(object instance)
         {
             var that = (global::VacationMasters.Screens.PackagesDisplay)instance;
             return that.List;
         }
-        private void set_28_PackagesDisplay_List(object instance, object Value)
+        private void set_29_PackagesDisplay_List(object instance, object Value)
         {
             var that = (global::VacationMasters.Screens.PackagesDisplay)instance;
             that.List = (global::System.Collections.ObjectModel.ObservableCollection<global::VacationMasters.Essentials.Package>)Value;
         }
-        private object get_29_SearchResult_UserManager(object instance)
+        private object get_30_SearchResult_UserManager(object instance)
         {
             var that = (global::VacationMasters.Screens.SearchResult)instance;
             return that.UserManager;
         }
-        private void set_29_SearchResult_UserManager(object instance, object Value)
+        private void set_30_SearchResult_UserManager(object instance, object Value)
         {
             var that = (global::VacationMasters.Screens.SearchResult)instance;
             that.UserManager = (global::VacationMasters.UserManagement.UserManager)Value;
         }
-        private object get_30_SearchResult_DbWrapper(object instance)
+        private object get_31_SearchResult_DbWrapper(object instance)
         {
             var that = (global::VacationMasters.Screens.SearchResult)instance;
             return that.DbWrapper;
         }
-        private void set_30_SearchResult_DbWrapper(object instance, object Value)
+        private void set_31_SearchResult_DbWrapper(object instance, object Value)
         {
             var that = (global::VacationMasters.Screens.SearchResult)instance;
             that.DbWrapper = (global::VacationMasters.Wrappers.DbWrapper)Value;
         }
-        private object get_31_SearchResult_IsOperationInProgress(object instance)
+        private object get_32_SearchResult_IsOperationInProgress(object instance)
         {
             var that = (global::VacationMasters.Screens.SearchResult)instance;
             return that.IsOperationInProgress;
         }
-        private void set_31_SearchResult_IsOperationInProgress(object instance, object Value)
+        private void set_32_SearchResult_IsOperationInProgress(object instance, object Value)
         {
             var that = (global::VacationMasters.Screens.SearchResult)instance;
             that.IsOperationInProgress = (global::System.Boolean)Value;
         }
-        private object get_32_SearchResult_List(object instance)
+        private object get_33_SearchResult_List(object instance)
         {
             var that = (global::VacationMasters.Screens.SearchResult)instance;
             return that.List;
         }
-        private void set_32_SearchResult_List(object instance, object Value)
+        private void set_33_SearchResult_List(object instance, object Value)
         {
             var that = (global::VacationMasters.Screens.SearchResult)instance;
             that.List = (global::System.Collections.ObjectModel.ObservableCollection<global::VacationMasters.Essentials.Package>)Value;
         }
-        private object get_33_MainPage_DbWrapper(object instance)
+        private object get_34_MainPage_DbWrapper(object instance)
         {
             var that = (global::VacationMasters.MainPage)instance;
             return that.DbWrapper;
         }
-        private void set_33_MainPage_DbWrapper(object instance, object Value)
+        private void set_34_MainPage_DbWrapper(object instance, object Value)
         {
             var that = (global::VacationMasters.MainPage)instance;
             that.DbWrapper = (global::VacationMasters.Wrappers.DbWrapper)Value;
         }
-        private object get_34_MainPage_CollapsedVisibility(object instance)
+        private object get_35_MainPage_CollapsedVisibility(object instance)
         {
             var that = (global::VacationMasters.MainPage)instance;
             return that.CollapsedVisibility;
         }
-        private object get_35_MainPage_VisibleVisibility(object instance)
+        private object get_36_MainPage_VisibleVisibility(object instance)
         {
             var that = (global::VacationMasters.MainPage)instance;
             return that.VisibleVisibility;
         }
-        private object get_36_Color_A(object instance)
+        private object get_37_Color_A(object instance)
         {
             var that = (global::Windows.UI.Color)instance;
             return that.A;
         }
-        private void set_36_Color_A(object instance, object Value)
+        private void set_37_Color_A(object instance, object Value)
         {
             var that = (global::Windows.UI.Color)instance;
             that.A = (global::System.Byte)Value;
         }
-        private object get_37_Color_B(object instance)
+        private object get_38_Color_B(object instance)
         {
             var that = (global::Windows.UI.Color)instance;
             return that.B;
         }
-        private void set_37_Color_B(object instance, object Value)
+        private void set_38_Color_B(object instance, object Value)
         {
             var that = (global::Windows.UI.Color)instance;
             that.B = (global::System.Byte)Value;
         }
-        private object get_38_Color_G(object instance)
+        private object get_39_Color_G(object instance)
         {
             var that = (global::Windows.UI.Color)instance;
             return that.G;
         }
-        private void set_38_Color_G(object instance, object Value)
+        private void set_39_Color_G(object instance, object Value)
         {
             var that = (global::Windows.UI.Color)instance;
             that.G = (global::System.Byte)Value;
         }
-        private object get_39_Color_R(object instance)
+        private object get_40_Color_R(object instance)
         {
             var that = (global::Windows.UI.Color)instance;
             return that.R;
         }
-        private void set_39_Color_R(object instance, object Value)
+        private void set_40_Color_R(object instance, object Value)
         {
             var that = (global::Windows.UI.Color)instance;
             that.R = (global::System.Byte)Value;
         }
-        private object get_40_BooleanToImageConverter_FalseIcon(object instance)
+        private object get_41_BooleanToImageConverter_FalseIcon(object instance)
         {
             var that = (global::VacationMasters.Resources.Converters.BooleanToImageConverter)instance;
             return that.FalseIcon;
         }
-        private void set_40_BooleanToImageConverter_FalseIcon(object instance, object Value)
+        private void set_41_BooleanToImageConverter_FalseIcon(object instance, object Value)
         {
             var that = (global::VacationMasters.Resources.Converters.BooleanToImageConverter)instance;
             that.FalseIcon = (global::Windows.UI.Xaml.Media.ImageSource)Value;
         }
-        private object get_41_BooleanToImageConverter_TrueIcon(object instance)
+        private object get_42_BooleanToImageConverter_TrueIcon(object instance)
         {
             var that = (global::VacationMasters.Resources.Converters.BooleanToImageConverter)instance;
             return that.TrueIcon;
         }
-        private void set_41_BooleanToImageConverter_TrueIcon(object instance, object Value)
+        private void set_42_BooleanToImageConverter_TrueIcon(object instance, object Value)
         {
             var that = (global::VacationMasters.Resources.Converters.BooleanToImageConverter)instance;
             that.TrueIcon = (global::Windows.UI.Xaml.Media.ImageSource)Value;
         }
-        private object get_42_BooleanToVisibilityConverter_TrueValue(object instance)
+        private object get_43_BooleanToVisibilityConverter_TrueValue(object instance)
         {
             var that = (global::VacationMasters.Resources.Converters.BooleanToVisibilityConverter)instance;
             return that.TrueValue;
         }
-        private void set_42_BooleanToVisibilityConverter_TrueValue(object instance, object Value)
+        private void set_43_BooleanToVisibilityConverter_TrueValue(object instance, object Value)
         {
             var that = (global::VacationMasters.Resources.Converters.BooleanToVisibilityConverter)instance;
             that.TrueValue = (global::Windows.UI.Xaml.Visibility)Value;
         }
-        private object get_43_BooleanToVisibilityConverter_FalseValue(object instance)
+        private object get_44_BooleanToVisibilityConverter_FalseValue(object instance)
         {
             var that = (global::VacationMasters.Resources.Converters.BooleanToVisibilityConverter)instance;
             return that.FalseValue;
         }
-        private void set_43_BooleanToVisibilityConverter_FalseValue(object instance, object Value)
+        private void set_44_BooleanToVisibilityConverter_FalseValue(object instance, object Value)
         {
             var that = (global::VacationMasters.Resources.Converters.BooleanToVisibilityConverter)instance;
             that.FalseValue = (global::Windows.UI.Xaml.Visibility)Value;
         }
-        private object get_44_Rating_Value(object instance)
+        private object get_45_Rating_Value(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.Value;
         }
-        private void set_44_Rating_Value(object instance, object Value)
+        private void set_45_Rating_Value(object instance, object Value)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             that.Value = (global::System.Double)Value;
         }
-        private object get_45_Rating_ItemCount(object instance)
+        private object get_46_Rating_ItemCount(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.ItemCount;
         }
-        private void set_45_Rating_ItemCount(object instance, object Value)
+        private void set_46_Rating_ItemCount(object instance, object Value)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             that.ItemCount = (global::System.Int32)Value;
         }
-        private object get_46_Rating_SelectionMode(object instance)
+        private object get_47_Rating_SelectionMode(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.SelectionMode;
         }
-        private void set_46_Rating_SelectionMode(object instance, object Value)
+        private void set_47_Rating_SelectionMode(object instance, object Value)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             that.SelectionMode = (global::Callisto.Controls.RatingSelectionMode)Value;
         }
-        private object get_47_Rating_WeightedValue(object instance)
+        private object get_48_Rating_WeightedValue(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.WeightedValue;
         }
-        private object get_48_Rating_PointerPressedFill(object instance)
+        private object get_49_Rating_PointerPressedFill(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.PointerPressedFill;
         }
-        private void set_48_Rating_PointerPressedFill(object instance, object Value)
+        private void set_49_Rating_PointerPressedFill(object instance, object Value)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             that.PointerPressedFill = (global::Windows.UI.Xaml.Media.SolidColorBrush)Value;
         }
-        private object get_49_Rating_PointerOverFill(object instance)
+        private object get_50_Rating_PointerOverFill(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.PointerOverFill;
         }
-        private void set_49_Rating_PointerOverFill(object instance, object Value)
+        private void set_50_Rating_PointerOverFill(object instance, object Value)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             that.PointerOverFill = (global::Windows.UI.Xaml.Media.SolidColorBrush)Value;
         }
-        private object get_50_Rating_ReadOnlyFill(object instance)
+        private object get_51_Rating_ReadOnlyFill(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.ReadOnlyFill;
         }
-        private void set_50_Rating_ReadOnlyFill(object instance, object Value)
+        private void set_51_Rating_ReadOnlyFill(object instance, object Value)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             that.ReadOnlyFill = (global::Windows.UI.Xaml.Media.SolidColorBrush)Value;
@@ -1283,161 +1303,167 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 xamlMember.Getter = get_25_PackagesDisplay_UserManager;
                 xamlMember.Setter = set_25_PackagesDisplay_UserManager;
                 break;
+            case "VacationMasters.Screens.PackagesDisplay.PackManager":
+                userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Screens.PackagesDisplay");
+                xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "PackManager", "VacationMasters.PackageManagement.PackageManager");
+                xamlMember.Getter = get_26_PackagesDisplay_PackManager;
+                xamlMember.Setter = set_26_PackagesDisplay_PackManager;
+                break;
             case "VacationMasters.Screens.PackagesDisplay.DbWrapper":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Screens.PackagesDisplay");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "DbWrapper", "VacationMasters.Wrappers.DbWrapper");
-                xamlMember.Getter = get_26_PackagesDisplay_DbWrapper;
-                xamlMember.Setter = set_26_PackagesDisplay_DbWrapper;
+                xamlMember.Getter = get_27_PackagesDisplay_DbWrapper;
+                xamlMember.Setter = set_27_PackagesDisplay_DbWrapper;
                 break;
             case "VacationMasters.Screens.PackagesDisplay.IsOperationInProgress":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Screens.PackagesDisplay");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "IsOperationInProgress", "Boolean");
-                xamlMember.Getter = get_27_PackagesDisplay_IsOperationInProgress;
-                xamlMember.Setter = set_27_PackagesDisplay_IsOperationInProgress;
+                xamlMember.Getter = get_28_PackagesDisplay_IsOperationInProgress;
+                xamlMember.Setter = set_28_PackagesDisplay_IsOperationInProgress;
                 break;
             case "VacationMasters.Screens.PackagesDisplay.List":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Screens.PackagesDisplay");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "List", "System.Collections.ObjectModel.ObservableCollection`1<VacationMasters.Essentials.Package>");
-                xamlMember.Getter = get_28_PackagesDisplay_List;
-                xamlMember.Setter = set_28_PackagesDisplay_List;
+                xamlMember.Getter = get_29_PackagesDisplay_List;
+                xamlMember.Setter = set_29_PackagesDisplay_List;
                 break;
             case "VacationMasters.Screens.SearchResult.UserManager":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Screens.SearchResult");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "UserManager", "VacationMasters.UserManagement.UserManager");
-                xamlMember.Getter = get_29_SearchResult_UserManager;
-                xamlMember.Setter = set_29_SearchResult_UserManager;
+                xamlMember.Getter = get_30_SearchResult_UserManager;
+                xamlMember.Setter = set_30_SearchResult_UserManager;
                 break;
             case "VacationMasters.Screens.SearchResult.DbWrapper":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Screens.SearchResult");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "DbWrapper", "VacationMasters.Wrappers.DbWrapper");
-                xamlMember.Getter = get_30_SearchResult_DbWrapper;
-                xamlMember.Setter = set_30_SearchResult_DbWrapper;
+                xamlMember.Getter = get_31_SearchResult_DbWrapper;
+                xamlMember.Setter = set_31_SearchResult_DbWrapper;
                 break;
             case "VacationMasters.Screens.SearchResult.IsOperationInProgress":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Screens.SearchResult");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "IsOperationInProgress", "Boolean");
-                xamlMember.Getter = get_31_SearchResult_IsOperationInProgress;
-                xamlMember.Setter = set_31_SearchResult_IsOperationInProgress;
+                xamlMember.Getter = get_32_SearchResult_IsOperationInProgress;
+                xamlMember.Setter = set_32_SearchResult_IsOperationInProgress;
                 break;
             case "VacationMasters.Screens.SearchResult.List":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Screens.SearchResult");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "List", "System.Collections.ObjectModel.ObservableCollection`1<VacationMasters.Essentials.Package>");
-                xamlMember.Getter = get_32_SearchResult_List;
-                xamlMember.Setter = set_32_SearchResult_List;
+                xamlMember.Getter = get_33_SearchResult_List;
+                xamlMember.Setter = set_33_SearchResult_List;
                 break;
             case "VacationMasters.MainPage.DbWrapper":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.MainPage");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "DbWrapper", "VacationMasters.Wrappers.DbWrapper");
-                xamlMember.Getter = get_33_MainPage_DbWrapper;
-                xamlMember.Setter = set_33_MainPage_DbWrapper;
+                xamlMember.Getter = get_34_MainPage_DbWrapper;
+                xamlMember.Setter = set_34_MainPage_DbWrapper;
                 break;
             case "VacationMasters.MainPage.CollapsedVisibility":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.MainPage");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "CollapsedVisibility", "Windows.UI.Xaml.Visibility");
-                xamlMember.Getter = get_34_MainPage_CollapsedVisibility;
+                xamlMember.Getter = get_35_MainPage_CollapsedVisibility;
                 xamlMember.SetIsReadOnly();
                 break;
             case "VacationMasters.MainPage.VisibleVisibility":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.MainPage");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "VisibleVisibility", "Windows.UI.Xaml.Visibility");
-                xamlMember.Getter = get_35_MainPage_VisibleVisibility;
+                xamlMember.Getter = get_36_MainPage_VisibleVisibility;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Windows.UI.Color.A":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Windows.UI.Color");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "A", "Byte");
-                xamlMember.Getter = get_36_Color_A;
-                xamlMember.Setter = set_36_Color_A;
+                xamlMember.Getter = get_37_Color_A;
+                xamlMember.Setter = set_37_Color_A;
                 break;
             case "Windows.UI.Color.B":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Windows.UI.Color");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "B", "Byte");
-                xamlMember.Getter = get_37_Color_B;
-                xamlMember.Setter = set_37_Color_B;
+                xamlMember.Getter = get_38_Color_B;
+                xamlMember.Setter = set_38_Color_B;
                 break;
             case "Windows.UI.Color.G":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Windows.UI.Color");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "G", "Byte");
-                xamlMember.Getter = get_38_Color_G;
-                xamlMember.Setter = set_38_Color_G;
+                xamlMember.Getter = get_39_Color_G;
+                xamlMember.Setter = set_39_Color_G;
                 break;
             case "Windows.UI.Color.R":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Windows.UI.Color");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "R", "Byte");
-                xamlMember.Getter = get_39_Color_R;
-                xamlMember.Setter = set_39_Color_R;
+                xamlMember.Getter = get_40_Color_R;
+                xamlMember.Setter = set_40_Color_R;
                 break;
             case "VacationMasters.Resources.Converters.BooleanToImageConverter.FalseIcon":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Resources.Converters.BooleanToImageConverter");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "FalseIcon", "Windows.UI.Xaml.Media.ImageSource");
-                xamlMember.Getter = get_40_BooleanToImageConverter_FalseIcon;
-                xamlMember.Setter = set_40_BooleanToImageConverter_FalseIcon;
+                xamlMember.Getter = get_41_BooleanToImageConverter_FalseIcon;
+                xamlMember.Setter = set_41_BooleanToImageConverter_FalseIcon;
                 break;
             case "VacationMasters.Resources.Converters.BooleanToImageConverter.TrueIcon":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Resources.Converters.BooleanToImageConverter");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "TrueIcon", "Windows.UI.Xaml.Media.ImageSource");
-                xamlMember.Getter = get_41_BooleanToImageConverter_TrueIcon;
-                xamlMember.Setter = set_41_BooleanToImageConverter_TrueIcon;
+                xamlMember.Getter = get_42_BooleanToImageConverter_TrueIcon;
+                xamlMember.Setter = set_42_BooleanToImageConverter_TrueIcon;
                 break;
             case "VacationMasters.Resources.Converters.BooleanToVisibilityConverter.TrueValue":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Resources.Converters.BooleanToVisibilityConverter");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "TrueValue", "Windows.UI.Xaml.Visibility");
-                xamlMember.Getter = get_42_BooleanToVisibilityConverter_TrueValue;
-                xamlMember.Setter = set_42_BooleanToVisibilityConverter_TrueValue;
+                xamlMember.Getter = get_43_BooleanToVisibilityConverter_TrueValue;
+                xamlMember.Setter = set_43_BooleanToVisibilityConverter_TrueValue;
                 break;
             case "VacationMasters.Resources.Converters.BooleanToVisibilityConverter.FalseValue":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Resources.Converters.BooleanToVisibilityConverter");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "FalseValue", "Windows.UI.Xaml.Visibility");
-                xamlMember.Getter = get_43_BooleanToVisibilityConverter_FalseValue;
-                xamlMember.Setter = set_43_BooleanToVisibilityConverter_FalseValue;
+                xamlMember.Getter = get_44_BooleanToVisibilityConverter_FalseValue;
+                xamlMember.Setter = set_44_BooleanToVisibilityConverter_FalseValue;
                 break;
             case "Callisto.Controls.Rating.Value":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "Value", "Double");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_44_Rating_Value;
-                xamlMember.Setter = set_44_Rating_Value;
+                xamlMember.Getter = get_45_Rating_Value;
+                xamlMember.Setter = set_45_Rating_Value;
                 break;
             case "Callisto.Controls.Rating.ItemCount":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "ItemCount", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_45_Rating_ItemCount;
-                xamlMember.Setter = set_45_Rating_ItemCount;
+                xamlMember.Getter = get_46_Rating_ItemCount;
+                xamlMember.Setter = set_46_Rating_ItemCount;
                 break;
             case "Callisto.Controls.Rating.SelectionMode":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "SelectionMode", "Callisto.Controls.RatingSelectionMode");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_46_Rating_SelectionMode;
-                xamlMember.Setter = set_46_Rating_SelectionMode;
+                xamlMember.Getter = get_47_Rating_SelectionMode;
+                xamlMember.Setter = set_47_Rating_SelectionMode;
                 break;
             case "Callisto.Controls.Rating.WeightedValue":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "WeightedValue", "Double");
-                xamlMember.Getter = get_47_Rating_WeightedValue;
+                xamlMember.Getter = get_48_Rating_WeightedValue;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Callisto.Controls.Rating.PointerPressedFill":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "PointerPressedFill", "Windows.UI.Xaml.Media.SolidColorBrush");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_48_Rating_PointerPressedFill;
-                xamlMember.Setter = set_48_Rating_PointerPressedFill;
+                xamlMember.Getter = get_49_Rating_PointerPressedFill;
+                xamlMember.Setter = set_49_Rating_PointerPressedFill;
                 break;
             case "Callisto.Controls.Rating.PointerOverFill":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "PointerOverFill", "Windows.UI.Xaml.Media.SolidColorBrush");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_49_Rating_PointerOverFill;
-                xamlMember.Setter = set_49_Rating_PointerOverFill;
+                xamlMember.Getter = get_50_Rating_PointerOverFill;
+                xamlMember.Setter = set_50_Rating_PointerOverFill;
                 break;
             case "Callisto.Controls.Rating.ReadOnlyFill":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "ReadOnlyFill", "Windows.UI.Xaml.Media.SolidColorBrush");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_50_Rating_ReadOnlyFill;
-                xamlMember.Setter = set_50_Rating_ReadOnlyFill;
+                xamlMember.Getter = get_51_Rating_ReadOnlyFill;
+                xamlMember.Setter = set_51_Rating_ReadOnlyFill;
                 break;
             }
             return xamlMember;
@@ -1764,6 +1790,12 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
         }
     }
 }
+
+
+
+
+
+
 
 
 

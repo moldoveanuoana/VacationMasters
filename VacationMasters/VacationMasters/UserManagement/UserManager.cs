@@ -40,6 +40,7 @@ namespace VacationMasters.UserManagement
             _dbWrapper.QueryValue<object>(sql);
         }
 
+
         public User GetUser(string userName)
         {
             var sql = string.Format("SELECT UserName, FirstName, LastName, Email, PhoneNumber, " +
@@ -63,6 +64,7 @@ namespace VacationMasters.UserManagement
                     var keyWordsSearchers = reader.GetString(7);
                     user = new User(userName, firstName, lastName, email, phoneNumber, banned,
                         type, keyWordsSearchers);
+                    user.Preferences = GetPreferencesByUser(userName);
                 }
                 return user;
             });
@@ -138,6 +140,26 @@ namespace VacationMasters.UserManagement
                 return list;
             });
         }
+        public List<Preference> GetPreferencesByUser(string userName)
+        {
+            var id = _dbWrapper.QueryValue<int>(string.Format("Select ID from Users Where UserName='{0}'", userName));
+            return _dbWrapper.RunCommand(command =>
+            {
+                command.CommandText = string.Format("Select p.ID,p.Name,p.Category from ChoosePreferences c join Preferences p on c.IDPreference = p.ID Where c.IDUser ={0};",id);
+                var reader = command.ExecuteReader();
+                var list = new List<Preference>();
+                while (reader.Read())
+                {
+                    var preference = new Preference();
+                    preference.ID = reader.GetInt32(0);
+                    preference.Name = reader.GetString(1);
+                    preference.Category = reader.GetString(2);
+                    list.Add(preference);
+                }
+                return list;
+            });
+        }
+
 
         public List<string> GetStrings(string sql)
         {

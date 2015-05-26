@@ -142,6 +142,17 @@ namespace VacationMasters.Wrappers
             return list;
         }
 
+        public List<String> ReadDestinationName(MySqlCommand command)
+        {
+            var reader = command.ExecuteReader();
+            var list = new List<String>();
+            while(reader.Read())
+            {
+                list.Add(reader.GetString(0));
+            }
+            return list;
+        }
+
         public List<Package> GetPackagesByName(String name)
         {
             return RunCommand(command =>
