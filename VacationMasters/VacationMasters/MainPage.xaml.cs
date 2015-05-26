@@ -16,27 +16,28 @@ namespace VacationMasters
     {
         public DbWrapper DbWrapper { get; set; }
         public static User CurrentUser { get; set; }
-        public static Package SelectedPackage { get; set; } 
-         public MainPage()
+        public static Package SelectedPackage { get; set; }
+        public MainPage()
         {
-             this.DbWrapper = new DbWrapper();
-             this.InitializeComponent();
-             this.DataContext = this;
-             this.InitializeComponent();
-             begin_date.Date = DateTimeOffset.MinValue;
-             end_date.Date = DateTimeOffset.MinValue;
-             Task.Run(() => Initialize());
+            this.DbWrapper = new DbWrapper();
+            this.InitializeComponent();
+            this.DataContext = this;
+            this.InitializeComponent();
+            begin_date.Date = DateTimeOffset.MinValue;
+            end_date.Date = DateTimeOffset.MinValue;
+            Task.Run(() => Initialize());
         }
 
-         private async void Initialize()
-         {
-             var types = DbWrapper.GetTypes();
-             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-             {
-                 foreach (String t in types)
-                     type_combo.Items.Add(t);
-             });
-         }
+        private async void Initialize()
+        {
+            var types = DbWrapper.GetTypes();
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                foreach (String t in types)
+                    type_combo.Items.Add(t);
+                Home(null, null);
+            });
+        }
 
         public Visibility CollapsedVisibility
         {
@@ -50,12 +51,12 @@ namespace VacationMasters
 
         private void Search(object sender, RoutedEventArgs e)
         {
-            if(!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue && 
+            if (!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
+                && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue &&
                 type_combo.SelectedItem == null)
             {
                 var packages = DbWrapper.GetPackagesByName(name.Text);
-                foreach(Package pack in packages)
+                foreach (Package pack in packages)
                 {
                     //set gridview components
                 }
@@ -69,26 +70,26 @@ namespace VacationMasters
                 foreach (Package pack in packages)
                 {
                     //set gridview components
-                    
+
                 }
 
 
             }
 
-            if(String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
+            if (String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
                 && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
                 type_combo.SelectedItem == null)
             {
-                var packages = DbWrapper.GetPackagesByDate(begin_date.Date.DateTime,end_date.Date.DateTime);
+                var packages = DbWrapper.GetPackagesByDate(begin_date.Date.DateTime, end_date.Date.DateTime);
                 foreach (Package pack in packages)
                 {
                     //set gridview components
-                    
+
                 }
             }
-            
-            if(String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
-                && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue && 
+
+            if (String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
+                && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue &&
                 type_combo.SelectedItem != null)
             {
                 var packages = DbWrapper.getPackagesByType(type_combo.SelectedValue.ToString());
@@ -98,11 +99,11 @@ namespace VacationMasters
                 }
             }
 
-            if(String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
+            if (String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
                 && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
                 type_combo.SelectedItem == null)
             {
-                var packages = DbWrapper.getPackagesByPriceDate(Convert.ToInt32(min_price.Text), Convert.ToInt32(max_price.Text), 
+                var packages = DbWrapper.getPackagesByPriceDate(Convert.ToInt32(min_price.Text), Convert.ToInt32(max_price.Text),
                                begin_date.Date.DateTime, end_date.Date.DateTime);
                 foreach (Package pack in packages)
                 {
@@ -110,7 +111,7 @@ namespace VacationMasters
                 }
             }
 
-            if(String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
+            if (String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
                 && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue &&
                 type_combo.SelectedItem != null)
             {
@@ -122,7 +123,7 @@ namespace VacationMasters
                 }
             }
 
-            if(String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
+            if (String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
                 && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
                 type_combo.SelectedItem != null)
             {
@@ -133,7 +134,7 @@ namespace VacationMasters
                 }
             }
 
-            if(!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
+            if (!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
                 && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue &&
                 type_combo.SelectedItem == null)
             {
@@ -144,7 +145,7 @@ namespace VacationMasters
                 }
             }
 
-            if(!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
+            if (!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
                 && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
                 type_combo.SelectedItem == null)
             {
@@ -155,7 +156,7 @@ namespace VacationMasters
                 }
             }
 
-            if(!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
+            if (!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
                 && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue &&
                 type_combo.SelectedItem != null)
             {
@@ -166,7 +167,7 @@ namespace VacationMasters
                 }
             }
 
-            if(!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
+            if (!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
                 && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
                 type_combo.SelectedItem == null)
             {
@@ -178,7 +179,7 @@ namespace VacationMasters
                 }
             }
 
-            if(!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
+            if (!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
                 && begin_date.Date == DateTimeOffset.MinValue && end_date.Date == DateTimeOffset.MinValue &&
                 type_combo.SelectedItem != null)
             {
@@ -190,7 +191,7 @@ namespace VacationMasters
                 }
             }
 
-            if(!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
+            if (!String.IsNullOrEmpty(name.Text) && String.IsNullOrEmpty(min_price.Text) && String.IsNullOrEmpty(max_price.Text)
                 && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
                 type_combo.SelectedItem != null)
             {
@@ -202,7 +203,7 @@ namespace VacationMasters
                 }
             }
 
-            if(String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
+            if (String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
                 && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
                 type_combo.SelectedItem != null)
             {
@@ -215,7 +216,7 @@ namespace VacationMasters
                 }
             }
 
-            if(!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
+            if (!String.IsNullOrEmpty(name.Text) && !String.IsNullOrEmpty(min_price.Text) && !String.IsNullOrEmpty(max_price.Text)
                 && begin_date.Date != DateTimeOffset.MinValue && end_date.Date != DateTimeOffset.MinValue &&
                 type_combo.SelectedItem != null)
             {
@@ -231,11 +232,6 @@ namespace VacationMasters
         }
 
         private void Home(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Packages(object sender, RoutedEventArgs e)
         {
             VisualStateManager.GoToState(this, "PackagesV", true);
         }
