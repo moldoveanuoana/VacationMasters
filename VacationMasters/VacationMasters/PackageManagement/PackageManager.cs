@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using VacationMasters.Essentials;
 using VacationMasters.UserManagement;
@@ -20,6 +20,22 @@ namespace VacationMasters.PackageManagement
             _userManager = new UserManager(_dbWrapper);
         }
 
+        public List<Package> SearchPackages(string searchQuery)
+        {
+            List<Package> searchedPackages = new List<Package>();
+
+            var packagesByName = _dbWrapper.GetPackagesByName(searchQuery);
+            var packagesByType = _dbWrapper.getPackagesByType(searchQuery);
+
+            if (packagesByName != null)
+                searchedPackages.AddRange(packagesByName);
+
+            if(packagesByType !=null)
+                searchedPackages.AddRange(packagesByType);
+
+            return searchedPackages;
+        } 
+
         public void AddPackage(Package package)
         {
             var sql = string.Format("INSERT INTO Packages(Name, Type, Included, Transport, Price, SearchIndex, Rating,"
@@ -27,7 +43,21 @@ namespace VacationMasters.PackageManagement
                                       + "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', '{9}');",
                                       package.Name, package.Type, package.Included, package.Transport, package.Price,
                                       package.SearchIndex, package.Rating, package.BeginDate.ToString("yyyy-MM-dd HH:mm:ss"), package.EndDate.ToString("yyyy-MM-dd HH:mm:ss"), package.Picture);
+
             _dbWrapper.QueryValue<object>(sql);
+        }
+       
+        public void Display(List<Package> l)
+        {
+            var list = l;
+
+
+            foreach (Package pack in list)
+            {
+
+
+            }
+
         }
 
         public void RemovePackage(Package package)
@@ -38,7 +68,7 @@ namespace VacationMasters.PackageManagement
        
         public List<Package> GetPackagesByPreferences()
         {
-            User loggedUser = _userManager.CurrentUser;
+            User loggedUser = UserManager.CurrentUser;
             List<Package> packagesByPrefrences = new List<Package>();
             foreach (var pref in loggedUser.Preferences)
             {
@@ -71,7 +101,7 @@ namespace VacationMasters.PackageManagement
 
         public List<Package> GetPackagesByHistoric()
         {
-            User loggedUser = _userManager.CurrentUser;
+            User loggedUser = UserManager.CurrentUser;
             List<Package> packagesByHistoric = new List<Package>();
 
             string sql = "Select * from packages p join choosepackage cp on(p.ID = cp.IDPackage)" +
@@ -148,7 +178,7 @@ namespace VacationMasters.PackageManagement
 
         public List<Package> GetPackagesByUserGroups()
         {
-            User loggedUser = _userManager.CurrentUser;
+            User loggedUser = UserManager.CurrentUser;
             var packagesByUserGroups = new List<Package>();
 
             var sql = string.Format("Select Name from Groups g join ChooseGroups cg on g.ID = cg.IDGroup" +
@@ -195,7 +225,5 @@ namespace VacationMasters.PackageManagement
 
         } 
        
-
-
     }
 }

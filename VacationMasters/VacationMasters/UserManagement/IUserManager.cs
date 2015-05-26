@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using VacationMasters.Essentials;
 
 namespace VacationMasters.UserManagement
 {
     public interface IUserManager
     {
-        User CurrentUser { get; set; }
-
+        
         /// <summary>
         /// checks whether a given user satisfies the login conditions
         /// Conditions: existing and not banned
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
         /// <returns></returns>
-        bool CanLogin(string username, string password);
+        int CanLogin(string username, string password);
 
         /// <summary>
         /// checks whether a given user exists
         /// Conditions: existing and password equivalence
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="password"></param>
+        /// <param name="userName"></param>
         /// <returns></returns>
         bool CheckIfUserExists(string userName);
 
@@ -33,6 +33,21 @@ namespace VacationMasters.UserManagement
         /// <returns></returns>
         bool CheckCredentials(string userName, string password);
 
+        /// <summary>
+        /// Checks if two password match.
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="confirmPassword"></param>
+        /// <returns></returns>
+        bool CheckIfPasswordMach(string password, string confirmPassword);
+
+        /// <summary>
+        /// Verifies a security question.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="answer"></param>
+        /// <returns></returns>
+        bool CheckAnswer(string username, string answer);
         /// <summary>
         /// Change password of an user
         /// </summary>
@@ -82,17 +97,16 @@ namespace VacationMasters.UserManagement
         /// <param name="userName"></param>
         void UnbanUser(string userName);
 
-        /// <summary>
-        /// Logs the user
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
-        void Login(string username, string password);
-   
         /// Gets all the emails from database
         /// </summary>
         List<String> GetAllEmails();
 
         List<String> GetStrings(string sql);
+
+        /// Logs the user
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        void Login(string username, string password);
     }
 }

@@ -15,13 +15,11 @@ namespace VacationMasters.UnitTests.DatabaseTests
         private IDbWrapper _dbWrapper;
         private IUserManager _userManagement;
         private PackageManager _packageManager;
-        private DbWrapper _db;
 
         [SetUp]
         public void SetUp()
         {
             _dbWrapper = new DbWrapper();
-            _db = new DbWrapper();
             _userManagement = new UserManager(_dbWrapper);
             _packageManager = new PackageManager(_dbWrapper);
         }
@@ -120,8 +118,8 @@ namespace VacationMasters.UnitTests.DatabaseTests
 
             Assert.DoesNotThrow(() => _userManagement.Login(user1.UserName, password1));
             Assert.DoesNotThrow(() => _userManagement.Login(user2.UserName, password2));
-            Assert.IsTrue(_userManagement.CurrentUser.UserName == user1.UserName);
-            Assert.IsFalse(_userManagement.CurrentUser.UserName == user2.UserName);
+            Assert.IsTrue(UserManager.CurrentUser.UserName == user1.UserName);
+            Assert.IsFalse(UserManager.CurrentUser.UserName == user2.UserName);
 
             _userManagement.RemoveUser(user1.UserName);
             _userManagement.RemoveUser(user2.UserName);
@@ -136,7 +134,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
             _userManagement.AddUser(user, password);
 
             Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password));
-            Assert.NotNull(_userManagement.CurrentUser);
+            Assert.NotNull(UserManager.CurrentUser);
 
             _userManagement.RemoveUser(user.UserName);
         }
@@ -148,8 +146,12 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var password1 = CreateRandom.String();
             var user = CreateRandomUser();
 
+            _userManagement.AddUser(user, password);
+            
             Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password1));
-            Assert.IsNull(_userManagement.CurrentUser);
+            Assert.IsNull(UserManager.CurrentUser);
+            
+            _userManagement.RemoveUser(user.UserName);
         }
         
         [Test]
@@ -159,12 +161,22 @@ namespace VacationMasters.UnitTests.DatabaseTests
            var user = CreateRandomUser();
 
            Assert.DoesNotThrow(() => _userManagement.Login(user.UserName, password));
-           Assert.IsNull(_userManagement.CurrentUser);
+           Assert.IsNull(UserManager.CurrentUser);
         }
 
+        [Test]
         public void UserCanChangeHisPassword()
         {
-            //TODO:this
+            var password = CreateRandom.String();
+            var user = CreateRandomUser();
+            var newPassword = CreateRandom.String();
+
+            _userManagement.AddUser(user,password);
+
+            Assert.DoesNotThrow(() => _userManagement.ChangePassword(user.UserName, newPassword));
+            Assert.True(_userManagement.CheckCredentials(user.UserName, newPassword));
+
+            _userManagement.RemoveUser(user.UserName);
         }
 
         
@@ -190,7 +202,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
 
             _packageManager.AddPackage(pack);
 
-            var list = _db.GetPackagesByName(pack.Name);
+            var list = _dbWrapper.GetPackagesByName(pack.Name);
             Assert.That(list.FirstOrDefault().Name == pack.Name);
 
             _packageManager.RemovePackage(pack);
@@ -204,7 +216,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
 
             _packageManager.AddPackage(pack);
 
-            var list = _db.GetPackagesByPrice(1000.0, 8000.0);
+            var list = _dbWrapper.GetPackagesByPrice(1000.0, 8000.0);
             foreach(Package item in list)
             {
                 if (item.Name.Equals("testpack"))
@@ -221,7 +233,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
 
             _packageManager.AddPackage(pack);
 
-            var list = _db.GetPackagesByDate(new DateTime(2015, 7, 16), new DateTime(2015, 7, 26));
+            var list = _dbWrapper.GetPackagesByDate(new DateTime(2015, 7, 16), new DateTime(2015, 7, 26));
             foreach (Package item in list)
             {
                 if (item.Name.Equals("testpack"))
@@ -237,7 +249,7 @@ namespace VacationMasters.UnitTests.DatabaseTests
             var pack = CreateTestPackage();
 
             _packageManager.AddPackage(pack);
-            var list = _db.getPackagesByType("croaziera");
+            var list = _dbWrapper.getPackagesByType("croaziera");
             foreach (Package item in list)
             {
                 if (item.Name.Equals("testpack"))

@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
+using Windows.UI.Popups;
 using VacationMasters.Essentials;
 using VacationMasters.Wrappers;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace VacationMasters.UserManagement
     public class UserManager : IUserManager
     {
         private readonly IDbWrapper _dbWrapper;
-        public User CurrentUser { get; set; }
+        public static User CurrentUser { get; set; }
 
         public UserManager(IDbWrapper dbWrapper)
         {
@@ -25,9 +26,9 @@ namespace VacationMasters.UserManagement
             if (!CheckIfUserExists(userName))
                 return false;
 
-            var sql = string.Format("SELECT password FROM Users UserName = {0}", userName);
+            var sql = string.Format("SELECT password FROM Users Where UserName = '{0}'", userName);
             var usrPwd = _dbWrapper.QueryValue<object>(sql);
-            string pwd = EncryptPassword(userName, password);
+            string pwd = EncryptPassword(password);
 
             if (String.Compare(usrPwd.ToString(), pwd) != 0)
                 return false;
@@ -37,7 +38,7 @@ namespace VacationMasters.UserManagement
 
         public void ChangePassword(string userName, string newPassword)
         {
-            string newPwd = EncryptPassword(userName, newPassword);
+            string newPwd = EncryptPassword(newPassword);
             var sql = string.Format("Update Users Set password ='{0}'", newPwd);
             _dbWrapper.QueryValue<object>(sql);
         }
@@ -85,15 +86,37 @@ namespace VacationMasters.UserManagement
             _dbWrapper.QueryValue<object>(sql);
         }
 
+        public bool CheckIfPasswordMach(string password, string confirmPassword)
+        {
+            string pwd = EncryptPassword(password);
+            string confirmPwd = EncryptPassword(confirmPassword);
+
+            if (pwd != confirmPwd)
+                return false;
+
+            return true;
+        }
+
+        public bool CheckAnswer(string username, string answer)
+        {
+            var sql = string.Format("Select PhoneNumber FromUsers Where UserName ='{0}';", username);
+            string correctAnswer = _dbWrapper.QueryValue<string>(sql);
+            if (String.Compare(correctAnswer, answer) != 0)
+                return false;
+            
+            return true;
+        }
+
         public bool CheckIfUserExists(string userName)
         {
-            var sql = string.Format("Select ID From Users Where UserName = {0};", userName);
-            if (_dbWrapper.QueryValue<int>(sql) == 0) return false;
+            var sql = string.Format("Select ID From Users Where UserName ='{0}';", userName);
+            if (_dbWrapper.QueryValue<int>(sql) == 0) 
+                return false;
             return true;
         }
         public bool CheckIfEmailExists(string email)
         {
-            var sql = string.Format("Select ID From Users Where Email = {0};", email);
+            var sql = string.Format("Select ID From Users Where Email = '{0}';", email);
             if (_dbWrapper.QueryValue<int>(sql) == 0) return false;
             return true;
         }
@@ -166,10 +189,10 @@ namespace VacationMasters.UserManagement
         public void RemoveUser(string userName)
         {
             var sql = string.Format("DELETE FROM ChoosePreferences" +
-                                    " WHERE IDUser = (SELECT ID FROM Users Where UserName = {0});",
+                                    " WHERE IDUser = (SELECT ID FROM Users Where UserName = '{0}');",
                                     userName);
             sql += string.Format("DELETE FROM ChooseGroups" +
-                                   " WHERE IDUser = (SELECT ID FROM Users Where UserName = {0});",
+                                   " WHERE IDUser = (SELECT ID FROM Users Where UserName = '{0}');",
                                    userName);
             sql += string.Format("Delete from Users where UserName = '{0}';", userName);
             _dbWrapper.QueryValue<object>(sql);
@@ -191,61 +214,35 @@ namespace VacationMasters.UserManagement
 
         public void Login(string userName, string password)
         {
-            if (CanLogin(userName, password))
+            if (CanLogin(userName, password)==0)
                 CurrentUser = GetUser(userName);
         }
 
-        public bool CanLogin(string userName, string password)
+        public int CanLogin(string userName, string password)
         {
             bool fieldsCompleted = userName != String.Empty && password!= String.Empty;
             if (CurrentUser == null && fieldsCompleted && CheckIfUserExists(userName) == true)
             {
                 var currUser = GetUser(userName);
                 if (currUser.Banned)
-                {
-                    String message = "You have been baned!";
-                    DisplayPopup(message);
-                    return false;
-                }
-
+                    return 1;
+            
                 if (CheckCredentials(userName, password) == false)
-                {
-                    String message = "Incorrect username or password!";
-                    DisplayPopup(message);
-                    return false;
-                }
-                return true;
+                    return 2;
+                
+                return 0;
             }
         
             if (!fieldsCompleted)
-            {
-                String message = "All fields are mandatory!";
-                DisplayPopup(message);
-                return false;
-            }
-
-          if (CheckIfUserExists(userName) == true)
-          {
-              String message = "Incorrect credentials!";
-              DisplayPopup(message);
-              return false;
-          }
-
-          return false;
-        }
-
-        private void DisplayPopup(string message)
-        {
-            Popup validationPopup = new Popup();
-            validationPopup.VerticalOffset = 200;
-            validationPopup.HorizontalOffset = 300;
+                return 3;
             
-             TextBlock popupText = new TextBlock();
-             popupText.Text = message;
-             validationPopup.Child = popupText;
+          if (CheckIfUserExists(userName) == false)
+              return 4;
+
+          return 5;
         }
 
-        private string EncryptPassword(string userName, string password)
+        private string EncryptPassword(string password)
         {
             var input = CryptographicBuffer.ConvertStringToBinary(password,
             BinaryStringEncoding.Utf8);

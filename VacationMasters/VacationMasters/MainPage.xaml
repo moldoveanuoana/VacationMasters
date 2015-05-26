@@ -6,10 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:screens="using:VacationMasters.Screens"
+    xmlns:converters="using:VacationMasters.Resources.Converters"
     d:DataContext="{d:DesignInstance Type=local:MainPage, 
                                      IsDesignTimeCreatable=True}"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <ResourceDictionary>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid >
         <Grid.Background>
             <ImageBrush ImageSource="/Resources/Images/sunset.jpg"></ImageBrush>
@@ -30,7 +36,15 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChangePasswordView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -46,14 +60,26 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChangePasswordView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
+                <VisualState x:Name="ContactControl">    
+                </VisualState>
                 <VisualState x:Name="LoginControl">
-                    <Storyboard>
+                        <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AdminControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
@@ -62,9 +88,18 @@
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
+                            
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContactControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChangePasswordView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -83,6 +118,34 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChangePasswordView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="ChangePasswordV">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AdminControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RegisterControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoginControlView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PackagesDisplayView"
+                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding CollapsedVisibility}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChangePasswordView"
                                                        Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding VisibleVisibility}" />
                         </ObjectAnimationUsingKeyFrames>
@@ -145,12 +208,23 @@
                                  Content="Login" 
                                  HorizontalAlignment="Right"
                                  Grid.Column="0"
-                                 Click="GoToLoginControl"/>
+                                 Click="GoToLoginControl"
+                                 Visibility="{Binding IsNotLogged, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 <HyperlinkButton x:Name="register"
                                  Content="Register" 
                                  HorizontalAlignment="Right"
                                  Grid.Column="1"
-                                 Click="GoToRegisterControl"/>
+                                 Click="GoToRegisterControl"
+                                 Visibility="{Binding IsNotLogged, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <StackPanel  Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Visibility="{Binding IsLogged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock x:Name="GreetingBlock"  FontFamily="Segoe UI" FontSize="16" Margin="3" VerticalAlignment="Center"  TextAlignment="Left" Text="{Binding Hellou}"/>
+                    <HyperlinkButton x:Name="SignOut"
+                                 Content="Sign Out"
+                                 HorizontalAlignment="Right"
+                                 Click="SignOutControl"/>
+                </StackPanel>
+                
+               
             </Grid>
             <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
@@ -164,28 +238,18 @@
                 <Button x:Name="packagesbtn" Content="Packages" FontSize="16"  HorizontalAlignment="Left" Grid.Column="1" Click="Packages"  />
                 <Button x:Name="user_panel" Content="User Panel" FontSize="16"  HorizontalAlignment="Left" Grid.Column="2" Click="UserPanel"  />
                 <Button x:Name="admin_control" Content="Admin Control" FontSize="16"  HorizontalAlignment="Left" Grid.Column="4" Click="GoToAdminControl"/>
-                <Button x:Name="contact" Content="Contact" FontSize="16"  HorizontalAlignment="Left" Grid.Column="3" Click="Contact" />
+                <Button x:Name="contact" Content="Contact" FontSize="16"  HorizontalAlignment="Left" Grid.Column="3" Click="GoToContactControl" />
             </Grid>
         </Grid >
-        <ScrollViewer Grid.Row="1" Grid.Column="1">
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="0,0,0,63"  >
             <StackPanel>
-            <screens:AdminControl x:Name="AdminControlView" Visibility="Collapsed"/>
-            <screens:Register x:Name="RegisterControlView" Visibility="Collapsed"/>
-            <screens:Login x:Name="LoginControlView" Visibility="Collapsed"/>
-            <screens:PackagesDisplay x:Name="PackagesDisplayView" Visibility="Collapsed"/>
+                <screens:AdminControl x:Name="AdminControlView" Visibility="Collapsed"/>
+                <screens:Register x:Name="RegisterControlView" Visibility="Collapsed"/>
+                <screens:Contact x:Name="ContactControlView" Visibility="Collapsed" />
+                <screens:Login x:Name="LoginControlView" Visibility="Collapsed"/>
+                <screens:ChangePassword x:Name="ChangePasswordView" Visibility="Collapsed"/>
+                <screens:PackagesDisplay x:Name="PackagesDisplayView" Visibility="Collapsed"/>
             </StackPanel>
         </ScrollViewer>
-        <Grid Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <TextBlock TextWrapping="Wrap" Text="You can contact us at" HorizontalAlignment="Center" FontSize="16" Grid.Row="0" Margin="0,3,0,3"/>
-            <TextBlock TextWrapping="Wrap" Text="Address:" HorizontalAlignment="Left" FontSize="16" Grid.Row="1" Margin="0,7,0,3" />
-            <TextBlock TextWrapping="Wrap" Text="Phone:"  HorizontalAlignment="Left" FontSize="16" Grid.Row="2" Margin="0,3,0,3" />
-            <TextBlock TextWrapping="Wrap" Text="Email:"  HorizontalAlignment="Left" FontSize="16" Grid.Row="3" Margin="0,0,0,3" />
-        </Grid>
     </Grid>
 </Page>

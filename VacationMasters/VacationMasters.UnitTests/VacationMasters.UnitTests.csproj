@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseTests\DatabaseCommandsTests.cs" />
+    <Compile Include="DatabaseTests\RatingSystemTests.cs" />
     <Compile Include="DatabaseTests\WrapperTests.cs" />
     <Compile Include="Infrastructure\CreateRandom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
