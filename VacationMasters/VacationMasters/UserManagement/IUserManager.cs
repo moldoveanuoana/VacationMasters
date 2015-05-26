@@ -98,5 +98,7 @@ namespace VacationMasters.UserManagement
         /// <param name="userName"></param>
         /// <param name="password"></param>
         void Login(string username, string password);
+
+        List<Preference> GetPreferencesByUser(string userName);
     }
 }

@@ -30,11 +30,11 @@ namespace VacationMasters.PackageManagement
             if (packagesByName != null)
                 searchedPackages.AddRange(packagesByName);
 
-            if(packagesByType !=null)
+            if (packagesByType != null)
                 searchedPackages.AddRange(packagesByType);
 
             return searchedPackages;
-        } 
+        }
 
         public void AddPackage(Package package)
         {
@@ -46,7 +46,7 @@ namespace VacationMasters.PackageManagement
 
             _dbWrapper.QueryValue<object>(sql);
         }
-       
+
         public void Display(List<Package> l)
         {
             var list = l;
@@ -70,29 +70,28 @@ namespace VacationMasters.PackageManagement
         {
             User loggedUser = MainPage.CurrentUser;
             List<Package> packagesByPrefrences = new List<Package>();
+            var destinations = _userManager.GetStrings("Select Name From Destinations");
+            var destMatched = new List<string>();
+            var results = new List<Package>();
             foreach (var pref in loggedUser.Preferences)
             {
-                string sql = string.Format("Select * from packages where Type == {0}", pref.Category);
-                List<Package> results = _dbWrapper.RunCommand(command =>
+                if (destinations.Contains(pref.Name))
                 {
-                    command.CommandText = sql;
-                    return _dbWrapper.ReadPackages(command);
-                });
-
-                foreach (var item in results)
-                    packagesByPrefrences.Add(item);
-
-                sql = string.Format("Select * from packages p join ChooseDestinations cd on (p.ID = cd.IDPackage)" +
-                "join destinations on (cd.IDDestination = d.ID) where d.Name ={0};", pref.Category);
-                results = _dbWrapper.RunCommand(command =>
-                {
-                    command.CommandText = sql;
-                    return _dbWrapper.ReadPackages(command);
-                });
-
-                foreach (var item in results)
-                    packagesByPrefrences.Add(item);
+                    destMatched.Add(pref.Name);
+                }
             }
+            foreach (var dest in destMatched)
+            {
+                var sql = string.Format("Select p.ID,p.Name,p.Type,p.Included,p.Transport,p.Price,p.SearchIndex,p.Rating,p.BeginDate,p.EndDate,p.Picture from packages p join ChooseDestinations cd on (p.ID = cd.IDPackage)" +
+                      " join destinations d on (cd.IDDestination = d.ID) where d.Name = '{0}';", dest);
+                results = _dbWrapper.RunCommand(command =>
+                 {
+                     command.CommandText = sql;
+                     return _dbWrapper.ReadPackages(command);
+                 });
+            }
+            foreach (var item in results)
+                packagesByPrefrences.Add(item);
 
             var sortedPackagesByPrefrences = packagesByPrefrences.OrderBy(p => p.Rating).ThenBy(p => p.SearchIndex).ToList<Package>();
 
@@ -104,8 +103,8 @@ namespace VacationMasters.PackageManagement
             User loggedUser = MainPage.CurrentUser;
             List<Package> packagesByHistoric = new List<Package>();
 
-            string sql = "Select * from packages p join choosepackage cp on(p.ID = cp.IDPackage)" +
-                "join Order o on (cp.IDOrder = o.ID)";
+            string sql = string.Format("Select p.ID,p.Name,p.Type,p.Included,p.Transport,p.Price,p.SearchIndex,p.Rating,p.BeginDate,p.EndDate,p.Picture from packages p join choosepackage cp on (p.ID = cp.IDPackage)" +
+                " join Orders o on (cp.IDOrder = o.ID) join Users u on (u.ID = o.IDUser) Where u.UserName = '{0}'", loggedUser.UserName);
 
             List<Package> results = _dbWrapper.RunCommand(command =>
             {
@@ -115,19 +114,33 @@ namespace VacationMasters.PackageManagement
 
             var typeList = results.Select(p => p.Type);
 
-            foreach(var res in results){
-                sql = string.Format("Select Name from destinations d join ChooseDestinations cd on (cd.IDDestination = d.ID)" +
-               "join packages p (p.ID = cd.IDPackage) where p.ID ={0};", res.ID);
+            foreach (var res in results)
+            {
+                sql = string.Format("Select d.Name from destinations d join ChooseDestinations cd on (cd.IDDestination = d.ID)" +
+               " join packages p on (p.ID = cd.IDPackage) where p.ID = {0};", res.ID);
 
                 var results2 = _dbWrapper.RunCommand(command =>
                 {
-                
+
+                    command.CommandText = sql;
+                    return _dbWrapper.ReadDestinationName(command);
+                });
+
+                foreach (var dest in results2)
+                {
+                    sql = string.Format("Select * from Packages p join ChooseDestinations cd on (p.ID = cd.IDPackage) " +
+                                        " join Destinations d on (cd.IDDestination = d.ID) WHERE d.Name = '{0}'", dest);
+                }
+                var packAtDest = _dbWrapper.RunCommand(command =>
+                {
+
                     command.CommandText = sql;
                     return _dbWrapper.ReadPackages(command);
                 });
-                
-                foreach(var dest in results2)
-                    packagesByHistoric.Add(dest);
+
+                foreach (Package pack in packAtDest)
+
+                    packagesByHistoric.Add(pack);
             }
 
 
@@ -135,7 +148,7 @@ namespace VacationMasters.PackageManagement
             List<int> frequencyNameArray = new List<int>();
             foreach (var name in nameList)
                 frequencyNameArray.Add(nameList.Count(nume => nume == name));
-           
+
             List<int> frequencyTypeArray = new List<int>();
             foreach (var type in typeList)
                 frequencyTypeArray.Add(typeList.Count(tip => tip == type));
@@ -146,16 +159,19 @@ namespace VacationMasters.PackageManagement
                 if (i == frequencyTypeArray.Max())
                     index = frequencyTypeArray.IndexOf(i);
 
-            var typeMax = frequencyTypeArray.ElementAt(index);
+            var typeMax = string.Empty; 
+            if(typeList.Count()>0)
+                typeList.ElementAt(index);
 
-            foreach(var i in frequencyNameArray)
-                if(i == frequencyNameArray.Max())
+            foreach (var i in frequencyNameArray)
+                if (i == frequencyNameArray.Max())
                     index = frequencyNameArray.IndexOf(i);
+            var nameMax = string.Empty;
+            if(nameList.Count()>0)
+            nameMax = nameList.ElementAt(index);
 
-            var nameMax = frequencyNameArray.ElementAt(index);
-
-            sql = string.Format("Select * from preferences d join ChooseDestinations cd on (cd.IDDestination = d.ID)" +
-               "join packages p (p.ID = cd.IDPackage) where p.Type = {0} or d.Name = {1};", typeMax, nameMax);
+            sql = string.Format("Select Distinct p.ID,p.Name,p.Type,p.Included,p.Transport,p.Price,p.SearchIndex,p.Rating,p.BeginDate,p.EndDate,p.Picture from preferences d join ChooseDestinations cd on (cd.IDDestination = d.ID)" +
+               " join packages p on (p.ID = cd.IDPackage) where p.Type = '{0}' or d.Name = '{1}';", typeMax, nameMax);
 
             var selectedPackages = _dbWrapper.RunCommand(command =>
             {
@@ -163,13 +179,7 @@ namespace VacationMasters.PackageManagement
                 command.CommandText = sql;
                 return _dbWrapper.ReadPackages(command);
             });
-
-            List<Package> selected2Packages = new List<Package>();
-
-            foreach (var item in selectedPackages)
-                if (!results.Contains(item))
-                    selected2Packages.Add(item);
-
+            var  selected2Packages = RemoveDuplicated(selectedPackages, results);
             selected2Packages.OrderBy(p => p.Rating).ThenBy(p => p.SearchIndex);
 
             return selected2Packages;
@@ -182,8 +192,8 @@ namespace VacationMasters.PackageManagement
             User loggedUser = MainPage.CurrentUser;
             var packagesByUserGroups = new List<Package>();
 
-            var sql = string.Format("Select Name from Groups g join ChooseGroups cg on g.ID = cg.IDGroup" +
-                                    "join Users u on u.ID = cg.IDUser where u.UserName = {0}", loggedUser.UserName);
+            var sql = string.Format("Select Name from Groups g join ChooseGroups cg on (g.ID = cg.IDGroup)" +
+                                    " join Users u on (u.ID = cg.IDUser) where u.UserName = '{0}'", loggedUser.UserName);
 
             var groups = new List<String>();
             groups = _userManager.GetStrings(sql);
@@ -191,8 +201,8 @@ namespace VacationMasters.PackageManagement
 
             foreach (var group in groups)
             {
-                sql = string.Format("Select ID from Users u join ChooseGroups cg on u.ID = cg.IDUser" +
-                                    "join Groups g on g.ID = cg.IDGroup where Name ={0}", group);
+                sql = string.Format("Select u.ID from Users u join ChooseGroups cg on (u.ID = cg.IDUser)" +
+                                    " join Groups g on (g.ID = cg.IDGroup) where Name = '{0}'", group);
                 var temp = new List<String>();
                 temp = _userManager.GetStrings(sql);
                 users.AddRange(temp);
@@ -200,13 +210,13 @@ namespace VacationMasters.PackageManagement
 
             foreach (var user in users)
             {
-                sql = string.Format("Select * from Packages p join ChoosePackage cp on p.ID = cp.IDPackage" +
-                                    "join Order o on o.ID = cp.IDOrder join Users u on " +
-                                    "u.ID = o.IDUser where u.ID = {0}", user);
+                sql = string.Format("Select p.ID,p.Name,p.Type,p.Included,p.Transport,p.Price,p.SearchIndex,p.Rating,p.BeginDate,p.EndDate,p.Picture from Packages p join ChoosePackage cp on (p.ID = cp.IDPackage)" +
+                                    " join Orders o on (o.ID = cp.IDOrder) join Users u on " +
+                                    " (u.ID = o.IDUser) where u.ID = {0}", user);
 
                 var temp = new List<Package>();
 
-                temp =  _dbWrapper.RunCommand(command =>
+                temp = _dbWrapper.RunCommand(command =>
                 {
                     command.CommandText = sql;
                     return _dbWrapper.ReadPackages(command);
@@ -215,24 +225,49 @@ namespace VacationMasters.PackageManagement
                 packagesByUserGroups.AddRange(temp);
             }
 
-            var noduplicatespackagesByUserGroups = packagesByUserGroups.Distinct();
-            var finalList = GetPackagesByPreferences();
+            var noduplicatespackagesByUserGroups = packagesByUserGroups.Distinct().ToList();
 
-            finalList.AddRange(noduplicatespackagesByUserGroups);
-
-            finalList.OrderBy(p => p.Rating).ThenBy(p => p.SearchIndex);
-
-            return finalList;
+            return noduplicatespackagesByUserGroups;
 
         }
+
+        public List<Package> GetPackagesByRecommendation()
+        {
+            var listByPreferences = GetPackagesByPreferences();
+            var listByHistoric = GetPackagesByHistoric();
+            var listByUserGroups = GetPackagesByUserGroups();
+            var noDuplicatesFinalList = RemoveDuplicated(listByPreferences, listByUserGroups);
+            var noDups = RemoveDuplicated(noDuplicatesFinalList, listByHistoric);
+            var relevantList = noDups.OrderByDescending(p => p.Rating).ThenByDescending(p => p.SearchIndex).ToList();
+            var rest = _dbWrapper.getRandomPackages().OrderByDescending(p=>p.Rating).ToList();
+            return RemoveDuplicated(relevantList, rest);
+        }
+
+        private static List<Package> RemoveDuplicated(List<Package> relevantList, List<Package> rest)
+        {
+            var finalList = new List<Package>();
+            finalList.AddRange(relevantList);
+            foreach (var item in rest)
+            {
+                var isDuplicated = false;
+                foreach (var item2 in relevantList)
+                {
+                    if (item2.ID == item.ID)
+                        isDuplicated = true;
+                }
+                if (isDuplicated == false) finalList.Add(item);
+            }
+            return finalList;
+        }
+
         public int CheckIfUserHasOrderedThePackage(int packageId, string userName)
         {
-            var sql = string.Format("SELECT o.Id FROM Users u JOIN  Orders o  ON  u.ID = o.IDUser JOIN ChoosePackage c ON o.ID = c.IDOrder Where c.IDPackage = {0} AND  u.UserName= '{1}' ", packageId, userName);
+            var sql = string.Format("SELECT o.Id FROM Users u JOIN  Orders o  ON  (u.ID = o.IDUser) JOIN ChoosePackage c ON (o.ID = c.IDOrder) Where c.IDPackage = {0} AND  u.UserName= '{1}' ", packageId, userName);
             return _dbWrapper.QueryValue<int>(sql);
         }
         public bool CheckIfUserDidVote(int packageId, string userName)
         {
-            var sql = string.Format("SELECT c.HasRated FROM Users u JOIN  Orders o  ON  u.ID = o.IDUser JOIN ChoosePackage c ON o.ID = c.IDOrder Where c.IDPackage = {0} AND  u.UserName= '{1}' ", packageId, userName);
+            var sql = string.Format("SELECT c.HasRated FROM Users u JOIN  Orders o  ON  (u.ID = o.IDUser) JOIN ChoosePackage c ON (o.ID = c.IDOrder) Where c.IDPackage = {0} AND  u.UserName= '{1}' ", packageId, userName);
             return _dbWrapper.QueryValue<bool>(sql);
         }
         public int RetrieveUserId(string userName)
@@ -262,9 +297,9 @@ namespace VacationMasters.PackageManagement
         public void UpdateRating(int packageId, double rating, int orderId)
         {
             var sql = string.Format("UPDATE Packages" + " SET Rating = (Rating*TotalVotes+{1})/(TotalVotes+1)" +
-            " WHERE Id = {0};"+" UPDATE Packages SET TotalVotes = TotalVotes + 1  Where Id={0}; "+ "UPDATE ChoosePackage SET HasRated = 1 Where IDPackage = {0} And IDOrder = {2}; ", packageId, rating,orderId);
+            " WHERE Id = {0};" + " UPDATE Packages SET TotalVotes = TotalVotes + 1  Where Id={0}; " + "UPDATE ChoosePackage SET HasRated = 1 Where IDPackage = {0} And IDOrder = {2}; ", packageId, rating, orderId);
             _dbWrapper.QueryValue<object>(sql);
         }
-       
+
     }
 }

@@ -67,10 +67,10 @@ namespace VacationMasters.Screens
             {
                 _orderId = _packageManager.CheckIfUserHasOrderedThePackage(package.ID, MainPage.CurrentUser.UserName);
                 var hasVoted = _packageManager.CheckIfUserDidVote(package.ID, MainPage.CurrentUser.UserName);
-                if (_orderId != 0) ReserveOrCancel.Content = "Cancel"; 
+                if (_orderId != 0) ReserveOrCancel.Content = "Cancel";
                 else ReserveOrCancel.Content = "Reserve";
-                if (_orderId != 0 && hasVoted == false) 
-                {Rating.IsEnabled = true; Rating.ApplyTemplate();}
+                if (_orderId != 0 && hasVoted == false)
+                { Rating.IsEnabled = true; }
                 else Rating.IsEnabled = false;
             }
         }
