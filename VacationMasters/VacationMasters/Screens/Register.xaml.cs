@@ -45,7 +45,7 @@ namespace VacationMasters.Screens
             GroupManager = new GroupManager(DbWrapper);
             var preferences = await Task.Run(() => DbWrapper.GetAllPreferences());
             var groups = await Task.Run(() => GroupManager.GetAllGroups());
-            CountriesGridView.ItemsSource = preferences.Where(c => c.Category == "Country").Select(d => d.Name).ToArray();
+           // CountriesGridView.ItemsSource = preferences.Where(c => c.Category == "Country").Select(d => d.Name).ToArray();
             TypesGridView.ItemsSource = preferences.Where(c => c.Category == "Type").Select(d => d.Name).ToArray();
             GroupsGridView.ItemsSource = groups.Select(c=>c.Trim()).ToArray();
             IsOperationInProgress = false;
@@ -61,6 +61,7 @@ namespace VacationMasters.Screens
             var groups = GroupsGridView.SelectedItems.Select(c => c.ToString()).ToList();
             var user = new User(txtBoxUsrName.Text, txtBoxFrsName.Text, txtBoxLstName.Text, txtBoxEmail.Text, txtBoxPhone.Text, false, "User", null);
             UserManager.AddUser(user, pwdBox.Password, preferences, groups);
+            EraseJunk();
         }
 
         private bool VerifyRegisterFields()
@@ -152,6 +153,11 @@ namespace VacationMasters.Screens
             string pattern = @"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$";
             Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
             return regex.IsMatch(phoneNumber);
+        }
+
+        private void EraseJunk()
+        {
+            txtBoxUsrName.Text = txtBoxFrsName.Text = txtBoxLstName.Text = txtBoxEmail.Text = txtBoxPhone.Text = String.Empty;
         }
 
     }

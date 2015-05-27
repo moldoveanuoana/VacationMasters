@@ -37,11 +37,10 @@ namespace VacationMasters.Screens
                 }
             }
         }
-        
 
         public PackagesDisplay()
         {
-            this.DataContext = this;  
+            this.DataContext = this;
 
             this.InitializeComponent();
 
@@ -56,12 +55,14 @@ namespace VacationMasters.Screens
 
             DbWrapper = new DbWrapper();
             UserManager = new UserManager(DbWrapper);
+       
             PackManager = new PackageManager(DbWrapper);
-            MainPage.CurrentUser = UserManager.GetUser("abc");
-            if (MainPage.CurrentUser == null)
+
+            if (UserManager.CurrentUser == null) 
                 List = new ObservableCollection<Package>(DbWrapper.getRandomPackages());
             else
                 List = new ObservableCollection<Package>(PackManager.GetPackagesByRecommendation());
+           
             IsOperationInProgress = false;
         }
 
@@ -90,9 +91,9 @@ namespace VacationMasters.Screens
             var frame = (Frame)Window.Current.Content;
             var page = (MainPage)frame.Content;
             page.UpdateSelectedPackage((Package)e.ClickedItem);
+       
             VisualStateManager.GoToState(page, "PackagePage", true);
         }
     }
-
 }
 
