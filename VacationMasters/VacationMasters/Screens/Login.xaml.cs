@@ -54,11 +54,19 @@ namespace VacationMasters.Screens
 
                     string userType = _userManager.GetUser(userName).Type;
                     if (userType == "Admin")
+                    {
                         page.IsAdmin = true;
-                    else if (userType == "Agent")
-                        page.IsAgent = true;
-                    else
                         page.IsNormalUser = true;
+                    }
+                    else if (userType == "Agent")
+                    {
+                        page.IsNormalUser = true;
+                        page.IsAgent = true;
+                    }
+                    else
+                    {
+                        page.IsNormalUser = true;
+                    }
 
                     VisualStateManager.GoToState(page, "PackagesV", true);
                 }
