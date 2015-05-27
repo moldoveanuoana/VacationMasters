@@ -340,7 +340,7 @@ namespace VacationMasters
         {
             UserManager.CurrentUser = null;
             IsNotLogged = true;
-            IsLogged = false;
+            IsLogged = IsAdmin = IsAgent = IsNormalUser = false;
         }
 
        
