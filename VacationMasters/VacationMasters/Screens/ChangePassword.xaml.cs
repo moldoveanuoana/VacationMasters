@@ -22,7 +22,7 @@ using VacationMasters.Wrappers;
 
 namespace VacationMasters.Screens
 {
-    public sealed partial class ChangePassword : UserControl
+    public sealed partial class ChangePassword : UserControl, INotifyPropertyChanged
     {
 
         private bool _isQuestionAnswered;
@@ -97,11 +97,17 @@ namespace VacationMasters.Screens
                 messageDialog.ShowAsync();
                 return;
             }
-            _userManager.ChangePassword(Screens.Login.userName, pwdBox.Password.ToString());
+
+            if (_userManager.ChangePassword(Screens.Login.userName, pwdBox.Password.ToString()) == false)
+            {
+                String message = "You already have this password.";
+                var messageDialog = new MessageDialog(message);
+                messageDialog.ShowAsync();
+            }
 
             var frame = (Frame)Window.Current.Content;
-            var page = (MainPage)frame.Content;
-            VisualStateManager.GoToState(this, "LoginControl", true);
+            var page = (MainPage)frame.Content; 
+            VisualStateManager.GoToState(page, "LoginControl", true);
         }
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")

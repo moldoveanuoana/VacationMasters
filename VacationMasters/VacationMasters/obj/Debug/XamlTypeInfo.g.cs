@@ -550,10 +550,13 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 userType.Activator = Activate_32_MainPage;
                 userType.AddMemberName("DbWrapper");
                 userType.AddMemberName("IsNotLogged");
+                userType.AddMemberName("IsAgent");
+                userType.AddMemberName("IsAdmin");
+                userType.AddMemberName("IsNormalUser");
                 userType.AddMemberName("IsLogged");
+                userType.AddMemberName("Hellou");
                 userType.AddMemberName("CollapsedVisibility");
                 userType.AddMemberName("VisibleVisibility");
-                userType.AddMemberName("Hellou");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -1102,157 +1105,187 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
             var that = (global::VacationMasters.MainPage)instance;
             that.IsNotLogged = (global::System.Boolean)Value;
         }
-        private object get_43_MainPage_IsLogged(object instance)
+        private object get_43_MainPage_IsAgent(object instance)
+        {
+            var that = (global::VacationMasters.MainPage)instance;
+            return that.IsAgent;
+        }
+        private void set_43_MainPage_IsAgent(object instance, object Value)
+        {
+            var that = (global::VacationMasters.MainPage)instance;
+            that.IsAgent = (global::System.Boolean)Value;
+        }
+        private object get_44_MainPage_IsAdmin(object instance)
+        {
+            var that = (global::VacationMasters.MainPage)instance;
+            return that.IsAdmin;
+        }
+        private void set_44_MainPage_IsAdmin(object instance, object Value)
+        {
+            var that = (global::VacationMasters.MainPage)instance;
+            that.IsAdmin = (global::System.Boolean)Value;
+        }
+        private object get_45_MainPage_IsNormalUser(object instance)
+        {
+            var that = (global::VacationMasters.MainPage)instance;
+            return that.IsNormalUser;
+        }
+        private void set_45_MainPage_IsNormalUser(object instance, object Value)
+        {
+            var that = (global::VacationMasters.MainPage)instance;
+            that.IsNormalUser = (global::System.Boolean)Value;
+        }
+        private object get_46_MainPage_IsLogged(object instance)
         {
             var that = (global::VacationMasters.MainPage)instance;
             return that.IsLogged;
         }
-        private void set_43_MainPage_IsLogged(object instance, object Value)
+        private void set_46_MainPage_IsLogged(object instance, object Value)
         {
             var that = (global::VacationMasters.MainPage)instance;
             that.IsLogged = (global::System.Boolean)Value;
         }
-        private object get_44_MainPage_CollapsedVisibility(object instance)
-        {
-            var that = (global::VacationMasters.MainPage)instance;
-            return that.CollapsedVisibility;
-        }
-        private object get_45_MainPage_VisibleVisibility(object instance)
-        {
-            var that = (global::VacationMasters.MainPage)instance;
-            return that.VisibleVisibility;
-        }
-        private object get_46_MainPage_Hellou(object instance)
+        private object get_47_MainPage_Hellou(object instance)
         {
             var that = (global::VacationMasters.MainPage)instance;
             return that.Hellou;
         }
-        private void set_46_MainPage_Hellou(object instance, object Value)
+        private void set_47_MainPage_Hellou(object instance, object Value)
         {
             var that = (global::VacationMasters.MainPage)instance;
             that.Hellou = (global::System.String)Value;
         }
-        private object get_47_Color_A(object instance)
+        private object get_48_MainPage_CollapsedVisibility(object instance)
+        {
+            var that = (global::VacationMasters.MainPage)instance;
+            return that.CollapsedVisibility;
+        }
+        private object get_49_MainPage_VisibleVisibility(object instance)
+        {
+            var that = (global::VacationMasters.MainPage)instance;
+            return that.VisibleVisibility;
+        }
+        private object get_50_Color_A(object instance)
         {
             var that = (global::Windows.UI.Color)instance;
             return that.A;
         }
-        private void set_47_Color_A(object instance, object Value)
+        private void set_50_Color_A(object instance, object Value)
         {
             var that = (global::Windows.UI.Color)instance;
             that.A = (global::System.Byte)Value;
         }
-        private object get_48_Color_B(object instance)
+        private object get_51_Color_B(object instance)
         {
             var that = (global::Windows.UI.Color)instance;
             return that.B;
         }
-        private void set_48_Color_B(object instance, object Value)
+        private void set_51_Color_B(object instance, object Value)
         {
             var that = (global::Windows.UI.Color)instance;
             that.B = (global::System.Byte)Value;
         }
-        private object get_49_Color_G(object instance)
+        private object get_52_Color_G(object instance)
         {
             var that = (global::Windows.UI.Color)instance;
             return that.G;
         }
-        private void set_49_Color_G(object instance, object Value)
+        private void set_52_Color_G(object instance, object Value)
         {
             var that = (global::Windows.UI.Color)instance;
             that.G = (global::System.Byte)Value;
         }
-        private object get_50_Color_R(object instance)
+        private object get_53_Color_R(object instance)
         {
             var that = (global::Windows.UI.Color)instance;
             return that.R;
         }
-        private void set_50_Color_R(object instance, object Value)
+        private void set_53_Color_R(object instance, object Value)
         {
             var that = (global::Windows.UI.Color)instance;
             that.R = (global::System.Byte)Value;
         }
-        private object get_51_BooleanToImageConverter_FalseIcon(object instance)
+        private object get_54_BooleanToImageConverter_FalseIcon(object instance)
         {
             var that = (global::VacationMasters.Resources.Converters.BooleanToImageConverter)instance;
             return that.FalseIcon;
         }
-        private void set_51_BooleanToImageConverter_FalseIcon(object instance, object Value)
+        private void set_54_BooleanToImageConverter_FalseIcon(object instance, object Value)
         {
             var that = (global::VacationMasters.Resources.Converters.BooleanToImageConverter)instance;
             that.FalseIcon = (global::Windows.UI.Xaml.Media.ImageSource)Value;
         }
-        private object get_52_BooleanToImageConverter_TrueIcon(object instance)
+        private object get_55_BooleanToImageConverter_TrueIcon(object instance)
         {
             var that = (global::VacationMasters.Resources.Converters.BooleanToImageConverter)instance;
             return that.TrueIcon;
         }
-        private void set_52_BooleanToImageConverter_TrueIcon(object instance, object Value)
+        private void set_55_BooleanToImageConverter_TrueIcon(object instance, object Value)
         {
             var that = (global::VacationMasters.Resources.Converters.BooleanToImageConverter)instance;
             that.TrueIcon = (global::Windows.UI.Xaml.Media.ImageSource)Value;
         }
-        private object get_53_Rating_Value(object instance)
+        private object get_56_Rating_Value(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.Value;
         }
-        private void set_53_Rating_Value(object instance, object Value)
+        private void set_56_Rating_Value(object instance, object Value)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             that.Value = (global::System.Double)Value;
         }
-        private object get_54_Rating_ItemCount(object instance)
+        private object get_57_Rating_ItemCount(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.ItemCount;
         }
-        private void set_54_Rating_ItemCount(object instance, object Value)
+        private void set_57_Rating_ItemCount(object instance, object Value)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             that.ItemCount = (global::System.Int32)Value;
         }
-        private object get_55_Rating_SelectionMode(object instance)
+        private object get_58_Rating_SelectionMode(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.SelectionMode;
         }
-        private void set_55_Rating_SelectionMode(object instance, object Value)
+        private void set_58_Rating_SelectionMode(object instance, object Value)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             that.SelectionMode = (global::Callisto.Controls.RatingSelectionMode)Value;
         }
-        private object get_56_Rating_WeightedValue(object instance)
+        private object get_59_Rating_WeightedValue(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.WeightedValue;
         }
-        private object get_57_Rating_PointerPressedFill(object instance)
+        private object get_60_Rating_PointerPressedFill(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.PointerPressedFill;
         }
-        private void set_57_Rating_PointerPressedFill(object instance, object Value)
+        private void set_60_Rating_PointerPressedFill(object instance, object Value)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             that.PointerPressedFill = (global::Windows.UI.Xaml.Media.SolidColorBrush)Value;
         }
-        private object get_58_Rating_PointerOverFill(object instance)
+        private object get_61_Rating_PointerOverFill(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.PointerOverFill;
         }
-        private void set_58_Rating_PointerOverFill(object instance, object Value)
+        private void set_61_Rating_PointerOverFill(object instance, object Value)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             that.PointerOverFill = (global::Windows.UI.Xaml.Media.SolidColorBrush)Value;
         }
-        private object get_59_Rating_ReadOnlyFill(object instance)
+        private object get_62_Rating_ReadOnlyFill(object instance)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             return that.ReadOnlyFill;
         }
-        private void set_59_Rating_ReadOnlyFill(object instance, object Value)
+        private void set_62_Rating_ReadOnlyFill(object instance, object Value)
         {
             var that = (global::Callisto.Controls.Rating)instance;
             that.ReadOnlyFill = (global::Windows.UI.Xaml.Media.SolidColorBrush)Value;
@@ -1523,113 +1556,131 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
                 xamlMember.Getter = get_42_MainPage_IsNotLogged;
                 xamlMember.Setter = set_42_MainPage_IsNotLogged;
                 break;
+            case "VacationMasters.MainPage.IsAgent":
+                userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.MainPage");
+                xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "IsAgent", "Boolean");
+                xamlMember.Getter = get_43_MainPage_IsAgent;
+                xamlMember.Setter = set_43_MainPage_IsAgent;
+                break;
+            case "VacationMasters.MainPage.IsAdmin":
+                userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.MainPage");
+                xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "IsAdmin", "Boolean");
+                xamlMember.Getter = get_44_MainPage_IsAdmin;
+                xamlMember.Setter = set_44_MainPage_IsAdmin;
+                break;
+            case "VacationMasters.MainPage.IsNormalUser":
+                userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.MainPage");
+                xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "IsNormalUser", "Boolean");
+                xamlMember.Getter = get_45_MainPage_IsNormalUser;
+                xamlMember.Setter = set_45_MainPage_IsNormalUser;
+                break;
             case "VacationMasters.MainPage.IsLogged":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.MainPage");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "IsLogged", "Boolean");
-                xamlMember.Getter = get_43_MainPage_IsLogged;
-                xamlMember.Setter = set_43_MainPage_IsLogged;
+                xamlMember.Getter = get_46_MainPage_IsLogged;
+                xamlMember.Setter = set_46_MainPage_IsLogged;
+                break;
+            case "VacationMasters.MainPage.Hellou":
+                userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.MainPage");
+                xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "Hellou", "String");
+                xamlMember.Getter = get_47_MainPage_Hellou;
+                xamlMember.Setter = set_47_MainPage_Hellou;
                 break;
             case "VacationMasters.MainPage.CollapsedVisibility":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.MainPage");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "CollapsedVisibility", "Windows.UI.Xaml.Visibility");
-                xamlMember.Getter = get_44_MainPage_CollapsedVisibility;
+                xamlMember.Getter = get_48_MainPage_CollapsedVisibility;
                 xamlMember.SetIsReadOnly();
                 break;
             case "VacationMasters.MainPage.VisibleVisibility":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.MainPage");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "VisibleVisibility", "Windows.UI.Xaml.Visibility");
-                xamlMember.Getter = get_45_MainPage_VisibleVisibility;
+                xamlMember.Getter = get_49_MainPage_VisibleVisibility;
                 xamlMember.SetIsReadOnly();
-                break;
-            case "VacationMasters.MainPage.Hellou":
-                userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.MainPage");
-                xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "Hellou", "String");
-                xamlMember.Getter = get_46_MainPage_Hellou;
-                xamlMember.Setter = set_46_MainPage_Hellou;
                 break;
             case "Windows.UI.Color.A":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Windows.UI.Color");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "A", "Byte");
-                xamlMember.Getter = get_47_Color_A;
-                xamlMember.Setter = set_47_Color_A;
+                xamlMember.Getter = get_50_Color_A;
+                xamlMember.Setter = set_50_Color_A;
                 break;
             case "Windows.UI.Color.B":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Windows.UI.Color");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "B", "Byte");
-                xamlMember.Getter = get_48_Color_B;
-                xamlMember.Setter = set_48_Color_B;
+                xamlMember.Getter = get_51_Color_B;
+                xamlMember.Setter = set_51_Color_B;
                 break;
             case "Windows.UI.Color.G":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Windows.UI.Color");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "G", "Byte");
-                xamlMember.Getter = get_49_Color_G;
-                xamlMember.Setter = set_49_Color_G;
+                xamlMember.Getter = get_52_Color_G;
+                xamlMember.Setter = set_52_Color_G;
                 break;
             case "Windows.UI.Color.R":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Windows.UI.Color");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "R", "Byte");
-                xamlMember.Getter = get_50_Color_R;
-                xamlMember.Setter = set_50_Color_R;
+                xamlMember.Getter = get_53_Color_R;
+                xamlMember.Setter = set_53_Color_R;
                 break;
             case "VacationMasters.Resources.Converters.BooleanToImageConverter.FalseIcon":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Resources.Converters.BooleanToImageConverter");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "FalseIcon", "Windows.UI.Xaml.Media.ImageSource");
-                xamlMember.Getter = get_51_BooleanToImageConverter_FalseIcon;
-                xamlMember.Setter = set_51_BooleanToImageConverter_FalseIcon;
+                xamlMember.Getter = get_54_BooleanToImageConverter_FalseIcon;
+                xamlMember.Setter = set_54_BooleanToImageConverter_FalseIcon;
                 break;
             case "VacationMasters.Resources.Converters.BooleanToImageConverter.TrueIcon":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("VacationMasters.Resources.Converters.BooleanToImageConverter");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "TrueIcon", "Windows.UI.Xaml.Media.ImageSource");
-                xamlMember.Getter = get_52_BooleanToImageConverter_TrueIcon;
-                xamlMember.Setter = set_52_BooleanToImageConverter_TrueIcon;
+                xamlMember.Getter = get_55_BooleanToImageConverter_TrueIcon;
+                xamlMember.Setter = set_55_BooleanToImageConverter_TrueIcon;
                 break;
             case "Callisto.Controls.Rating.Value":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "Value", "Double");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_53_Rating_Value;
-                xamlMember.Setter = set_53_Rating_Value;
+                xamlMember.Getter = get_56_Rating_Value;
+                xamlMember.Setter = set_56_Rating_Value;
                 break;
             case "Callisto.Controls.Rating.ItemCount":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "ItemCount", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_54_Rating_ItemCount;
-                xamlMember.Setter = set_54_Rating_ItemCount;
+                xamlMember.Getter = get_57_Rating_ItemCount;
+                xamlMember.Setter = set_57_Rating_ItemCount;
                 break;
             case "Callisto.Controls.Rating.SelectionMode":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "SelectionMode", "Callisto.Controls.RatingSelectionMode");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_55_Rating_SelectionMode;
-                xamlMember.Setter = set_55_Rating_SelectionMode;
+                xamlMember.Getter = get_58_Rating_SelectionMode;
+                xamlMember.Setter = set_58_Rating_SelectionMode;
                 break;
             case "Callisto.Controls.Rating.WeightedValue":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "WeightedValue", "Double");
-                xamlMember.Getter = get_56_Rating_WeightedValue;
+                xamlMember.Getter = get_59_Rating_WeightedValue;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Callisto.Controls.Rating.PointerPressedFill":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "PointerPressedFill", "Windows.UI.Xaml.Media.SolidColorBrush");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_57_Rating_PointerPressedFill;
-                xamlMember.Setter = set_57_Rating_PointerPressedFill;
+                xamlMember.Getter = get_60_Rating_PointerPressedFill;
+                xamlMember.Setter = set_60_Rating_PointerPressedFill;
                 break;
             case "Callisto.Controls.Rating.PointerOverFill":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "PointerOverFill", "Windows.UI.Xaml.Media.SolidColorBrush");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_58_Rating_PointerOverFill;
-                xamlMember.Setter = set_58_Rating_PointerOverFill;
+                xamlMember.Getter = get_61_Rating_PointerOverFill;
+                xamlMember.Setter = set_61_Rating_PointerOverFill;
                 break;
             case "Callisto.Controls.Rating.ReadOnlyFill":
                 userType = (global::VacationMasters.VacationMasters_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Callisto.Controls.Rating");
                 xamlMember = new global::VacationMasters.VacationMasters_XamlTypeInfo.XamlMember(this, "ReadOnlyFill", "Windows.UI.Xaml.Media.SolidColorBrush");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_59_Rating_ReadOnlyFill;
-                xamlMember.Setter = set_59_Rating_ReadOnlyFill;
+                xamlMember.Getter = get_62_Rating_ReadOnlyFill;
+                xamlMember.Setter = set_62_Rating_ReadOnlyFill;
                 break;
             }
             return xamlMember;
@@ -1956,7 +2007,6 @@ namespace VacationMasters.VacationMasters_XamlTypeInfo
         }
     }
 }
-
 
 
 
