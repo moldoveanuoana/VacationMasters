@@ -52,7 +52,7 @@ namespace VacationMasters.UserManagement
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="newPassword"></param>
-        void ChangePassword(string userName, string newPassword);
+        bool ChangePassword(string userName, string newPassword);
 
         /// <summary>
         /// Returns an user

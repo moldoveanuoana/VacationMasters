@@ -51,6 +51,15 @@ namespace VacationMasters.Screens
                     page.IsLogged = true;
                     page.IsNotLogged = false;
                     page.Hellou = "Hello " + userName;
+
+                    string userType = _userManager.GetUser(userName).Type;
+                    if (userType == "Admin")
+                        page.IsAdmin = true;
+                    else if (userType == "Agent")
+                        page.IsAgent = true;
+                    else
+                        page.IsNormalUser = true;
+
                     VisualStateManager.GoToState(page, "PackagesV", true);
                 }
                 else

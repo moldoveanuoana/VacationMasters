@@ -12,6 +12,7 @@
     <Grid>
         <StackPanel>
             <StackPanel Height="20">
+                <TextBlock Margin="3" FontFamily="Segoe UI" FontSize="24" TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Sign up now for free."/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="3"  Width="88" TextAlignment="Right" VerticalAlignment="Center">User Name</TextBlock>

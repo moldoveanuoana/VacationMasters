@@ -37,11 +37,15 @@ namespace VacationMasters.UserManagement
             return true;
         }
 
-        public void ChangePassword(string userName, string newPassword)
+        public bool ChangePassword(string userName, string newPassword)
         {
             string newPwd = EncryptPassword(newPassword);
-            var sql = string.Format("Update Users Set password ='{0}'", newPwd);
+            if (CheckCredentials(userName, newPwd))
+                return false;
+
+            var sql = string.Format("Update Users Set password ='{0}' where username = '{1}'", newPwd, userName);
             _dbWrapper.QueryValue<object>(sql);
+            return true;
         }
         public string GetMail(string userName)
         {
@@ -115,7 +119,7 @@ namespace VacationMasters.UserManagement
 
         public bool CheckAnswer(string username, string answer)
         {
-            var sql = string.Format("Select PhoneNumber FromUsers Where UserName ='{0}';", username);
+            var sql = string.Format("Select PhoneNumber From Users Where UserName ='{0}';", username);
             string correctAnswer = _dbWrapper.QueryValue<string>(sql);
             if (String.Compare(correctAnswer, answer) != 0)
                 return false;
